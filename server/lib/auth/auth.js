@@ -36,7 +36,7 @@ exports.verify = function(req, res, next) {
 exports.createAndStoreToken = function(data, ttl, callback) {
 
 	data = data || {};
-	ttl = ttl || config.session.time.redis;
+	ttl = ttl || config.redis.token.time;
 
 	if (data != null && typeof data !== 'object') callback(new Error('data is not an Object'));
 	if (ttl != null && typeof ttl !== 'number') callback(new Error('ttl is not a valid Number'));

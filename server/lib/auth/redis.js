@@ -1,8 +1,9 @@
 var redis = require('redis');
 
-var redisClient = redis.createClient(6379,'127.0.0.1');
+var config = require('../../core/config');
 
-var auth = require('./auth');
+var redisClient = redis.createClient(config.redis.token.port,config.redis.token.ip);
+
 
 redisClient.on('error', function(err) {
 	throw err;
@@ -29,7 +30,7 @@ exports.setTokenWithData = function(token, data, ttl, callback) {
 	var userData = data || {};
 	userData._ts = new Date();
 
-	var timeToLive = ttl || auth.TIME_TO_LIVE;
+	var timeToLive = ttl;
 	if (timeToLive != null && typeof timeToLive !== 'number') throw new Error('TimeToLive is not a Number');
 
 

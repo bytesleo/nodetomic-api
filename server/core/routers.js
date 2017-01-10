@@ -6,6 +6,7 @@ module.exports = (app) => {
     /*
      ** Routes
      */
+     
     app.use('/api/hello', require('../api/hello'));
     app.use('/api/user', require('../api/user'));
     app.use('/auth', require('../lib/auth'));

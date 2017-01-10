@@ -55,10 +55,10 @@ const RedisStore = require('connect-redis')(session);
 app.use(session({
     store: new RedisStore({
         //client: redisClient,
-        host : "127.0.0.1",
-        port : 6379,
-        db : 1,
-        ttl: config.session.time.redis
+        host : config.redis.session.ip,
+        port : config.redis.session.port,
+        db : config.redis.session.db,
+        ttl: config.redis.session.time
     }),
     secret: config.secret,
     resave: false,

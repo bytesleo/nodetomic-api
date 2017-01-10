@@ -31,21 +31,14 @@ module.exports = {
      /*
      *redirect
      */
-     login:{
+    login:{
         redirect:'/home'
     },
     /*
      ** Session
      */
      secret: 's3kr3t_$k3y_&5ess10n?!%',
-
-     session:{
-        time:{
-            redis: (60*15) // 60*60*24 = 24 hours,
-        }
-    },
-
-    /*
+     /*
      ** DataBase
      */
      database: {
@@ -58,6 +51,22 @@ module.exports = {
             },
             seed: true
         },
+    },
+     /**
+     * Redis
+     */
+     redis:{
+        token:{
+            ip: '127.0.0.1',
+            port: 6379,
+            time: (60*15) // 60*60*24 = 24 hours,
+        },
+        session:{
+            ip: '127.0.0.1',
+            port: 6379,
+            time: (60*15),
+            db: 1
+        }
     },
     /*
      ** Log request in console?
