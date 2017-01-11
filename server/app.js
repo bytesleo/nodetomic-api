@@ -20,5 +20,5 @@ const server = http.createServer(app);
 
 // Listen on provided port, on all network interfaces. 
 server.listen(config.port, config.ip, () => {
-	console.log(`Server listening on ${config.ip}:${config.port} in mode (${config.production ? 'PRODUCTION' : 'DEVELOPMENT'})`)
+    console.log(`Server listening on ${config.ip}:${config.port} in mode (${config.production ? 'PRODUCTION' : 'DEVELOPMENT'})`)
 });

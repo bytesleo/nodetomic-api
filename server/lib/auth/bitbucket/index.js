@@ -7,14 +7,13 @@ var auth = require('../auth');
 var router = express.Router();
 
 router
+        .get('/', passport.authenticate('bitbucket'))
 
-.get('/', passport.authenticate('bitbucket'))
-
-.get('/callback', passport.authenticate('bitbucket',{
-	failureRedirect: '/signup',
-	//session:false
-}),function(req, res) {
-	auth.init(req,res,'socialnetwork');
-});
+        .get('/callback', passport.authenticate('bitbucket', {
+            failureRedirect: '/signup',
+            //session:false
+        }), function (req, res) {
+            auth.init(req, res, 'socialnetwork');
+        });
 
 module.exports = router;

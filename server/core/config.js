@@ -4,74 +4,74 @@ module.exports = {
     /*
      ** Mode
      */
-     production: false,
+    production: false,
     /*
      ** Path Root
      */
-     root: path.normalize(__dirname + '/../..'),
+    root: path.normalize(__dirname + '/../..'),
     /*
      ** Folder Client
      */
-     client: this.production ? '/dist' : '/src',
+    client: this.production ? '/dist' : '/src',
     /*
      ** IP
      */
-     ip: 'localhost',
+    ip: 'localhost',
     /*
      ** Port
      */
-     port: this.production ? 9000 : 9000,
+    port: this.production ? 9000 : 9000,
     /*
      ** User
      */
-     user: {
+    user: {
 
-
-     },
-     /*
+    },
+    /*
      *redirect
      */
-    login:{
-        redirect:'/home'
+    login: {
+        redirect: '/home'
     },
     /*
      ** Session
      */
-     secret: 's3kr3t_$k3y_&5ess10n?!%',
-     /*
+    secret: 's3kr3t_$k3y_&5ess10n?!%',
+    /*
      ** DataBase
      */
-     database: {
+    database: {
         mongo: {
-            uri: 'mongodb://localhost/' + (this.production ? 'nodetomic' : 'nodetomic-dev'), 
+            uri: 'mongodb://localhost/' + (this.production ? 'nodetomic' : 'nodetomic-dev'),
             options: {
                 db: {
                     safe: true
                 }
             },
             seed: true
-        },
+        }
     },
-     /**
+    /**
      * Redis
      */
-     redis:{
-        token:{
+    redis: {
+        token: {
             ip: '127.0.0.1',
             port: 6379,
-            time: (60*15) // 60*60*24 = 24 hours,
+            time: 60 * 5,
+            oneAuth: true // if you want multiples logins : false
         },
-        session:{
+        session: {
             ip: '127.0.0.1',
             port: 6379,
-            time: (60*15),
+            time: (60 * 60 * 24), // 60*60*24 = 24 hours,
             db: 1
         }
     },
     /*
      ** Log request in console?
      */
-     log: true,
+    log: true,
 
     /*
      *	oAuth:  this.production ? ID_Production : ID_Development
@@ -101,4 +101,4 @@ module.exports = {
         clientSecret: this.production ? 'EMWyqntmKXP53wqWkrLBwVAcCVcqNFWc' : 'aNFm2sFdsUtvYrQ4g5GM9XmYW5QWtFwX',
         callbackURL: '/auth/bitbucket/callback'
     }
-}
+};

@@ -1,115 +1,127 @@
 const config = require('../../core/config');
-
 var redisHelper = require('./redis');
 var tokenHelper = require('./token');
 
-
 /*
-* Middleware to verify the token and store the user data in req._user
-*/
-exports.verify = function(req, res, next) {
+ * Initialization token session
+ */
 
-	var headers = req.headers;
-	if (headers == null) return res.status(401).send('401');
+exports.init = function (req, res, type) {
 
-	// Extract Token from header x-access-token
-	tokenHelper.extractTokenFromHeader(req,function(err,token){
+    var user = req.user;
 
-		if (err) 
-			return res.status(401).send(err);
+    //req.user = null;
+    this.createAndStoreToken(user, null, function (err, token) {//key, data, time session
+        if (err) {
+            return res.status(400);
+        }
+        switch (type) {
+            case 'local' :
+                res.status(200).json({
+                    token: token,
+                    redirect: config.login.redirect
+                });
+                break;
+            case 'socialnetwork' :
+                res.cookie('token', JSON.stringify(token));
+                res.redirect(config.login.redirect);
+                break;
+        }
 
-			//Verify it in redis, set data in req.user
-			redisHelper.getDataByToken(token, function(err, data) {
-				if (err) 
-					return res.status(401).send('Unauthorized');
-				req.user = data;
-				next();
-			});
-		});
+    });
 };
 
 
 /*
-* Create a new token, stores it in redis with data during ttl time in seconds
-* callback(err, token);
-*/
-exports.createAndStoreToken = function(data, ttl, callback) {
+ * Middleware to verify the token and store the user data in req._user
+ */
+exports.verify = function (req, res, next) {
 
-	data = data || {};
-	ttl = ttl || config.redis.token.time;
+    var headers = req.headers;
+    if (headers === null)
+        return res.status(401).send('401');
 
-	if (data != null && typeof data !== 'object') callback(new Error('data is not an Object'));
-	if (ttl != null && typeof ttl !== 'number') callback(new Error('ttl is not a valid Number'));
+    tokenHelper.extractTokenFromHeader(req, function (err, token) {// Extract Token from header x-access-token
 
-	
+        if (err)
+            return res.status(401).send(err);
 
-	tokenHelper.createToken(data,function(err, token) {
-		if (err) callback(err);
+        redisHelper.getDataByToken(token.decode, function (err, data) {
 
-		redisHelper.setTokenWithData(token, data, ttl, function(err, success) {
-			if (err) callback(err);
+            if (err)
+                return res.status(401).send('Unauthorized');
 
-			if (success) {
-				callback(null, token);
-			}
-			else {
-				callback(new Error('Error when saving token'));
-			}
-		});
-	});
-	
+            if (token.value !== data.jwt)
+                return res.status(401).send('Unauthorized, token in new device...');
+
+            req.user = data;
+            next();
+        });
+    });
+};
+
+
+/*
+ * Create a new token, stores it in redis with data during ttl time in seconds
+ * callback(err, token);
+ */
+exports.createAndStoreToken = function (data, ttl, callback) {
+
+    data = data || {};
+    ttl = ttl || config.redis.token.time;
+
+    if (data !== null && typeof data !== 'object')
+        callback(new Error('data is not an Object'));
+    if (ttl !== null && typeof ttl !== 'number')
+        callback(new Error('ttl is not a valid Number'));
+
+    tokenHelper.createToken(data._id, function (err, token) {
+        if (err)
+            callback(err);
+
+        if (config.redis.token.oneAuth) {//delete all sessions tokens
+            redisHelper.findByPattern(token.key, function (err, exits) {
+                if (err)
+                    callback(err);
+            });
+        }
+
+        redisHelper.setTokenWithData(token, data, ttl, function (err, success) {
+            if (err)
+                callback(err);
+            if (success) {
+                callback(null, token.value);
+            } else {
+                callback(new Error('Error when saving token'));
+            }
+        });
+    });
+
 };
 
 /*
-* Expires the token (remove from redis)
-*/
-exports.expireToken = function(headers, callback) {
-	if (headers == null) callback(new Error('Headers are null'));
-	// Get token
-	try {
-		var token = tokenHelper.extractTokenFromHeader(headers);
+ * Expires the token (remove from redis)
+ */
+exports.expireToken = function (headers, callback) {
+    if (headers === null)
+        callback(new Error('Headers are null'));
+    // Get token
+    try {
+        var token = tokenHelper.extractTokenFromHeader(headers);
+        if (token === null)
+            callback(new Error('Token is null'));
 
-		if (token == null) callback(new Error('Token is null'));
+        redisHelper.expireToken(token, callback);
+    } catch (err) {
+        console.log(err);
+        return callback(err);
+    }
+};
 
-		redisHelper.expireToken(token, callback);
-	} catch (err) {
-		console.log(err);
-		return callback(err);
-	}	
-}
-
-/*
-* Initialization token session
-*/
-
-exports.init = function(req, res, type) {
-
-	var user = req.user;
-
-	//req.user = null;
-	this.createAndStoreToken(user, null, function(err, token) {//key, data, time session
-		if (err) {
-			return res.status(400);
-		} 	
-		switch(type){
-			case 'local' :
-			res.status(200).json({
-				token: token,
-				redirect: config.login.redirect
-			});
-			break;
-			case 'socialnetwork' :
-			res.cookie('token', JSON.stringify(token));
-			res.redirect(config.login.redirect);
-			break;
-		}
-
-	});
-}
 
 /*
-* Get count session
-*/
-exports.getCount = function(callback){
-	redisHelper.getCount(callback);
+ * Get count session
+ */
+exports.getCount = function (callback) {
+    redisHelper.getCount(callback);
 };

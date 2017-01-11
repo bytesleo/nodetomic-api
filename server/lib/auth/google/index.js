@@ -7,14 +7,13 @@ var auth = require('../auth');
 var router = express.Router();
 
 router
+        .get('/', passport.authenticate('google'))
 
-.get('/', passport.authenticate('google'))
-
-.get('/callback', passport.authenticate('google',{
-	failureRedirect: '/signup',
-	//session:false
-}),function(req, res) {
-	auth.init(req,res,'socialnetwork');
-});
+        .get('/callback', passport.authenticate('google', {
+            failureRedirect: '/signup',
+            //session:false
+        }), function (req, res) {
+            auth.init(req, res, 'socialnetwork');
+        });
 
 module.exports = router;

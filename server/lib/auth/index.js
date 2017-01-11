@@ -9,11 +9,11 @@ const auth = require('./auth');
 //Call back Social Network
 
 passport.serializeUser(function (user, done) {
-	done(null, user); // req.user
-	});
+    done(null, user); // req.user
+});
 
 passport.deserializeUser(function (user, done) {
-	done(null, user);
+    done(null, user);
 });
 
 

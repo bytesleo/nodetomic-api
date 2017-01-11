@@ -7,14 +7,13 @@ var auth = require('../auth');
 var router = express.Router();
 
 router
+        .get('/', passport.authenticate('github'))
 
-.get('/', passport.authenticate('github'))
-
-.get('/callback', passport.authenticate('github',{
-	failureRedirect: '/signup',
-	//session:false
-}),function(req, res) {
-	auth.init(req,res,'socialnetwork');
-});
+        .get('/callback', passport.authenticate('github', {
+            failureRedirect: '/signup',
+            //session:false
+        }), function (req, res) {
+            auth.init(req, res, 'socialnetwork');
+        });
 
 module.exports = router;

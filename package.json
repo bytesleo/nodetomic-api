@@ -33,6 +33,7 @@
     "passport-local": "^1.0.0",
     "passport-twitter": "^1.0.4",
     "redis": "^2.6.3",
+    "redis-delete-wildcard": "0.0.3",
     "serve-favicon": "^2.3.2"
   }
 }
