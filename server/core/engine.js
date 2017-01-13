@@ -10,6 +10,8 @@ const cookieParser = require('cookie-parser'); // secret cookies
 const config = require('./config');
 const passport = require('passport');
 const session = require('express-session');
+const cors = require('cors');
+
 
 
 
@@ -31,6 +33,11 @@ module.exports = (app) => {
     app.use(compression());
     app.use(helmet());
 
+    app.use(cors({
+        origin: true,
+        credentials: true
+    }));
+
     /*Mongo*/
 
 //const mongoStore = require('connect-mongo')(session);
@@ -47,19 +54,18 @@ module.exports = (app) => {
 
     /*Redis*/
 
-    const RedisStore = require('connect-redis')(session);
-
-//var Redis = require('ioredis');
-//var redisClient = new Redis({port: 6379, host: 'localhost'});
-
+    //const RedisStore = require('connect-redis')(session);
+    //
+    //Use for Twitter Auth -_-
     app.use(session({
-        store: new RedisStore({
-            //client: redisClient,
-            host: config.redis.session.ip,
-            port: config.redis.session.port,
-            db: config.redis.session.db,
-            ttl: config.redis.session.time
-        }),
+        //If you want REDIS
+        /* store: new RedisStore({
+         //client: redisClient,
+         host: config.redis.session.ip,
+         port: config.redis.session.port,
+         db: config.redis.session.db,
+         ttl: config.redis.session.time
+         }),*/
         secret: config.secret,
         resave: false,
         saveUninitialized: true

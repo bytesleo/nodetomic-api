@@ -4,7 +4,7 @@ module.exports = {
     /*
      ** Mode
      */
-    production: false,
+    production: true, // Automatic config production when: gulp build
     /*
      ** Path Root
      */
@@ -12,7 +12,7 @@ module.exports = {
     /*
      ** Folder Client
      */
-    client: this.production ? '/dist' : '/src',
+    client: './src',
     /*
      ** IP
      */
@@ -20,7 +20,7 @@ module.exports = {
     /*
      ** Port
      */
-    port: this.production ? 9000 : 9000,
+    port: 9000,
     /*
      ** User
      */
@@ -48,7 +48,7 @@ module.exports = {
                     safe: true
                 }
             },
-            seed: true
+            safe: this.production ? false : true
         }
     },
     /**
@@ -59,7 +59,7 @@ module.exports = {
             ip: '127.0.0.1',
             port: 6379,
             time: 60 * 5,
-            oneAuth: true // if you want multiples logins : false
+            multiple: true // if you want multiples logins or only 1 device
         },
         session: {
             ip: '127.0.0.1',

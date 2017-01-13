@@ -1,0 +1,15 @@
+{
+  "name": "app",
+  "description": "app client",
+  "authors": [
+    "https://twitter.com/thekevoj"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}

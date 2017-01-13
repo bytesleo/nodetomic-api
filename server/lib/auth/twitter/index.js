@@ -12,7 +12,7 @@ router
         .get('/callback', passport.authenticate('twitter', {
             //successRedirect: '/api/hello',
             failureRedirect: '/signup',
-            //session:false
+            session: false
         }), function (req, res) {
             auth.init(req, res, 'socialnetwork');
         });

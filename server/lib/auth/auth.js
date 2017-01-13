@@ -3,14 +3,24 @@ var redisHelper = require('./redis');
 var tokenHelper = require('./token');
 
 /*
- * Initialization token session
+ * Initialization token session with local and social networks
  */
 
 exports.init = function (req, res, type) {
 
-    var user = req.user;
+    //var user = req.user;
+    // data save Redis
+    var user = {
+        _id: req.user._id,
+        name: req.user.name,
+        username: req.user.username,
+        email: req.user.email,
+        provider: req.user.provider,
+        photo: req.user.photo,
+        status: req.user.status,
+        role: req.user.role
+    };
 
-    //req.user = null;
     this.createAndStoreToken(user, null, function (err, token) {//key, data, time session
         if (err) {
             return res.status(400);
@@ -79,7 +89,7 @@ exports.createAndStoreToken = function (data, ttl, callback) {
         if (err)
             callback(err);
 
-        if (config.redis.token.oneAuth) {//delete all sessions tokens
+        if (!config.redis.token.multiple) {//delete all sessions tokens
             redisHelper.findByPattern(token.key, function (err, exits) {
                 if (err)
                     callback(err);

@@ -11,7 +11,7 @@ router
 
         .get('/callback', passport.authenticate('facebook', {
             failureRedirect: '/signup',
-            //session:false
+            session:false
         }), function (req, res) {
             auth.init(req, res, 'socialnetwork');
         });
