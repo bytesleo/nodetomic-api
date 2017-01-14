@@ -1,7 +1,7 @@
 // Nodejs encryption with CTR
 
 const crypto = require('crypto');
-const config = require('../../core/config');
+const config = require('../../config');
 const algorithm = 'aes-256-ctr';
 
 exports.encrypt = function (text) {

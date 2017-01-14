@@ -2,7 +2,7 @@
 
 const express = require('express');
 const passport = require('passport');
-const config = require('../../core/config');
+const config = require('../../config');
 const User = require('../../api/user/user.model');
 const auth = require('./auth');
 

@@ -1,4 +1,4 @@
-const config = require('../../core/config');
+const config = require('../../config');
 var redisHelper = require('./redis');
 var tokenHelper = require('./token');
 

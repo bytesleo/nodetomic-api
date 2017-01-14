@@ -1,5 +1,5 @@
 var path = require('path');
-var config = require('./config');
+var config = require('../config');
 
 module.exports = (app) => {
 

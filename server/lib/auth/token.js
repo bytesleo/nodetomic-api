@@ -5,7 +5,7 @@ var cryptolib = require('../crypto');
 //var crypto = require('crypto');
 //var TOKEN_LENGTH = 32;
 
-var config = require('../../core/config');
+var config = require('../../config');
 /*
  * Create a 32 bytes token - ASYNC
  * callback(err, token) 

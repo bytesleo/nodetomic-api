@@ -1,6 +1,6 @@
 var redis = require('redis');
 
-var config = require('../../core/config');
+var config = require('../../config');
 var cryptolib = require('../crypto');
 
 
