@@ -4,7 +4,6 @@
  * 
  */
 
-
 var path = require('path');
 
 module.exports = {
@@ -29,6 +28,14 @@ module.exports = {
      */
     port: 9000,
     /*
+     * livereload
+     */
+    livereload: {
+        ip: 'localhost',
+        port: 35729
+    },
+
+    /*
      ** User
      */
     user: {
@@ -43,7 +50,7 @@ module.exports = {
     /*
      ** Session
      */
-    secret: 's3kr3t_$k3y_&5ess10n?!%',
+    secret: 's3kr3t_$k3y_&5ess10n?!%_dev',
     /*
      ** DataBase
      */
@@ -68,12 +75,14 @@ module.exports = {
             time: 60 * 5, // 60*60*24 = 24 hours,
             multiple: true // if you want multiples logins or only 1 device
         },
-        session: {
-            ip: '127.0.0.1',
-            port: 6379,
-            time: (60 * 60 * 24),
-            db: 1
-        }
+        // Only if your use sessionStore in engine.js
+        /*
+         session: {
+         ip: '127.0.0.1',
+         port: 6379,
+         time: 60 * 5,
+         db: 1
+         }*/
     },
     /*
      ** Log request in console?

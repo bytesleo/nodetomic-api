@@ -1,6 +1,6 @@
 //use with JWT
 var jwt = require('jsonwebtoken');
-var cryptolib = require('../crypto');
+var utility = require('../utility');
 //use with  crypto
 //var crypto = require('crypto');
 //var TOKEN_LENGTH = 32;
@@ -11,13 +11,14 @@ var config = require('../../config');
  * callback(err, token) 
  */
 exports.createToken = function (id, callback) {
-    //with  JWT
 
-    var verify = cryptolib.makeid(20);
-    var key = cryptolib.encrypt(id.toString()) + ':' + verify;
+    //with  JWT
+    var verify = utility.makeid(20);
+    var key = utility.encrypt(id.toString()) + ':' + verify;
 
     var token = jwt.sign({_id: id, _verify: verify}, config.secret, {
         //noTimestamp: true
+        expiresIn: config.redis.token.time
     });
 
     callback(null, {
@@ -62,6 +63,7 @@ exports.extractTokenFromHeader = function (req, callback) {
         });
         //return callback(null, token);
     });
+
     //with  crypto
 
     /*if (headers == null) throw new Error('Header is null');

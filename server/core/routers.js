@@ -1,5 +1,6 @@
 var path = require('path');
 var config = require('../config');
+const express = require('express');
 
 module.exports = (app) => {
 
@@ -13,6 +14,9 @@ module.exports = (app) => {
 
 
 
+
+    // Point static path to client
+    app.use(express.static(config.root + config.client));
 
     /*
      **Catch all other routes and return the index file

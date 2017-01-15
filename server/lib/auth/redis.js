@@ -1,7 +1,7 @@
 var redis = require('redis');
 
 var config = require('../../config');
-var cryptolib = require('../crypto');
+var utility = require('../utility');
 
 
 require('redis-delete-wildcard')(redis);
@@ -68,7 +68,7 @@ exports.getDataByToken = function (token, callback) {
     if (token == null)
         callback(new Error('Token is null'));
 
-    var key = cryptolib.encrypt(token._id) + ':' + token._verify;
+    var key = utility.encrypt(token._id) + ':' + token._verify;
 
     redisClient.get(key, function (err, userData) {
         if (err)

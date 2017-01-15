@@ -68,12 +68,12 @@ module.exports = {
             time: 60 * 5, // 60*60*24 = 24 hours,
             multiple: true // if you want multiples logins or only 1 device
         },
-        session: {
-            ip: '127.0.0.1',
-            port: 6379,
-            time: (60 * 60 * 24),
-            db: 1
-        }
+        /*session: {
+         ip: '127.0.0.1',
+         port: 6379,
+         time: (60 * 60 * 24),
+         db: 1
+         }*/
     },
     /*
      ** Log request in console?

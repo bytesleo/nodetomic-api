@@ -2,18 +2,14 @@
 const path = require('path'); // Paths
 const helmet = require('helmet'); // protection
 const favicon = require('serve-favicon');
-const morgan = require('morgan'); //log console
 const bodyParser = require('body-parser'); //Parse params POST
 const compression = require('compression'); //Compress response
 const methodOverride = require('method-override'); // Put and DELETE methods
 const cookieParser = require('cookie-parser'); // secret cookies
-const config = require('../config');
+const config = require('./../config');
 const passport = require('passport');
 const session = require('express-session');
 const cors = require('cors');
-
-
-
 
 module.exports = (app) => {
 
@@ -39,27 +35,25 @@ module.exports = (app) => {
         credentials: true
     }));
 
-    /*Mongo*/
+    /*SessionStore with Mongo*/
+    /*
+     const mongoStore = require('connect-mongo')(session);
+     const mongoose = require('mongoose');
+     app.use(session({
+     secret: config.secret,
+     saveUninitialized: true,
+     resave: true,
+     store: new mongoStore({
+     mongooseConnection: mongoose.connection,
+     collection: 'sessions' // default
+     })
+     }));
+     */
 
-//const mongoStore = require('connect-mongo')(session);
-//const mongoose = require('mongoose');
-//    app.use(session({
-//        secret: config.secret,
-//        saveUninitialized: true,
-//        resave: true,
-//        store: new mongoStore({
-//            mongooseConnection: mongoose.connection,
-//            collection: 'sessions' // default
-//        })
-//    }));
-
-    /*Redis*/
-
+    /*SessionStore with Redis*/
     //const RedisStore = require('connect-redis')(session);
-    //
     //Use for Twitter Auth -_-
     app.use(session({
-        //If you want REDIS
         /* store: new RedisStore({
          //client: redisClient,
          host: config.redis.session.ip,
@@ -76,9 +70,5 @@ module.exports = (app) => {
     app.use(passport.session());
 
     app.use(favicon(path.join(config.root, config.client, 'favicon.ico')));
-
-    if (config.log) {
-        app.use(morgan('dev'));
-    }
-
+    require('./dev')(app);
 };

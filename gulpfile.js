@@ -1,5 +1,6 @@
-/*
- * Dependencias
+/**
+ * 
+ * @type Module nodetomic Gulp
  */
 var gulp = require('gulp'),
         gutil = require('gulp-util'),
@@ -11,13 +12,16 @@ var gulp = require('gulp'),
         sourcemaps = require('gulp-sourcemaps'),
         plumber = require('gulp-plumber'),
         nodemon = require('gulp-nodemon'),
-        notify = require("gulp-notify"),
         color = require('gulp-color'),
         rename = require('gulp-rename'),
         htmlreplace = require('gulp-html-replace'),
         htmlmin = require('gulp-htmlmin'),
-        clean = require('gulp-clean'),
-        replace = require('gulp-string-replace');
+        clean = require('gulp-rimraf'),
+        replace_string = require('gulp-replace'),
+        replace = require('gulp-string-replace'),
+        runSequence = require('run-sequence'),
+        connect = require('gulp-connect'),
+        livereload = require('gulp-livereload');
 
 
 var configDev = require('./server/config/index');
@@ -26,49 +30,83 @@ var path_root = './dist';
 var path_client_from = configDev.client;
 var path_client_to = path_root + '/' + configPro.client;
 
+var color_compile = 'BLUE';
+var color_success = 'GREEN';
+var color_watch = 'YELLOW';
 
 
+//gulp.task('default', ['start:server']);
+//gulp.watch('js/source/*.js', ['js']);
 
-//gulp.task('default', ['clean']);
-
-
-gulp.task('build', [
-//    'clean',
-    'compress-js',
-    'compress-sass',
-    'compress-img',
-    'copy-server',
-    'replace-html',
-    'compress-html',
-    'copy-others'
-
-], function () {
-    console.log(color('Enjoy!', 'GREEN'));
+gulp.task('serve', ['start:livereload', 'dev-sass-watch'], function () {
+    nodemon({
+        script: './server/app.js',
+        watch: ['dev-sass-watch']
+//        //tasks: ['dev-sass-compile']
+    }).on('restart', function () {
+        console.log('restarted!')
+    })
 });
 
 
-//gulp.task('clean', function () {
-//    console.log(color('Clean...', 'GREEN'));
-//    return gulp.src(server_pro, {read: false})
-//            .pipe(clean());
-//});
+gulp.task('serve-dist', function () {
+    nodemon({
+        script: './dist/server/app.js'
+    });
+});
 
 
-gulp.task('compress-js', function () {
+gulp.task('build', function () {
+    runSequence(
+            'build-clean',
+            [
+                'build-scripts',
+                'build-scripts-libs'
+            ],
+            'build-styles',
+            [
+                'replace-paths-html',
+                'build-htmls'
+            ],
+            'build-images',
+            [
+                'build-server',
+                'build-server-production'
+            ],
+            'build-extra-files'
+            )
+});
 
-    console.log(color('Compress JS...', 'CYAN'));
 
-    gulp.src(path_client_from + '/lib/**/*.js')
-            .pipe(plumber())
-            .pipe(sourcemaps.init())
-            .pipe(jshint())
-            //.pipe(jshint.reporter('default'))
-            .pipe(concat('libs.min.js'))
-            .pipe(uglify())
-            .pipe(sourcemaps.write('./maps'))
-            .pipe(gulp.dest(path_client_to + '/js/libs/'));
+gulp.task('start:livereload', function () {
+    livereload.listen(
+            {
+                basePath: path_client_from,
+                host: configDev.livereload.ip,
+                port: configDev.livereload.port
+            }
+    );
+});
 
-    gulp.src(path_client_from + '/scripts/**/*.js')
+
+/*
+ * TASKS COMPILE TO PRODUCTION
+ */
+
+gulp.task('build-clean', function () {
+
+    console.log(color('Clean all files in build folder...', color_success));
+
+    return gulp.src(path_root + "/*", {read: false}).pipe(clean());
+
+});
+
+
+gulp.task('build-scripts', function () {
+
+    console.log(color('build-scripts...', color_compile));
+
+    return gulp.src(path_client_from + '/scripts/**/*.js')
             .pipe(plumber())
             .pipe(sourcemaps.init())
             .pipe(jshint())
@@ -78,15 +116,79 @@ gulp.task('compress-js', function () {
             .pipe(sourcemaps.write('./maps'))
             .pipe(gulp.dest(path_client_to + '/js'));
 
-    gutil.log('Finish JS');
+});
+
+
+gulp.task('build-scripts-libs', function () {
+
+    console.log(color('build-scripts-libs...', color_compile));
+
+    return  gulp.src(path_client_from + '/lib/**/*.js')
+            .pipe(plumber())
+            .pipe(sourcemaps.init())
+            .pipe(jshint())
+            //.pipe(jshint.reporter('default'))
+            .pipe(concat('libs.min.js'))
+            .pipe(uglify())
+            .pipe(sourcemaps.write('./maps'))
+            .pipe(gulp.dest(path_client_to + '/js/libs/'));
+
 
 });
 
 
-gulp.task('compress-img', function () {
+gulp.task('build-styles', function () {
 
-    console.log(color('Compress Images...', 'CYAN'));
-    gulp.src([path_client_from + '/images/*.*'])
+    console.log(color('build-styles...', color_compile));
+
+    return  gulp.src([path_client_from + '/lib/**/*.{sass,scss,css}', path_client_from + '/styles/**/*.{sass,scss,css}'])
+            .pipe(plumber())
+            .pipe(sourcemaps.init())
+            .pipe(sass({
+                outputStyle: 'compressed'
+            }).on('error', sass.logError))
+            .pipe(concat('app.css'))
+            .pipe(rename('app.min.css'))
+            .pipe(sourcemaps.write('./maps'))
+            .pipe(gulp.dest(path_client_to + '/css'));
+});
+
+
+gulp.task('replace-paths-html', function () {
+
+    console.log(color('replace-paths-html...', color_compile));
+
+    return gulp.src(path_client_from + '/index.html')
+            .pipe(htmlreplace({
+                'clean': '',
+                'css': 'css/app.min.css',
+                'js': [
+                    'js/libs/libs.min.js',
+                    'js/app.min.js'
+                ]
+            }))
+            //.pipe(rename('index.html'))
+            .pipe(htmlmin({collapseWhitespace: true}))
+            .pipe(gulp.dest(path_client_to));
+});
+
+
+gulp.task('build-htmls', function () {
+
+    console.log(color('replace-paths-html...', color_compile));
+
+    return gulp.src(path_client_from + '/partials/**/*.html')
+            .pipe(htmlmin({
+                collapseWhitespace: true
+            }))
+            .pipe(gulp.dest(path_client_to + '/partials'));
+});
+
+gulp.task('build-images', function () {
+
+    console.log(color('build-imgs', color_compile));
+
+    return gulp.src([path_client_from + '/images/*.*'])
             .pipe(plumber())
             .pipe(sourcemaps.init())
             .pipe(imagemin())
@@ -95,58 +197,33 @@ gulp.task('compress-img', function () {
 });
 
 
-gulp.task('compress-sass', function () {
+gulp.task('build-server', function () {
 
-    console.log(color('Compress SASS...', 'CYAN'));
-    gulp.src([path_client_from + '/lib/**/*.{sass,scss,css}', path_client_from + '/styles/**/*.{sass,scss,css}'])
-            .pipe(plumber())
-            .pipe(sourcemaps.init())
-            .pipe(sass({outputStyle: 'compressed'}).on('error', sass.logError))
-            .pipe(concat('app.css'))
-            .pipe(rename('app.min.css'))
-            .pipe(sourcemaps.write('./maps'))
-            .pipe(gulp.dest(path_client_to + '/css'));
-});
+    console.log(color('build-server...', color_compile));
 
-
-gulp.task('replace-html', function () {
-    console.log(color('Replace html...', 'CYAN'));
-
-    gulp.src(path_client_from + '/index.html')
-            .pipe(htmlreplace({
-                'clean': '',
-                'css': 'css/app.min.css',
-                'js': ['js/libs/libs.min.js', 'js/app.min.js']
-            }))
-            //.pipe(rename('index.html'))
-            .pipe(htmlmin({collapseWhitespace: true}))
-            .pipe(gulp.dest(path_client_to));
-
-});
-
-
-gulp.task('compress-html', function () {
-    return gulp.src(path_client_from + '/partials/**/*.html')
-            .pipe(htmlmin({collapseWhitespace: true}))
-            .pipe(gulp.dest(path_client_to + '/partials'));
-});
-
-
-gulp.task('copy-server', function () {
-
-    console.log(color('Copy server...', 'CYAN'));
-    gulp.src([
+    return gulp.src([
         'server/**/*',
         '!server/config/**',
+        '!server/core/engine.js',
+        '!server/core/livereload.js'
     ], {base: "."}).pipe(gulp.dest(path_root));
 
+});
+
+
+gulp.task('build-server-production', function () {
+
+    console.log(color('build-server...', color_compile));
 
     gulp.src(["server/config/production.js"])
             .pipe(rename('index.js'))
             .pipe(gulp.dest(path_root + '/server/config'));
 
+    gulp.src("server/core/engine.js")
+            .pipe(replace_string("require('./dev')(app);", ''))
+            .pipe(gulp.dest(path_root + '/server/core/'));
 
-    //replace object
+//replace object
 //    gulp.src(["server/core/config.js"])
 //            .pipe(replace('production: false', 'production: true', {}))
 //            .pipe(replace('log: true', 'log: false', {}))
@@ -157,52 +234,41 @@ gulp.task('copy-server', function () {
 });
 
 
-gulp.task('copy-others', function () {
-    console.log(color('Copy others...', 'CYAN'));
-    gulp.src('package.json', {base: "."}).pipe(gulp.dest(path_root));
-    gulp.src(path_client_from + '/favicon.ico', {base: "."}).pipe(rename('favicon.ico')).pipe(gulp.dest(path_client_to));
+gulp.task('build-extra-files', function () {
+
+    console.log(color('build-extra-files...', color_compile));
+
+    gulp.src('package.json', {base: "."})
+            .pipe(gulp.dest(path_root));
+
+    gulp.src(path_client_from + '/favicon.ico', {base: "."})
+            .pipe(rename('favicon.ico'))
+            .pipe(gulp.dest(path_client_to));
 });
 
 
+/*
+ * TASKS DEVELOPMENT
+ */
 
+gulp.task('dev-sass-compile', function () {
 
+    console.log(color('Compile SASS', color_success));
 
-
-
-gulp.task('dev-compress-sass', function () {
-    console.log(color('Sass compile..', 'CYAN'));
     gulp.src(path_client_from + '/styles/**/*.{sass,scss,css}')
             .pipe(plumber())
-            .pipe(sourcemaps.init())
+            //.pipe(sourcemaps.init())
             .pipe(sass().on('error', sass.logError))
-            //.pipe(concat('app.css'))
-            .pipe(rename('app.css'))
-            .pipe(sourcemaps.write('./maps'))
-            .pipe(gulp.dest(path_client_from));
+            .pipe(concat('app.css'))
+            //.pipe(sourcemaps.write('./maps'))
+            .pipe(gulp.dest(path_client_from + '/'))
+            .pipe(livereload());
 });
 
 
+gulp.task('dev-sass-watch', function () {
 
-gulp.task('sass-watch', function () {
-    console.log(color('SASS watching...', 'CYAN'));
-    gulp.watch(path_client_from + '/styles/**/*.{sass,scss,css}', ['dev-compress-sass']);
-});
-
-
-
-
-
-
-//gulp.watch('js/source/*.js', ['js']);
-
-gulp.task('serve', ['sass-watch'], function () {
-
-    nodemon({
-        script: './server/app.js',
-        //task: ['sass-watch'],
-        //      watch: ['sass-watch']
-    });
+    console.log(color('SASS watching...', 'BLUE'));
+    gulp.watch(path_client_from + '/styles/**/*.{sass,scss,css}', ['dev-sass-compile']);
 
 });
-
-
