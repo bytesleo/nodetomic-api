@@ -18,6 +18,9 @@ and open the template in the editor.
     Author     : leo
 */
 body {
-  background: white !important;
+  background: #2796ec !important;
   /*color:$hola;*/
-  /*background-color: $papu;*/ }
+  /*background-color: $papu;*/
+  padding-top: 60px;
+  padding-bottom: 40px;
+  background-color: #eee; }

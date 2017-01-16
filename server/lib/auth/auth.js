@@ -128,7 +128,6 @@ exports.expireToken = function (headers, callback) {
     }
 };
 
-
 /*
  * Get count session
  */

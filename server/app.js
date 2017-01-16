@@ -13,5 +13,5 @@ require('./core/routers')(app);
 const server = http.createServer(app);
 // Listen on provided port, on all network interfaces. 
 server.listen(config.port, config.ip, () => {
-    console.log(`Server listening on ${config.ip}:${config.port} in mode (${config.mode})`);
+    console.log(`Server listening on http://${config.ip}:${config.port} in mode (${config.mode})`);
 });

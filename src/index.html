@@ -8,34 +8,30 @@
         <meta name="author" content="">
 
         <title>Restful Authentication with NodeJS & AngularJS</title>
-
-        <!-- Bootstrap core CSS -->
-
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
-        <!-- build:clean -->
+
+        <!--**** compile(vendor.css) ****-->
+        <!-- bower:css -->
+        <link rel="stylesheet" href="/bower_components/animate.css/animate.css" />
+        <!-- endbower -->
+
+
+        <!--**** compile(app.css) ****-->
+        <!-- build:css -->
         <link rel="stylesheet" href="lib/loading-bar.css" />
         <link rel="stylesheet" href="app.css" />
         <!-- endbuild -->
 
-        <!--Copy from lib-->
-        <!-- build:css -->
-        <!-- endbuild -->
 
-
-        <style>
-            body {
-                padding-top: 60px;
-                padding-bottom: 40px;
-                background-color: #eee;
-            }
-        </style>
 
         <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!--[if lt IE 9]>
         <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
         <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
         <![endif]-->
+
+
     </head>
 
     <body ng-app="angularRestfulAuth">
@@ -64,15 +60,28 @@
         </div>
         <div class="container" ng-view="">
 
-        </div> <!-- /container -->
+        </div>
 
+        <!--**** compile(vendor.js) ****-->
+        <!-- bower:js -->
+        <script src="/bower_components/angular/angular.js"></script>
+        <script src="/bower_components/angular-animate/angular-animate.js"></script>
+        <script src="/bower_components/angular-aria/angular-aria.js"></script>
+        <script src="/bower_components/angular-cookies/angular-cookies.js"></script>
+        <script src="/bower_components/angular-messages/angular-messages.js"></script>
+        <script src="/bower_components/angular-resource/angular-resource.js"></script>
+        <script src="/bower_components/angular-touch/angular-touch.js"></script>
+        <script src="/bower_components/angular-sanitize/angular-sanitize.js"></script>
+        <script src="/bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+        <script src="/bower_components/moment/moment.js"></script>
+        <script src="/bower_components/jquery/dist/jquery.js"></script>
+        <script src="/bower_components/jquery-ui/jquery-ui.js"></script>
+        <script src="/bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+        <!-- endbower -->
 
-        <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js" type='text/javascript' ></script>
-        <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"type='text/javascript' ></script>
-        <script src="http://cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.20/angular.min.js" type='text/javascript' ></script>
-        <script src="http://cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.20/angular-route.min.js" type='text/javascript' ></script>
-
-        <!-- build:clean -->
+        
+        <!--**** compile(app.js) ****-->
+        <!-- build:js -->
         <script src="lib/ngStorage.js" type='text/javascript' ></script>
         <script src="lib/loading-bar.js" type='text/javascript' ></script>
         <script src="scripts/app.js" type='text/javascript' ></script>
@@ -81,9 +90,8 @@
         <!-- endbuild -->
 
 
-        <!--Copy from lib,scripts-->
-        <!-- build:js -->
+        <!-- build:clean -->
+        <!-- links delete in pro -->
         <!-- endbuild -->
-
     </body>
 </html>

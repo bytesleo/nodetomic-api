@@ -3,8 +3,11 @@ $hola:'red';
 @import '1leo.scss';
 
 body{
-    background: white !important;   
+    background:#2796ec !important;   
     /*color:$hola;*/
     /*background-color: $papu;*/
-}
 
+    padding-top: 60px;
+    padding-bottom: 40px;
+    background-color: #eee;
+};
