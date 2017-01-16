@@ -15,6 +15,9 @@
     "animate.css": "^3.5.2",
     "jquery": "^3.1.1",
     "jquery-ui": "^1.12.1",
-    "angular-bootstrap": "^2.4.0"
+    "angular-bootstrap": "^2.4.0",
+    "susy": "^2.2.12",
+    "bootstrap-css-only": "^3.3.7",
+    "angular-route": "^1.6.1"
   }
 }

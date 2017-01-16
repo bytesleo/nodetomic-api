@@ -24,9 +24,15 @@ var gulp = require('gulp'),
         open = require("open"),
         livereload = require('gulp-livereload'),
         spawn = require('child_process').spawn,
+        filter = require('gulp-filter'),
+        order = require("gulp-order"),
+        mainBowerFiles = require('main-bower-files'),
+        wiredep = require('wiredep').stream,
+        strip = require('gulp-strip-comments'),
+        obfuscate = require('gulp-obfuscate'),
         node;
 
-
+var inject = require("gulp-inject");
 
 /* var config*/
 var configDev = require('./server/config/index'),
@@ -38,52 +44,15 @@ var configDev = require('./server/config/index'),
         color_success = 'GREEN',
         color_watch = 'YELLOW';
 
+
 //gulp.task('default', ['start:server']);
 //gulp.watch('js/source/*.js', ['js']);
-/*BOWER*/
-
-var bowerFiles = require('main-bower-files');
-var inject = require("gulp-inject");
-
-
-//var mainBowerFiles = require('gulp-main-bower-files');
-
-
-var wiredep = require('wiredep').stream;
-
-gulp.task('build:bower', function () {
-//    return gulp.src('./src/index.html')
-//            .pipe(inject(gulp.src(bowerFiles(), {read: false}), {name: 'bower'}))
-//            .pipe(gulp.dest(path_client_from + '/index.html'))
-
-    return gulp.src(path_client_from + '/index.html')
-            .pipe(wiredep({
-                directory: './bower_components',
-                ignorePath: '..'
-            }))
-            .pipe(gulp.dest(path_client_from));
-
-});
-
-
-
-//var inject = require('gulp-inject');
-//var mainBowerFiles = require('gulp-main-bower-files');
-//var mainBowerFiles = require('main-bower-files');
-
-
-
-//gulp.task('index', function () {
-//    return gulp.src('./src/index.html')
-//        .pipe(inject(gulp.src(mainBowerFiles(), {read: false}), {name: 'bower', relative: true}))
-//        .pipe(gulp.dest('./dist'));
-//});
 
 /*
  * COMMAND SERVE
  */
 
-gulp.task('serve', ['serve:start', 'build:bower', 'dev-sass-compile', 'serve:livereload', 'serve:watch']);
+gulp.task('serve', ['serve:start', 'inject:bower', 'dev-sass-compile', 'serve:livereload', 'serve:watch']);
 
 gulp.task('serve:start', function () {
     if (node)
@@ -109,6 +78,7 @@ gulp.task('serve:livereload', function () {
 gulp.task('serve:watch', function () {
     gulp.watch(['./server/**/*.js'], ['serve:start']);
     gulp.watch(path_client_from + '/styles/**/*.{sass,scss,css}', ['dev-sass-compile']);
+    gulp.watch('./bower.json', ['inject:bower']);
 });
 
 // clean up if an error goes unhandled.
@@ -120,6 +90,23 @@ process.on('exit', function () {
 /*
  * TASKS SERVE
  */
+
+
+
+gulp.task('inject:bower', function () {
+
+    return gulp.src(path_client_from + '/index.html')
+            .pipe(inject(gulp.src(mainBowerFiles(), {read: false}), {name: 'bower'}))
+            .pipe(gulp.dest(path_client_from))
+            .pipe(livereload());
+
+//    return gulp.src(path_client_from + '/index.html')
+//            .pipe(wiredep({
+//                directory: './bower_components',
+//                ignorePath: '..'
+//            }))
+//            .pipe(gulp.dest(path_client_from));
+});
 
 gulp.task('dev-sass-compile', function () {
     console.log(color('SASS Compile...', 'BLUE'));
@@ -153,12 +140,10 @@ gulp.task('build', function () {
     runSequence(
             'build:clean',
             [
-                'build:scripts',
-                'build:scripts:libs'
+                'build:scripts'
             ],
             [
-                'build:styles',
-                'build:styles:libs',
+                'build:styles'
             ],
             [
                 'replace:paths:html',
@@ -169,7 +154,11 @@ gulp.task('build', function () {
                 'build:server',
                 'build:server:production'
             ],
-            'build:extra:files'
+            'build:extra:files',
+            [
+                'build:bower:js',
+                'build:bower:css'
+            ]
             )
 });
 
@@ -182,42 +171,21 @@ gulp.task('build:clean', function () {
 });
 
 gulp.task('build:scripts', function () {
-    return gulp.src(path_client_from + '/scripts/**/*.js')
+    return gulp.src([path_client_from + '/lib/**/*.js', path_client_from + '/scripts/**/*.js'])
             .pipe(plumber()).pipe(sourcemaps.init())
             .pipe(jshint())
             //.pipe(jshint.reporter('default'))
-            .pipe(concat('app.js'))
-            .pipe(uglify())
+            .pipe(concat('app.js')).pipe(uglify())
+//            .pipe(obfuscate())
             .pipe(sourcemaps.write('../maps'))
             .pipe(gulp.dest(path_client_to + '/js'));
 });
 
-gulp.task('build:scripts:libs', function () {
-    return  gulp.src(path_client_from + '/lib/**/*.js')
-            .pipe(plumber()).pipe(sourcemaps.init())
-            .pipe(jshint())
-            //.pipe(jshint.reporter('default'))
-            .pipe(concat('vendor.js'))
-            .pipe(uglify())
-            .pipe(sourcemaps.write('../maps'))
-            .pipe(gulp.dest(path_client_to + '/js/'));
-});
-
 gulp.task('build:styles', function () {
-    return  gulp.src([path_client_from + '/lib/**/*.{sass,scss,css}'])
+    return  gulp.src([path_client_from + '/lib/**/*.{sass,scss,css}', path_client_from + '/styles/**/*.{sass,scss,css}'])
             .pipe(plumber()).pipe(sourcemaps.init())
             .pipe(sass({outputStyle: 'compressed'}).on('error', sass.logError))
-            .pipe(concat('app.css'))
-            .pipe(sourcemaps.write('../maps'))
-            .pipe(gulp.dest(path_client_to + '/css'));
-});
-
-gulp.task('build:styles:libs', function () {
-    return  gulp.src([path_client_from + '/styles/**/*.{sass,scss,css}'])
-            .pipe(plumber()).pipe(sourcemaps.init())
-            .pipe(sass({outputStyle: 'compressed'}).on('error', sass.logError))
-            .pipe(concat('vendor.css'))
-            .pipe(sourcemaps.write('../maps'))
+            .pipe(concat('app.css')).pipe(sourcemaps.write('../maps'))
             .pipe(gulp.dest(path_client_to + '/css'));
 });
 
@@ -234,6 +202,7 @@ gulp.task('replace:paths:html', function () {
                     'js/app.js'
                 ]
             }))
+            .pipe(strip({safe: true}))
             .pipe(htmlmin({collapseWhitespace: true}))
             .pipe(gulp.dest(path_client_to));
 });
@@ -275,4 +244,28 @@ gulp.task('build:server:production', function () {
 gulp.task('build:extra:files', function () {
     gulp.src('package.json').pipe(gulp.dest(path_root));
     gulp.src(path_client_from + '/favicon.ico').pipe(gulp.dest(path_client_to));
+});
+
+/*
+ * BOWER BUILD
+ */
+//var mainBowerFiles = require('gulp-main-bower-files');
+
+gulp.task('build:bower:js', function () {
+    return gulp.src(mainBowerFiles())
+            .pipe(plumber()).pipe(sourcemaps.init()).pipe(filter('**/*.js'))
+            .pipe(concat('vendor.js')).pipe(uglify()).pipe(sourcemaps.write('../maps'))
+            .pipe(gulp.dest(path_client_to + '/js'));
+});
+
+gulp.task('build:bower:css', function () {
+    return gulp.src(mainBowerFiles())
+            .pipe(plumber()).pipe(sourcemaps.init()).pipe(filter('**/*.css'))
+            .pipe(order([
+                'normalize.css',
+                '*'
+            ]))
+            .pipe(sass({outputStyle: 'compressed'}).on('error', sass.logError))
+            .pipe(concat('vendor.css')).pipe(sourcemaps.write('../maps'))
+            .pipe(gulp.dest(path_client_to + '/css'));
 });
