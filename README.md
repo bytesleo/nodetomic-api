@@ -3,7 +3,9 @@
 
 ![](http://solucionesit.ldtsynergy.com/-/Srvs015/MongoDB/file/view/mongodb.png/547250106/315x368/mongodb.png)
 ![](http://code.runnable.com/images/provider-icons/icon-express-alt.svg)
-![](https://chris.lu/upload/images/redis.png | width=10)
+![](https://chris.lu/upload/images/redis.png)
+<img src="https://chris.lu/upload/images/redis.png" width="48">
+
 ![](http://oraclelinuxworld.com/wp-content/uploads/2016/01/NodeJS-Small-Blog-Feature-Image-.jpg)
 
 Easy server RESTful, based in MongoDb, Express, Redis, NodeJS.
