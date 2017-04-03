@@ -1,17 +1,16 @@
+'use strict';
+
 /*
- * 
  * MODE PRODUCTION
- * 
- */
+*/
 
-
-var path = require('path');
+const path = require('path');
 
 module.exports = {
     /*
-     ** Mode
-     */
-    mode: 'PRODUCTION',
+   ** Mode: development / production
+   */
+    mode: 'production',
     /*
      ** Path Root
      */
@@ -19,7 +18,7 @@ module.exports = {
     /*
      ** Folder Client
      */
-    client: 'public',
+    client: 'dist',
     /*
      ** IP
      */
@@ -27,13 +26,7 @@ module.exports = {
     /*
      ** Port
      */
-    port: 9001,
-    /*
-     ** User
-     */
-    user: {
-
-    },
+    port: 8001,
     /*
      *redirect
      */
@@ -43,21 +36,38 @@ module.exports = {
     /*
      ** Session
      */
-    secret: 's3kr3t_$k3y_&5ess10n?!%',
+    secret: 's3kr3t_$k3y_&5ess10n?!%_pro',
     /*
      ** DataBase
      */
     database: {
+        //MongoDb
         mongo: {
-            uri: 'mongodb://localhost/nodetomic',
-            options: {
-                db: {
-                    safe: true
+            db: {
+                uri: 'mongodb://localhost/nodetomic-dev',
+                options: {
+                    db: {
+                        safe: true
+                    }
+                },
+                seed: {
+                    user: false,
+                    hello: false
                 }
-            },
-            safe: false
+            }
         }
+        //Other DataBase
     },
+    /*
+     * Roles
+     */
+    roles: [
+        {
+            rol: 'user',
+            time: 60 //minutes
+        }
+    ],
+
     /**
      * Redis
      */
@@ -65,46 +75,42 @@ module.exports = {
         token: {
             ip: '127.0.0.1',
             port: 6379,
-            time: 60 * 5, // 60*60*24 = 24 hours,
+            time: (60 * 60 * 24), // by default 60*60*24 = 24 hours,
             multiple: true // if you want multiples logins or only 1 device
-        },
-        /*session: {
-         ip: '127.0.0.1',
-         port: 6379,
-         time: (60 * 60 * 24),
-         db: 1
-         }*/
+        }
     },
     /*
      ** Log request in console?
      */
     log: false,
     /*
-     *	oAuth:  this.production ? ID_Production : ID_Development
+     *	oAuth
      */
-    facebook: {//dragtoolapp
-        clientID: '1761107184177486',
-        clientSecret: '09fb3f2b822f2846bdc03193231e22e0',
-        callbackURL: '/auth/facebook/callback'
-    },
-    twitter: {//dragtoolapp
-        clientID: 'hfrGIq0U4pUMaGm1lEUIittiI',
-        clientSecret: 'g8hLu1MPKt7kXnz6gqTZNVDLqdLZhLpAgnsudWA4ywOMasGiMw',
-        callbackURL: '/auth/twitter/callback'
-    },
-    google: {//dragtoolapp
-        clientID: '959531593421-rbefifq5bid7v7j0ngmbql85i58fucuc.apps.googleusercontent.com',
-        clientSecret: 'KaossMVdlEt62MKyDdr3GqAb',
-        callbackURL: '/auth/google/callback'
-    },
-    github: {//leonardorico
-        clientID: 'e64eae04dcf1da75dcbb',
-        clientSecret: '5aa562cf7c1a7b5801015e023a08536cf19fb733',
-        callbackURL: '/auth/github/callback'
-    },
-    bitbucket: {//Login Face Apeiron
-        clientID: 'QRgAjhPUvvVFFTZyK7',
-        clientSecret: 'EMWyqntmKXP53wqWkrLBwVAcCVcqNFWc',
-        callbackURL: '/auth/bitbucket/callback'
+    oAuth: {
+        facebook: {
+            clientID: '',
+            clientSecret: '',
+            callbackURL: '/auth/facebook/callback'
+        },
+        twitter: {
+            clientID: '',
+            clientSecret: '',
+            callbackURL: '/auth/twitter/callback'
+        },
+        google: {
+            clientID: '',
+            clientSecret: '',
+            callbackURL: '/auth/google/callback'
+        },
+        github: {
+            clientID: '',
+            clientSecret: '',
+            callbackURL: '/auth/github/callback'
+        },
+        bitbucket: {
+            clientID: '',
+            clientSecret: '',
+            callbackURL: '/auth/bitbucket/callback'
+        }
     }
 };

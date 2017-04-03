@@ -29,9 +29,10 @@ module.exports = (app) => {
         res.status(404).sendFile(`${config.root}/server/views/404.html`);
     });
 
-    app.get('/:url(admin)/*', (req, res) => {
-        res.sendFile(`${config.root}/${config.clientAdmin}/index.html`);
-    });
+    //other folder client
+    // app.get('/:url(admin)/*', (req, res) => {
+    //     res.sendFile(`${config.root}/${config.clientAdmin}/index.html`);
+    // });
 
     app.get('/*', (req, res) => {
         res.sendFile(`${config.root}/${config.client}/index.html`);

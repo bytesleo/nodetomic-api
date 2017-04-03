@@ -16,6 +16,5 @@ module.exports = (app) => {
             //                return res.statusCode == 304;
             //            }
         }));
-
     }
 };

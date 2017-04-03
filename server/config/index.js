@@ -1,12 +1,10 @@
 'use strict';
 
 /*
- *
  * MODE DEVELOPMENT
- *
- */
+*/
 
-var path = require('path');
+const path = require('path');
 
 module.exports = {
     /*
@@ -28,7 +26,7 @@ module.exports = {
     /*
      ** Port
      */
-    port: 9000,
+    port: 8000,
     /*
      * livereload
      */
@@ -50,6 +48,7 @@ module.exports = {
      ** DataBase
      */
     database: {
+        //MongoDb
         mongo: {
             db: {
                 uri: 'mongodb://localhost/nodetomic-dev',
@@ -64,6 +63,7 @@ module.exports = {
                 }
             }
         }
+        //Other DataBase
     },
     /*
      * Roles
@@ -82,7 +82,7 @@ module.exports = {
         token: {
             ip: '127.0.0.1',
             port: 6379,
-            time: (60 * 60 * 24), // 60*60*24 = 24 hours,
+            time: (60 * 60 * 24), // by default 60*60*24 = 24 hours,
             multiple: true // if you want multiples logins or only 1 device
         }
     },
@@ -91,7 +91,7 @@ module.exports = {
      */
     log: true,
     /*
-     *	oAuth:  this.production ? ID_Production : ID_Development
+     *	oAuth
      */
     oAuth: {
         facebook: {
