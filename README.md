@@ -21,9 +21,9 @@ command: `npm run build`
 
 output: `dist`
 
-##dist
+## Production
 
-ready for production!
+folder "dist" ready for production!
 
 ```bash
 cd dist
