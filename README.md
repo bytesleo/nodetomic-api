@@ -1,10 +1,10 @@
 
 # Nodetomic
 
-![](http://solucionesit.ldtsynergy.com/-/Srvs015/MongoDB/file/view/mongodb.png/547250106/315x368/mongodb.png | width=10)
-![](http://code.runnable.com/images/provider-icons/icon-express-alt.svg | width=10)
+![](http://solucionesit.ldtsynergy.com/-/Srvs015/MongoDB/file/view/mongodb.png/547250106/315x368/mongodb.png)
+![](http://code.runnable.com/images/provider-icons/icon-express-alt.svg)
 ![](https://chris.lu/upload/images/redis.png | width=10)
-![](http://oraclelinuxworld.com/wp-content/uploads/2016/01/NodeJS-Small-Blog-Feature-Image-.jpg | width=10)
+![](http://oraclelinuxworld.com/wp-content/uploads/2016/01/NodeJS-Small-Blog-Feature-Image-.jpg)
 
 Easy server RESTful, based in MongoDb, Express, Redis, NodeJS.
 
