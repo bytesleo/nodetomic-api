@@ -1,44 +1,19 @@
 'use strict';
 
-/* get models */
+// models
 const User = require('./user.model');
-//const config = require('../../core/config');
 
-module.exports = {
+exports.read = (req, res) => {
 
-	/* Methods */
-	create(req, res){
+    User.find({}, function(err, users) {
+        res.status(200).json(users);
+    });
 
-		 // create a sample user
-		  var nick = new User({ 
-		    name: 'admin', 
-		    password: '123',
-		    provider: 'local'
-		  });
-
-
-		 // save the sample user
-		 nick.save(function(err) {
-		    if (err) throw err;
-
-		    console.log('User saved successfully');
-		    res.json({ success: true });
-		 });
-
-
-	   // return res.status(200).json({status : true}); 
-	},
-
-
-	read(req, res){
-
-		User.find({}, function(err, users) {
-			res.json(users);
-		});
-
-	}
-
-
-	
-	
 }
+
+exports.me = (req, res, next) => {
+    var usuario = req.user; //get user
+    usuario.ts = usuario.ttlRol - Math.floor(((new Date().getTime()) - usuario.ts) / 1000); //time session
+    delete usuario.jwt;
+    res.status(200).json(usuario);
+};

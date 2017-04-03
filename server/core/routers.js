@@ -1,38 +1,40 @@
-var path = require('path');
-var config = require('../config');
+'use strict';
+
+const config = require('../config');
 const express = require('express');
+const fs = require("fs");
 
 module.exports = (app) => {
-    
+
     // Point static path to client
     app.use(express.static(config.root + config.client));
     app.use('/bower_components', express.static(config.root + '/bower_components'));
 
-    /*
-     ** Routes
-     */
+    //assets specials
+    // app.use('/vendor.bundle.js', express.static(config.root + '/dist-admin/vendor.bundle.js'));
 
-    app.use('/api/hello', require('../api/hello'));
-    app.use('/api/user', require('../api/user'));
-    app.use('/auth', require('../lib/auth'));
-
-    /*
-     **Catch all other routes and return the index file
-     */
-
-    app.get('/:url(api|auth|bower_components|core|app|assets)/*', (req, res) => {
-        res.sendFile(`${config.root}/server/views/404.html`);
+    //Routers autoload
+    fs.readdirSync(`${config.root}/server/api`).forEach(route => {
+        if (route.charAt(0) !== '_') {
+            app.use('/api/' + route, require('../api/' + route));
+        }
     });
 
+    //Routers Manual
+    app.use('/auth', require('../lib/auth'));
+    // app.use('/api/hello', require('../api/hello'));
 
+    //Paths clients
+    app.get('/:url(api|auth|bower_components|core|app|assets)/*', (req, res) => {
+        res.status(404).sendFile(`${config.root}/server/views/404.html`);
+    });
 
-    app.get('/:url(editor)/*', (req, res) => {
-        res.sendFile(`${config.root}/${config.client}/editor.html`);
+    app.get('/:url(admin)/*', (req, res) => {
+        res.sendFile(`${config.root}/${config.clientAdmin}/index.html`);
     });
 
     app.get('/*', (req, res) => {
         res.sendFile(`${config.root}/${config.client}/index.html`);
     });
-
 
 };

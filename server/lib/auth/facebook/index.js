@@ -1,19 +1,16 @@
 'use strict';
 
-var express = require('express');
-var passport = require('passport');
-var auth = require('../auth');
+const express = require('express');
+const passport = require('passport');
+const auth = require('../service');
 
-var router = express.Router();
+const router = express.Router();
 
-router
-        .get('/', passport.authenticate('facebook'))
-
-        .get('/callback', passport.authenticate('facebook', {
-            failureRedirect: '/signup',
-            session:false
-        }), function (req, res) {
-            auth.init(req, res, 'socialnetwork');
-        });
+router.get('/', passport.authenticate('facebook')).get('/callback', passport.authenticate('facebook', {
+    failureRedirect: '/signup',
+    session: false
+}), (req, res) => {
+    auth.start(req, res, 'social');
+});
 
 module.exports = router;

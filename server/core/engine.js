@@ -1,3 +1,4 @@
+'use strict';
 
 const path = require('path'); // Paths
 const helmet = require('helmet'); // protection
@@ -6,34 +7,22 @@ const bodyParser = require('body-parser'); //Parse params POST
 const compression = require('compression'); //Compress response
 const methodOverride = require('method-override'); // Put and DELETE methods
 const cookieParser = require('cookie-parser'); // secret cookies
-const config = require('./../config');
-const passport = require('passport');
-const session = require('express-session');
-const cors = require('cors');
+const config = require('./../config'); //config
+const passport = require('passport'); //Passport
+const session = require('express-session'); //session
+const cors = require('cors'); //cors
+const fileUpload = require('express-fileupload'); //fileUpload
 
 module.exports = (app) => {
 
-    //app.disable('x-powered-by')
     app.use(bodyParser.json({limit: '5mb'}));
     app.use(bodyParser.urlencoded({extended: false}));
-    /* app.all('*', function (req, res, next) {
-     res.set('Access-Control-Allow-Origin', 'http://localhost');
-     res.set('Access-Control-Allow-Credentials', true);
-     res.set('Access-Control-Allow-Methods', 'GET, POST, DELETE, PUT');
-     res.set('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type');
-     if ('OPTIONS' == req.method)
-     return res.send(200);
-     next();
-     });*/
+    app.use(fileUpload());
     app.use(cookieParser());
     app.use(methodOverride());
     app.use(compression());
     app.use(helmet());
-
-    app.use(cors({
-        origin: true,
-        credentials: true
-    }));
+    app.use(cors({origin: true, credentials: true}));
 
     /*SessionStore with Mongo*/
     /*

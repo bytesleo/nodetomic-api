@@ -1,16 +1,18 @@
+'use strict';
+
 /*
- * 
+ *
  * MODE DEVELOPMENT
- * 
+ *
  */
 
 var path = require('path');
 
 module.exports = {
     /*
-     ** Mode
-     */
-    mode: 'DEVELOPMENT',
+   ** Mode: development / production
+   */
+    mode: 'development',
     /*
      ** Path Root
      */
@@ -34,13 +36,6 @@ module.exports = {
         ip: 'localhost',
         port: 35729
     },
-
-    /*
-     ** User
-     */
-    user: {
-
-    },
     /*
      *redirect
      */
@@ -56,15 +51,30 @@ module.exports = {
      */
     database: {
         mongo: {
-            uri: 'mongodb://localhost/nodetomic-dev',
-            options: {
-                db: {
-                    safe: true
+            db: {
+                uri: 'mongodb://localhost/nodetomic-dev',
+                options: {
+                    db: {
+                        safe: true
+                    }
+                },
+                seed: {
+                    user: false,
+                    hello: true
                 }
-            },
-            safe: true
+            }
         }
     },
+    /*
+     * Roles
+     */
+    roles: [
+        {
+            rol: 'user',
+            time: 60 //minutes
+        }
+    ],
+
     /**
      * Redis
      */
@@ -72,17 +82,9 @@ module.exports = {
         token: {
             ip: '127.0.0.1',
             port: 6379,
-            time: 60 * 5, // 60*60*24 = 24 hours,
+            time: (60 * 60 * 24), // 60*60*24 = 24 hours,
             multiple: true // if you want multiples logins or only 1 device
-        },
-        // Only if your use sessionStore in engine.js
-        /*
-         session: {
-         ip: '127.0.0.1',
-         port: 6379,
-         time: 60 * 5,
-         db: 1
-         }*/
+        }
     },
     /*
      ** Log request in console?
@@ -91,29 +93,31 @@ module.exports = {
     /*
      *	oAuth:  this.production ? ID_Production : ID_Development
      */
-    facebook: {//dragtoolapp
-        clientID: '1414309298866863',
-        clientSecret: 'a0e3aa719346ca3d88bc30b771395ca9',
-        callbackURL: '/auth/facebook/callback'
-    },
-    twitter: {//dragtoolapp
-        clientID: 'ECfOxu76tGIKdDFHB9aVQ09A6',
-        clientSecret: 'luQrsJXJzavTM2heOU3Ie9XHagrsYRS23fUnXYowgpU7ISulEU',
-        callbackURL: '/auth/twitter/callback'
-    },
-    google: {//dragtoolapp
-        clientID: '959531593421-np84t1tssmqlhmkf73rbm5m1rugmdnvo.apps.googleusercontent.com',
-        clientSecret: 'y5pa5One-glkl7N9dOa7W0T7',
-        callbackURL: '/auth/google/callback'
-    },
-    github: {//leonardorico
-        clientID: 'b44946eddc69246251be',
-        clientSecret: 'bdaa938b78c5fd1c50ecc744a99002612b5eaea7',
-        callbackURL: '/auth/github/callback'
-    },
-    bitbucket: {//Login Face Apeiron
-        clientID: '5JXWfCwXrKQuNCyh7X',
-        clientSecret: 'aNFm2sFdsUtvYrQ4g5GM9XmYW5QWtFwX',
-        callbackURL: '/auth/bitbucket/callback'
+    oAuth: {
+        facebook: {
+            clientID: '',
+            clientSecret: '',
+            callbackURL: '/auth/facebook/callback'
+        },
+        twitter: {
+            clientID: '',
+            clientSecret: '',
+            callbackURL: '/auth/twitter/callback'
+        },
+        google: {
+            clientID: '',
+            clientSecret: '',
+            callbackURL: '/auth/google/callback'
+        },
+        github: {
+            clientID: 'b44946eddc69246251be',
+            clientSecret: 'bdaa938b78c5fd1c50ecc744a99002612b5eaea7',
+            callbackURL: '/auth/github/callback'
+        },
+        bitbucket: {
+            clientID: '',
+            clientSecret: '',
+            callbackURL: '/auth/bitbucket/callback'
+        }
     }
 };

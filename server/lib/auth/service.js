@@ -1,15 +1,16 @@
+'use strict';
+
+const redisHelper = require('../utility/redis');
+const tokenHelper = require('../utility/token');
+const utility = require('../utility');
 const config = require('../../config');
-var redisHelper = require('./redis');
-var tokenHelper = require('./token');
 
 /*
  * Initialization token session with local and social networks
  */
 
-exports.init = function (req, res, type) {
-
+exports.start = (req, res, type) => {
     //var user = req.user;
-    // data save Redis
     var user = {
         _id: req.user._id,
         name: req.user.name,
@@ -21,18 +22,17 @@ exports.init = function (req, res, type) {
         role: req.user.role
     };
 
-    this.createAndStoreToken(user, null, function (err, token) {//key, data, time session
+    var ttl = req.user.ttl || utility.getTimeRol(req.user.roles);
+
+    this.createAndStoreToken(user, null, (err, token) => { //key, data, time session
         if (err) {
             return res.status(400);
         }
         switch (type) {
-            case 'local' :
-                res.status(200).json({
-                    token: token,
-                    redirect: config.login.redirect
-                });
+            case 'local':
+                res.status(200).json({token: token, redirect: config.login.redirect});
                 break;
-            case 'socialnetwork' :
+            case 'social':
                 res.cookie('token', JSON.stringify(token));
                 res.redirect(config.login.redirect);
                 break;
@@ -41,41 +41,11 @@ exports.init = function (req, res, type) {
     });
 };
 
-
-/*
- * Middleware to verify the token and store the user data in req._user
- */
-exports.verify = function (req, res, next) {
-
-    var headers = req.headers;
-    if (headers === null)
-        return res.status(401).send('401');
-
-    tokenHelper.extractTokenFromHeader(req, function (err, token) {// Extract Token from header x-access-token
-
-        if (err)
-            return res.status(401).send(err);
-
-        redisHelper.getDataByToken(token.decode, function (err, data) {
-
-            if (err)
-                return res.status(401).send('Unauthorized');
-
-            if (token.value !== data.jwt)
-                return res.status(401).send('Unauthorized, token in new device...');
-
-            req.user = data;
-            next();
-        });
-    });
-};
-
-
 /*
  * Create a new token, stores it in redis with data during ttl time in seconds
  * callback(err, token);
  */
-exports.createAndStoreToken = function (data, ttl, callback) {
+exports.createAndStoreToken = (data, ttl, callback) => {
 
     data = data || {};
     ttl = ttl || config.redis.token.time;
@@ -85,18 +55,19 @@ exports.createAndStoreToken = function (data, ttl, callback) {
     if (ttl !== null && typeof ttl !== 'number')
         callback(new Error('ttl is not a valid Number'));
 
-    tokenHelper.createToken(data._id, function (err, token) {
+    jwtHelper.createToken(data._id, (err, token) => {
         if (err)
             callback(err);
 
-        if (!config.redis.token.multiple) {//delete all sessions tokens
-            redisHelper.findByPattern(token.key, function (err, exits) {
+        if (!config.redis.token.multiple) { //delete all sessions tokens
+            redisHelper.findByPattern(token.key, (err, exits) => {
                 if (err)
                     callback(err);
-            });
+                }
+            );
         }
 
-        redisHelper.setTokenWithData(token, data, ttl, function (err, success) {
+        redisHelper.setTokenWithData(token, data, ttl, (err, success) => {
             if (err)
                 callback(err);
             if (success) {
@@ -112,9 +83,10 @@ exports.createAndStoreToken = function (data, ttl, callback) {
 /*
  * Expires the token (remove from redis)
  */
-exports.expireToken = function (headers, callback) {
+exports.expireToken = (headers, callback) => {
     if (headers === null)
         callback(new Error('Headers are null'));
+
     // Get token
     try {
         var token = tokenHelper.extractTokenFromHeader(headers);
@@ -126,11 +98,4 @@ exports.expireToken = function (headers, callback) {
         console.log(err);
         return callback(err);
     }
-};
-
-/*
- * Get count session
- */
-exports.getCount = function (callback) {
-    redisHelper.getCount(callback);
 };

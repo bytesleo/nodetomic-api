@@ -1,12 +1,14 @@
-/* Requires */
+'use strict';
+
+//require
 const express = require('express');
 const controller = require('./hello.controller');
 
-/* Router */
+// Router
 const router = express.Router();
 
-/* GET api listing. */
+// Rest Api
 
-router.get('/', controller.show);
+router.get('/read', controller.read);
 
 module.exports = router;

@@ -1,17 +1,16 @@
 'use strict';
 
-var express = require('express');
-var controller = require('./user.controller');
-var auth = require('../../lib/auth/auth');
+//require
+const express = require('express');
+const controller = require('./user.controller');
+const auth = require('../../lib/auth/middleware');
 
-/* Router */
+// Router
 const router = express.Router();
 
-/* GET api listing. */
+// Rest Api
 
-router.get('/create', controller.create);
-router.get('/read', auth.verify, controller.read);
-
-
+router.get('/me', auth.isAuthenticated(), controller.me);
+router.get('/read', auth.isAuthenticated(), controller.read);
 
 module.exports = router;

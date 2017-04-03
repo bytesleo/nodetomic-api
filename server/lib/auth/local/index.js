@@ -1,17 +1,14 @@
 'use strict';
 
-var express = require('express');
-var passport = require('passport');
-var auth = require('../auth');
+const express = require('express');
+const passport = require('passport');
+const auth = require('../service');
 
-/* Router */
 const router = express.Router();
 
-/* GET api listing. */
+router.post('/', (req, res, next) => {
 
-router.post('/', function (req, res, next) {
-
-    passport.authenticate('local', function (err, user, info) {
+    passport.authenticate('local', (err, user, info) => {
 
         var error = err || info;
         if (error)
@@ -20,7 +17,8 @@ router.post('/', function (req, res, next) {
             return res.status(404).json({message: 'Something went wrong, please try again.'});
 
         req.user = user;
-        auth.init(req, res, 'local');
+
+        auth.start(req, res, 'local');
 
     })(req, res, next);
 

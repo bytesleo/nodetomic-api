@@ -1,22 +1,12 @@
-/* get models */
-const model = require('./hello.model');
-var auth = require('../../lib/auth/auth');
+'use strict';
 
-module.exports = {
+//models
+const Hello = require('./hello.model');
 
-	/* Methods */
-	show(req, res, next){
+exports.read = (req, res) => {
 
-		auth.getCount(function(err, count) {
-			return res.status(200).json({online : count}); 
-		});
-
-	   // return res.status(200).json({status : true}); 
-	},
-	
-	delete(req,res,next){
-		
-
-	}
+    Hello.find({}, (err, hello) => {
+        res.status(200).json(hello);
+    })
 
 }
