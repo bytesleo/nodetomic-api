@@ -14,6 +14,30 @@ Easy server RESTful, based in MongoDb, Express, Redis, NodeJS.
 git clone [repo Nodetomic]
 npm install
 ```
+
+## Directory Layout
+
+```bash
+.
+├── /dist/                     # The compiled output
+├── /server/                   # Node.js application source files
+│   ├── /api/                  # api RESTful
+│   ├── /config/               # Global Config
+│   ├── /core/                 # Core
+│   │   ├── /mongoose/         # database
+│   │   ├── /dev.js            # dev
+│   │   ├── /engine.js         # Engine
+│   │   └── /routers.js        # Routers
+│   ├── /lib/                  # Libs
+│   │   ├── /auth/             # Authentication
+│   │   └── /utility/          # Utility
+│   ├── /views/                # Views
+│   └── /app.js                # Node.js server (entry point)
+├── /src/                      # Client
+├── gulpfile.js                # gulpfile
+└── package.json               # The list of project dependencies
+```
+
 ## Run
 
 command: `npm run serve`
@@ -35,3 +59,7 @@ cd dist
 nodemon server/app.js
 ```
 output: http://localhost:8001
+
+## License
+
+MIT
