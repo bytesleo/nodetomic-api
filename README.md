@@ -1,6 +1,8 @@
 
 # Nodetomic
 
+![alt tag](http://www.developersfeed.com/wp-content/uploads/2016/10/mongodbicon-1.png)
+
 Easy server RESTful, based in MongoDb, Express, Redis, NodeJS.
 
 ## Instructions
