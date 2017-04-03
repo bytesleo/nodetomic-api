@@ -1,7 +1,10 @@
 
 # Nodetomic
 
-![alt tag](http://www.developersfeed.com/wp-content/uploads/2016/10/mongodbicon-1.png)
+![alt tag](http://solucionesit.ldtsynergy.com/-/Srvs015/MongoDB/file/view/mongodb.png/547250106/315x368/mongodb.png =250x250)
+![alt tag](http://code.runnable.com/images/provider-icons/icon-express-alt.svg =250x250)
+![alt tag](https://chris.lu/upload/images/redis.png =250x250)
+![alt tag](http://oraclelinuxworld.com/wp-content/uploads/2016/01/NodeJS-Small-Blog-Feature-Image-.jpg =250x250)
 
 Easy server RESTful, based in MongoDb, Express, Redis, NodeJS.
 
