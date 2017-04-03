@@ -44,7 +44,7 @@ exports.extractTokenFromHeader = (req, callback) => {
 
         if (err)
             return callback('Token invalid.');
-
+        
         // decode token
         //req.decoded = decoded;
         return callback(null, {

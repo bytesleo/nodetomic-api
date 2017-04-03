@@ -59,7 +59,7 @@ module.exports = {
                     }
                 },
                 seed: {
-                    user: false,
+                    user: true,
                     hello: true
                 }
             }

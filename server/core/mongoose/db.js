@@ -12,7 +12,7 @@ var db = mongoose.connect(config.database.mongo.db.uri, config.database.mongo.db
 require('./status')(db, config.database.mongo.db.uri);
 
 // Seed
-if (config.database.mongo.db.seed.users) {
+if (config.database.mongo.db.seed.user) {
     setTimeout(() => {
         require('./seed/user');
     }, 800);

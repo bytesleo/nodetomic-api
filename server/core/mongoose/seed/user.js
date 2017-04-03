@@ -2,8 +2,19 @@
 
 var User = require('../../../api/user/user.model');
 
-// Usuario.find({}).remove(() => {
-//     Usuario.create(arrayUsuarios, () => {
-//         console.log('----------------->Publicación de Usuarios Finalizada.');
-//     });
-// });
+var data = [
+    {
+        username: 'admin',
+        password: '123',
+        email: 'admin@admin.com',
+        provider: 'local',
+        name: 'Administrator',
+        photo: 'https://goo.gl/iRM3yA'
+    }
+];
+
+User.find({}).remove(() => {
+    User.create(data, () => {
+        console.log('----------------->Published User seed');
+    });
+});

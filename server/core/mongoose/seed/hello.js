@@ -2,7 +2,7 @@
 
 var Hello = require('../../../api/hello/hello.model');
 
-var helloArray = [
+var data = [
     {
         greet: 'Hello World',
         language: 'English'
@@ -25,7 +25,7 @@ var helloArray = [
 ];
 
 Hello.find({}).remove(() => {
-    Hello.create(helloArray, () => {
-        console.log('----------------->Publish finish Hello');
+    Hello.create(data, () => {
+        console.log('----------------->Published Hello seed');
     });
 });

@@ -8,7 +8,7 @@ const config = require('../../config');
  * Middleware to verify the token and store the user data in req._user
  */
 
-exports.isAuthenticated = (req, res, next) => {
+exports.isAuthenticated = (rolesRequired) => {
 
     return function(req, res, next) {
 
