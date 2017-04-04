@@ -4,10 +4,12 @@
     "description": "Easy server RESTful, based in MongoDb, Express, Redis, NodeJS",
     "main": "server/app.js",
     "scripts": {
-        "serve": "gulp",
-        "build": "gulp serve:build"
+        "start": "nodemon server/app.js --exec babel-node",
+        "build": "gulp serve:build:clean && babel server -d dist/server && gulp serve:build:replace",
+        "serve": "node dist/server/app.js",
+        "test": "mocha --compilers js:babel-register"
     },
-    "author": "Leonardo Rico https://twitter.com/thekevoj",
+    "author": "Leonardo Rico https://github.com/kevoj",
     "license": "MIT",
     "dependencies": {
         "bcrypt": "^1.0.2",
@@ -37,16 +39,22 @@
         "serve-favicon": "^2.3.2"
     },
     "devDependencies": {
+        "babel-cli": "^6.24.0",
+        "babel-plugin-transform-flow-comments": "^6.22.0",
+        "babel-preset-es2015": "^6.24.0",
+        "babel-preset-es2016": "^6.22.0",
+        "babel-preset-stage-2": "^6.22.0",
         "connect-livereload": "^0.6.0",
         "gulp": "^3.9.1",
-        "gulp-nodemon": "^2.2.1",
-        "gulp-rename": "^1.2.2",
-        "gulp-rimraf": "^0.2.1",
-        "gulp-color": "0.0.1",
         "gulp-clean": "^0.3.2",
         "gulp-color": "0.0.1",
+        "gulp-json-modify": "^1.0.2",
+        "gulp-rename": "^1.2.2",
         "gulp-replace": "^0.5.4",
-        "run-sequence": "^1.2.2",
-        "morgan": "^1.7.0"
+        "gulp-rimraf": "^0.2.1",
+        "mocha": "^3.2.0",
+        "morgan": "^1.7.0",
+        "nodemon": "^1.11.0",
+        "run-sequence": "^1.2.2"
     }
 }

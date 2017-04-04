@@ -1,12 +1,10 @@
-'use strict';
-
 //models
-const Hello = require('./hello.model');
+import Hello from './hello.model';
 
-exports.read = (req, res) => {
+export function index(req, res) {
 
     Hello.find({}, (err, hello) => {
-        res.status(200).json(hello);
-    })
+        return res.status(200).json(hello);
+    });
 
 }

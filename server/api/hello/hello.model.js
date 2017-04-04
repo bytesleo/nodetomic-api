@@ -1,11 +1,9 @@
-'use strict';
-
 // Libs
-var mongoose = require('mongoose');
-var Schema = mongoose.Schema;
+import mongoose from 'mongoose';
+const Schema = mongoose.Schema;
 
 // Model
-var HelloSchema = new Schema({
+const HelloSchema = new Schema({
     greet: {
         type: String,
         required: true
@@ -16,4 +14,4 @@ var HelloSchema = new Schema({
     }
 });
 
-module.exports = mongoose.model('Hello', HelloSchema);
+export default mongoose.model('Hello', HelloSchema);

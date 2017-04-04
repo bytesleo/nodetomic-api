@@ -1,7 +1,7 @@
-const passport = require('passport');
-const GitHubStrategy = require('passport-github').Strategy;
+import passport from 'passport';
+import {Strategy as GitHubStrategy} from 'passport-github';
 
-exports.setup = (User, config) => {
+export function setup(User, config) {
 
     passport.use(new GitHubStrategy({
 
@@ -50,4 +50,4 @@ exports.setup = (User, config) => {
             }
         });
     }));
-};
+}

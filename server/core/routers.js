@@ -1,27 +1,31 @@
-'use strict';
+import path from 'path';
+import config from '../config';
+import express from 'express';
+import fs from "fs";
+import favicon from 'serve-favicon';
 
-const config = require('../config');
-const express = require('express');
-const fs = require("fs");
-
-module.exports = (app) => {
+export default(app) => {
 
     // Point static path to client
-    app.use(express.static(config.root + config.client));
-    app.use('/bower_components', express.static(config.root + '/bower_components'));
+    if (fs.existsSync(config.root + config.client)) {
+        app.use(express.static(config.root + config.client));
+        app.use(favicon(path.join(config.root, config.client, 'favicon.ico')));
+    }
 
-    //assets specials
+    app.use('/bower_components', express.static(`${config.root}/bower_components`));
+
+    //Assets specifics
     // app.use('/vendor.bundle.js', express.static(config.root + '/dist-admin/vendor.bundle.js'));
 
     //Routers autoload
     fs.readdirSync(`${config.root}/server/api`).forEach(route => {
         if (route.charAt(0) !== '_') {
-            app.use('/api/' + route, require('../api/' + route));
+            app.use(`/api/${route}`, require(`../api/${route}`).default);
         }
     });
 
     //Routers Manual
-    app.use('/auth', require('../lib/auth'));
+    app.use('/auth', require('../lib/auth').default);
     // app.use('/api/hello', require('../api/hello'));
 
     //Paths clients
@@ -29,13 +33,14 @@ module.exports = (app) => {
         res.status(404).sendFile(`${config.root}/server/views/404.html`);
     });
 
-    //other folder client
-    // app.get('/:url(admin)/*', (req, res) => {
-    //     res.sendFile(`${config.root}/${config.clientAdmin}/index.html`);
-    // });
-
+    //Folder client
     app.get('/*', (req, res) => {
         res.sendFile(`${config.root}/${config.client}/index.html`);
     });
+
+    //other folder client
+    // app.get('/:url(admin)/*', (req, res) => {
+    //     res.sendFile(`${config.root}/${config.clientAdmin}/example.html`);
+    // });
 
 };

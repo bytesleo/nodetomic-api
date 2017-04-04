@@ -1,16 +1,13 @@
-'use strict';
-
 //require
-const express = require('express');
-const controller = require('./user.controller');
-const auth = require('../../lib/auth/middleware');
+import express from 'express';
+import * as auth from '../../lib/auth/middleware';
+import * as controller from './user.controller';
 
 // Router
 const router = express.Router();
 
 // Rest Api
-
+router.get('/index', auth.isAuthenticated(), controller.index);
 router.get('/me', auth.isAuthenticated(), controller.me);
-router.get('/read', auth.isAuthenticated(), controller.read);
 
-module.exports = router;
+export default router;

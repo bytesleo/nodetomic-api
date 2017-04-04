@@ -1,12 +1,10 @@
-'use strict';
-
-const redis = require('redis');
-const utility = require('../index');
-const config = require('../../../config');
+import * as redis from 'redis';
+import * as utility from '../index';
+import config from '../../../config';
 
 require('redis-delete-wildcard')(redis);
 
-var redisClient = redis.createClient(config.redis.token.port, config.redis.token.ip);
+const redisClient = redis.createClient(config.redis.token.port, config.redis.token.ip);
 
 redisClient.on('error', err => {
     throw err;
@@ -19,20 +17,20 @@ redisClient.on('error', err => {
  * ttl: Number - Time to Live in seconds (default: 24Hours)
  * callback: Function
  */
-exports.setTokenWithData = (token, data, ttl, callback) => {
+export function setTokenWithData(token, data, ttl, callback) {
 
     if (token.key == null || token.value == null)
         throw new Error('Token is null');
     if (data != null && typeof data !== 'object')
         throw new Error('data is not an Object');
 
-    var info = {
+    const info = {
         ts: new Date(),
         user: data,
         jwt: token.value
     };
 
-    var timeToLive = ttl;
+    const timeToLive = ttl;
     if (timeToLive != null && typeof timeToLive !== 'number')
         throw new Error('TimeToLive is not a Number');
 
@@ -46,7 +44,7 @@ exports.setTokenWithData = (token, data, ttl, callback) => {
         }
     });
 
-};
+}
 
 /*
  * Gets the associated data of the token.
@@ -54,12 +52,12 @@ exports.setTokenWithData = (token, data, ttl, callback) => {
  * callback: Function - returns data
  */
 
-exports.getDataByToken = (token, callback) => {
+export function getDataByToken(token, callback) {
 
     if (token == null)
         callback(new Error('Token is null'));
 
-    var key = utility.getRedisKey(token);
+    const key = utility.getRedisKey(token);
 
     redisClient.get(key, (err, userData) => {
         if (err)
@@ -70,13 +68,13 @@ exports.getDataByToken = (token, callback) => {
             callback(new Error('Token Not Found'));
         }
     );
-};
+}
 
 /*
  * Expires a token by deleting the entry in redis
  * callback(null, true) if successfuly deleted
  */
-exports.expireToken = (token, callback) => {
+export function expireToken(token, callback) {
     if (token == null)
         callback(new Error('Token is null'));
 
@@ -92,11 +90,11 @@ exports.expireToken = (token, callback) => {
             }
         );
     });
-};
+}
 
-exports.findByPattern = (key, callback) => {
-    var id_session = key.split(':')[0];
-    redisClient.delwild(id_session + ':*', (error, numberDeletedKeys) => {
+export function findByPattern(key, callback) {
+    const id_session = key.split(':')[0];
+    redisClient.delwild(`${id_session}:*`, (error, numberDeletedKeys) => {
         console.log(numberDeletedKeys);
     });
-};
+}

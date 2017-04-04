@@ -1,13 +1,12 @@
-'use strict';
 // Get dependencies
-const express = require('express');
-const http = require('http');
-const config = require('./config');
+import express from 'express';
+import http from 'http';
+import config from './config';
 const app = express();
 // Core
-require('./core/engine')(app);
+require('./core/engine').default(app);
 //Routers
-require('./core/routers')(app);
+require('./core/routers').default(app);
 // MongoDB
 require('./core/mongoose/db');
 //Create HTTP server.

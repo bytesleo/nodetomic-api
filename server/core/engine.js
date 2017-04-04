@@ -1,19 +1,17 @@
-'use strict';
+// Get dependencies
 
-const path = require('path'); // Paths
-const helmet = require('helmet'); // protection
-const favicon = require('serve-favicon');
-const bodyParser = require('body-parser'); //Parse params POST
-const compression = require('compression'); //Compress response
-const methodOverride = require('method-override'); // Put and DELETE methods
-const cookieParser = require('cookie-parser'); // secret cookies
-const config = require('./../config'); //config
-const passport = require('passport'); //Passport
-const session = require('express-session'); //session
-const cors = require('cors'); //cors
-const fileUpload = require('express-fileupload'); //fileUpload
+import helmet from 'helmet';
+import bodyParser from 'body-parser';
+import compression from 'compression';
+import methodOverride from 'method-override';
+import cookieParser from 'cookie-parser';
+import config from './../config';
+import passport from 'passport';
+import session from 'express-session';
+import cors from 'cors';
+import fileUpload from 'express-fileupload';
 
-module.exports = (app) => {
+export default(app) => {
 
     app.use(bodyParser.json({limit: '5mb'}));
     app.use(bodyParser.urlencoded({extended: false}));
@@ -58,6 +56,5 @@ module.exports = (app) => {
     app.use(passport.initialize());
     app.use(passport.session());
 
-    app.use(favicon(path.join(config.root, config.client, 'favicon.ico')));
-    require('./dev')(app);
+    require('./dev').default(app);
 };

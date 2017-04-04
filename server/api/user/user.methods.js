@@ -1,9 +1,7 @@
-'use strict';
-
 //libs
-const bcrypt = require('bcrypt');
+import bcrypt from 'bcrypt';
 
-module.exports = (User) => {
+export default(User) => {
 
     User.methods = {
 
@@ -16,7 +14,7 @@ module.exports = (User) => {
     };
 
     User.pre('save', function(next) {
-        var user = this;
+        const user = this;
         // only hash the password if it has been modified (or is new)
         if (!user.isModified('password'))
             return next();
@@ -37,5 +35,5 @@ module.exports = (User) => {
             });
         });
     });
-    
+
 };

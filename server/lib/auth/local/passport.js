@@ -1,7 +1,7 @@
-var passport = require('passport');
-var LocalStrategy = require('passport-local').Strategy;
+import passport from 'passport';
+import {Strategy as LocalStrategy} from 'passport-local';
 
-exports.setup = (User, config) => {
+export function setup(User, config) {
 
     passport.use(new LocalStrategy({
 
@@ -12,8 +12,8 @@ exports.setup = (User, config) => {
     }, (username, password, done) => {
 
         User.findOne({
-            username: username,
-            password: password,
+            username,
+            password,
             provider: 'local'
         }, (err, user) => {
             if (err)
@@ -36,4 +36,4 @@ exports.setup = (User, config) => {
         });
     }));
 
-};
+}

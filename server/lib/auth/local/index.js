@@ -1,8 +1,6 @@
-'use strict';
-
-const express = require('express');
-const passport = require('passport');
-const auth = require('../service');
+import express from 'express';
+import passport from 'passport';
+import auth from '../service';
 
 const router = express.Router();
 
@@ -10,7 +8,7 @@ router.post('/', (req, res, next) => {
 
     passport.authenticate('local', (err, user, info) => {
 
-        var error = err || info;
+        const error = err || info;
         if (error)
             return res.status(401).json(error);
         if (!user)
@@ -24,4 +22,4 @@ router.post('/', (req, res, next) => {
 
 });
 
-module.exports = router;
+export default router;

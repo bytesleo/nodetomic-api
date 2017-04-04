@@ -1,7 +1,7 @@
-var passport = require('passport');
-var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
+import passport from 'passport';
+import {OAuth2Strategy as GoogleStrategy} from 'passport-google-oauth';
 
-exports.setup = (User, config) => {
+export function setup(User, config) {
     passport.use(new GoogleStrategy({
 
         clientID: config.oAuth.google.clientID,
@@ -48,4 +48,4 @@ exports.setup = (User, config) => {
             }
         });
     }));
-};
+}

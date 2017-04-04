@@ -1,7 +1,7 @@
-var passport = require('passport');
-var BitbucketStrategy = require('passport-bitbucket').Strategy;
+import passport from 'passport';
+import {Strategy as BitbucketStrategy} from 'passport-bitbucket';
 
-exports.setup = (User, config) => {
+export function setup(User, config) {
 
     passport.use(new BitbucketStrategy({
 
@@ -50,4 +50,4 @@ exports.setup = (User, config) => {
             }
         });
     }));
-};
+}

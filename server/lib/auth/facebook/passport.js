@@ -1,7 +1,7 @@
-var passport = require('passport');
-var FacebookStrategy = require('passport-facebook').Strategy;
+import passport from 'passport';
+import {Strategy as FacebookStrategy} from 'passport-facebook';
 
-exports.setup = function(User, config) {
+export function setup(User, config) {
 
     passport.use(new FacebookStrategy({
 
@@ -9,7 +9,7 @@ exports.setup = function(User, config) {
         clientSecret: config.oAuth.facebook.clientSecret,
         callbackURL: config.oAuth.facebook.callbackURL
 
-    }, function(accessToken, refreshToken, profile, done) {
+    }, (accessToken, refreshToken, profile, done) => {
 
         User.findOne({
             provider: 'facebook',
@@ -25,7 +25,7 @@ exports.setup = function(User, config) {
                     username: profile.username || '',
                     email: profile.emails[0].value || '',
                     provider: 'facebook',
-                    photo: 'http://graph.facebook.com/' + profile.id + '/picture?type=square',
+                    photo: `http://graph.facebook.com/${profile.id}/picture?type=square`,
                     'social.id': profile.id,
                     'social.info': profile._json
                 });
@@ -39,7 +39,7 @@ exports.setup = function(User, config) {
             } else {
 
                 user.social.info = profile._json;
-                user.photo = 'http://graph.facebook.com/' + profile.id + '/picture?type=square';
+                user.photo = `http://graph.facebook.com/${profile.id}/picture?type=square`;
                 user.last_login = Date.now();
                 user.save(err => {
                     if (err)
@@ -51,4 +51,4 @@ exports.setup = function(User, config) {
         });
 
     }));
-};
+}

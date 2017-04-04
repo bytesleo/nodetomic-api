@@ -1,8 +1,6 @@
-'use strict';
-
-const express = require('express');
-const passport = require('passport');
-const auth = require('../service');
+import express from 'express';
+import passport from 'passport';
+import auth from '../service';
 
 const router = express.Router();
 
@@ -13,4 +11,4 @@ router.get('/', passport.authenticate('bitbucket')).get('/callback', passport.au
     auth.start(req, res, 'social');
 });
 
-module.exports = router;
+export default router;

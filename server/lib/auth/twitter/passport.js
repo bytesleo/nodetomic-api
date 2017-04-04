@@ -1,7 +1,7 @@
-var passport = require('passport');
-var TwitterStrategy = require('passport-twitter').Strategy;
+import passport from 'passport';
+import {Strategy as TwitterStrategy} from 'passport-twitter';
 
-exports.setup = (User, config) => {
+export function setup(User, config) {
 
     passport.use(new TwitterStrategy({
 
@@ -49,4 +49,4 @@ exports.setup = (User, config) => {
             }
         });
     }));
-};
+}

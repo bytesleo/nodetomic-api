@@ -1,10 +1,7 @@
-'use strict';
-
-//Required
-const express = require('express');
-const passport = require('passport');
-const config = require('../../config');
-const User = require('../../api/user/user.model');
+import express from 'express';
+import passport from 'passport';
+import config from '../../config';
+import User from '../../api/user/user.model';
 
 //Call back Social Network
 
@@ -18,7 +15,7 @@ passport.deserializeUser((user, done) => {
 
 //init
 require('./local/passport').setup(User, config);
-require('./github/passport').setup(User, config);
+// require('./github/passport').setup(User, config);
 // require('./twitter/passport').setup(User, config);
 // require('./facebook/passport').setup(User, config);
 // require('./google/passport').setup(User, config);
@@ -27,13 +24,13 @@ require('./github/passport').setup(User, config);
 //Router
 const router = express.Router();
 
-//Rest Api
+//Rest Api social
 
-router.use('/local', require('./local'));
-router.use('/github', require('./github'));
-router.use('/twitter', require('./twitter'));
-router.use('/facebook', require('./facebook'));
-router.use('/google', require('./google'));
-router.use('/bitbucket', require('./bitbucket'));
+router.use('/local', require('./local').default);
+// router.use('/github', require('./github').default);
+// router.use('/twitter', require('./twitter').default);
+// router.use('/facebook', require('./facebook').default);
+// router.use('/google', require('./google').default);
+// router.use('/bitbucket', require('./bitbucket').default);
 
-module.exports = router;
+export default router;

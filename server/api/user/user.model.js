@@ -1,11 +1,9 @@
-'use strict';
-
 // Libs
-var mongoose = require('mongoose');
-var Schema = mongoose.Schema;
+import mongoose from 'mongoose';
+const Schema = mongoose.Schema;
 
 // Model
-var UserSchema = new Schema({
+const UserSchema = new Schema({
     username: {
         type: String,
         required: true,
@@ -45,6 +43,6 @@ var UserSchema = new Schema({
     }
 });
 
-require('./user.methods')(UserSchema);
+require('./user.methods').default(UserSchema);
 
-module.exports = mongoose.model('User', UserSchema);
+export default mongoose.model('User', UserSchema);

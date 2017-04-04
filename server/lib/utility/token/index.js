@@ -1,19 +1,17 @@
-'use strict';
-
-const jwt = require('jsonwebtoken');
-const utility = require('../index');
-const config = require('../../../config');
+import jwt from 'jsonwebtoken';
+import * as utility from '../index';
+import config from '../../../config';
 
 /*
  * Create Token
  * Returns the jwt
  */
 
-exports.createToken = (id, callback) => {
+export function createToken(id, callback) {
 
-    var helper = utility.setRedisKey(id);
+    const helper = utility.setRedisKey(id);
 
-    var token = jwt.sign({
+    const token = jwt.sign({
         _id: id,
         _verify: helper.verify
     }, config.secret, {
@@ -25,7 +23,7 @@ exports.createToken = (id, callback) => {
         key: helper.key,
         value: token
     });
-};
+}
 
 /*
  * Extract the token from the header Authorization.
@@ -33,18 +31,18 @@ exports.createToken = (id, callback) => {
  * Returns the token
  */
 
-exports.extractTokenFromHeader = (req, callback) => {
+export function extractTokenFromHeader(req, callback) {
 
-    var token = req.body.token || req.query.token || req.headers['x-access-token'];
+    const token = req.body.token || req.query.token || req.headers['x-access-token'];
     if (!token)
         return callback('No token provided');
-    req.headers.authorization = 'Bearer ' + token;
+    req.headers.authorization = `Bearer ${token}`;
     // verifies secret and checks exp
     jwt.verify(token, config.secret, (err, decoded) => {
 
         if (err)
             return callback('Token invalid.');
-        
+
         // decode token
         //req.decoded = decoded;
         return callback(null, {
@@ -53,4 +51,4 @@ exports.extractTokenFromHeader = (req, callback) => {
         });
     });
 
-};
+}

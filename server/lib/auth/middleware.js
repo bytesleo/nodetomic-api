@@ -1,18 +1,16 @@
-'use strict';
-
-const redisHelper = require('../utility/redis');
-const tokenHelper = require('../utility/token');
-const config = require('../../config');
+import * as redisHelper from '../utility/redis';
+import * as tokenHelper from '../utility/token';
+import config from '../../config';
 
 /*
  * Middleware to verify the token and store the user data in req._user
  */
 
-exports.isAuthenticated = (rolesRequired) => {
+export function isAuthenticated(rolesRequired) {
 
     return function(req, res, next) {
 
-        var headers = req.headers;
+        const headers = req.headers;
 
         if (headers === null)
             return res.status(401).send('401');
@@ -38,16 +36,16 @@ exports.isAuthenticated = (rolesRequired) => {
             });
         });
     }
-};
+}
 
 /*
  * hasRole
  */
 
-exports.hasRole = (rolesRequired, rolesUser) => {
+export function hasRole(rolesRequired, rolesUser) {
     //console.log('rolesRequired ',rolesRequired);
     //console.log('rolesUser ',rolesUser);
-    var isAuthorized = false;
+    let isAuthorized = false;
     rolesRequired.forEach(rolReq => {
         rolesUser.forEach(RolUser => {
             if (rolReq === RolUser) {
@@ -57,4 +55,4 @@ exports.hasRole = (rolesRequired, rolesUser) => {
     });
 
     return isAuthorized;
-};
+}

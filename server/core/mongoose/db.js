@@ -1,15 +1,13 @@
-'use strict';
-
-const mongoose = require('mongoose');
-const config = require('../../config');
+import mongoose from 'mongoose';
+import config from '../../config';
 
 mongoose.Promise = global.Promise;
 
 // Connect to database
-var db = mongoose.connect(config.database.mongo.db.uri, config.database.mongo.db.options);
+const db = mongoose.connect(config.database.mongo.db.uri, config.database.mongo.db.options);
 
 // Events
-require('./status')(db, config.database.mongo.db.uri);
+require('./status').default(db, config.database.mongo.db.uri);
 
 // Seed
 if (config.database.mongo.db.seed.user) {

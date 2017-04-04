@@ -1,53 +1,51 @@
-'use strict';
-
 /*
  * MODE DEVELOPMENT
 */
 
-const path = require('path');
+import path from 'path';
 
-module.exports = {
+export default {
     /*
    ** Mode: development / production
    */
-    mode: 'development',
+    mode : 'development',
     /*
      ** Path Root
      */
-    root: path.normalize(__dirname + '/../../'),
+    root : path.normalize(`${__dirname}/../../`),
     /*
      ** Folder Client
      */
-    client: 'src',
+    client : 'src',
     /*
      ** IP
      */
-    ip: 'localhost',
+    ip : 'localhost',
     /*
      ** Port
      */
-    port: 8000,
+    port : 8000,
     /*
      * livereload
      */
-    livereload: {
+    livereload : {
         ip: 'localhost',
         port: 35729
     },
     /*
      *redirect
      */
-    login: {
+    login : {
         redirect: '/home'
     },
     /*
      ** Session
      */
-    secret: 's3kr3t_$k3y_&5ess10n?!%_dev',
+    secret : 's3kr3t_$k3y_&5ess10n?!%_dev',
     /*
      ** DataBase
      */
-    database: {
+    database : {
         //MongoDb
         mongo: {
             db: {
@@ -68,7 +66,7 @@ module.exports = {
     /*
      * Roles
      */
-    roles: [
+    roles : [
         {
             rol: 'user',
             time: 60 //minutes
@@ -78,7 +76,7 @@ module.exports = {
     /**
      * Redis
      */
-    redis: {
+    redis : {
         token: {
             ip: '127.0.0.1',
             port: 6379,
@@ -89,11 +87,11 @@ module.exports = {
     /*
      ** Log request in console?
      */
-    log: true,
+    log : true,
     /*
      *	oAuth
      */
-    oAuth: {
+    oAuth : {
         facebook: {
             clientID: '',
             clientSecret: '',

@@ -1,8 +1,6 @@
-'use strict';
+import Hello from '../../../api/hello/hello.model';
 
-var Hello = require('../../../api/hello/hello.model');
-
-var data = [
+const data = [
     {
         greet: 'Hello World',
         language: 'English'

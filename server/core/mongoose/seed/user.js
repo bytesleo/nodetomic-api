@@ -1,8 +1,6 @@
-'use strict';
+import User from '../../../api/user/user.model';
 
-var User = require('../../../api/user/user.model');
-
-var data = [
+const data = [
     {
         username: 'admin',
         password: '123',

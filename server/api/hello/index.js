@@ -1,14 +1,10 @@
-'use strict';
-
-//require
-const express = require('express');
-const controller = require('./hello.controller');
+import express from 'express';
+import * as controller from './hello.controller';
 
 // Router
 const router = express.Router();
 
 // Rest Api
+router.get('/index', controller.index);
 
-router.get('/read', controller.read);
-
-module.exports = router;
+export default router;

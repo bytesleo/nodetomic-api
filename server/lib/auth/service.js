@@ -1,17 +1,15 @@
-'use strict';
-
-const redisHelper = require('../utility/redis');
-const tokenHelper = require('../utility/token');
-const utility = require('../utility');
-const config = require('../../config');
+import redisHelper from '../utility/redis';
+import tokenHelper from '../utility/token';
+import utility from '../utility';
+import config from '../../config';
 
 /*
  * Initialization token session with local and social networks
  */
 
-exports.start = (req, res, type) => {
+export function start(req, res, type) {
     //var user = req.user;
-    var user = {
+    const user = {
         _id: req.user._id,
         name: req.user.name,
         username: req.user.username,
@@ -22,7 +20,7 @@ exports.start = (req, res, type) => {
         role: req.user.role
     };
 
-    var ttl = req.user.ttl || utility.getTimeRol(req.user.roles);
+    const ttl = req.user.ttl || utility.getTimeRol(req.user.roles);
 
     this.createAndStoreToken(user, null, (err, token) => { //key, data, time session
         if (err) {
@@ -30,7 +28,7 @@ exports.start = (req, res, type) => {
         }
         switch (type) {
             case 'local':
-                res.status(200).json({token: token, redirect: config.login.redirect});
+                res.status(200).json({token, redirect: config.login.redirect});
                 break;
             case 'social':
                 res.cookie('token', JSON.stringify(token));
@@ -39,13 +37,13 @@ exports.start = (req, res, type) => {
         }
 
     });
-};
+}
 
 /*
  * Create a new token, stores it in redis with data during ttl time in seconds
  * callback(err, token);
  */
-exports.createAndStoreToken = (data, ttl, callback) => {
+export function createAndStoreToken(data, ttl, callback) {
 
     data = data || {};
     ttl = ttl || config.redis.token.time;
@@ -78,18 +76,18 @@ exports.createAndStoreToken = (data, ttl, callback) => {
         });
     });
 
-};
+}
 
 /*
  * Expires the token (remove from redis)
  */
-exports.expireToken = (headers, callback) => {
+export function expireToken(headers, callback) {
     if (headers === null)
         callback(new Error('Headers are null'));
 
     // Get token
     try {
-        var token = tokenHelper.extractTokenFromHeader(headers);
+        const token = tokenHelper.extractTokenFromHeader(headers);
         if (token === null)
             callback(new Error('Token is null'));
 
@@ -98,4 +96,4 @@ exports.expireToken = (headers, callback) => {
         console.log(err);
         return callback(err);
     }
-};
+}

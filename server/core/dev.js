@@ -1,9 +1,7 @@
-'use strict';
+import config from './../config';
+import morgan from 'morgan';
 
-const config = require('./../config');
-const morgan = require('morgan'); //log console
-
-module.exports = (app) => {
+export default(app) => {
     app.use(require('connect-livereload')({src: `http://${config.livereload.ip}:${config.livereload.port}/livereload.js`}));
     if (config.log) {
         app.use(morgan('dev', {
