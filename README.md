@@ -28,42 +28,43 @@ npm install
 ├── /dist/                     # The compiled output
 ├── /server/                   # Node.js application source files
 │   ├── /api/                  # api RESTful
-│   ├── /config/               # Global Config
+│   ├── /assets/               # Assets, example : Upload files
+│   ├── /config/               # Global Config (development | production)
 │   ├── /core/                 # Core
-│   │   ├── /mongoose/         # database
-│   │   ├── /dev.js            # dev
-│   │   ├── /engine.js         # Engine
-│   │   └── /routers.js        # Routers
 │   ├── /lib/                  # Libs
-│   │   ├── /auth/             # Authentication
-│   │   └── /utility/          # Utility
-│   ├── /views/                # Views
+│   ├── /views/                # Views, example: 404.html
 │   └── /app.js                # Node.js server (entry point)
 ├── /src/                      # Client
+├── /test/                     # Test with Mocha
+├── .babelrc                   # babel
 ├── gulpfile.js                # gulpfile
 └── package.json               # The list of project dependencies
 ```
 
-## Run
+## Start [Development]
 
-command: `npm run serve`
+`npm start`
 
 output: http://localhost:8000
 
 ## Build
 
-command: `npm run build`
+ `npm run build`
 
 output: `dist`
 
-## Production
+## Test
 
-folder "dist" ready for production!
+ `npm test`
 
-```bash
-cd dist
-nodemon server/app.js
-```
+output: `dist`
+
+## Run [Production]
+
+DIST folder must exist!
+
+ `npm run serve`
+
 output: http://localhost:8001
 
 ## License
