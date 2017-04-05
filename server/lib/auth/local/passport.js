@@ -14,7 +14,7 @@ export function setup(User, config) {
             if (!user)
                 return done(null, false, {message: `'${username}' is not registered.`}); // You can register user here
 
-            user.authenticate(password).then((isMatch) => {
+            user.authenticate(password).then((isMatch) => { //validate password
 
                 if (!isMatch) {
                     return done(null, false, {message: 'This password is not correct.'});

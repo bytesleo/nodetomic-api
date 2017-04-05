@@ -3,17 +3,18 @@ import passport from 'passport';
 import config from '../../config';
 import User from '../../api/user/user.model';
 
-//Call back Social Network
+//Call back login Social
+// req.user
 
 passport.serializeUser((user, done) => {
-    done(null, user); // req.user
+    done(null, user);
 });
 
 passport.deserializeUser((user, done) => {
     done(null, user);
 });
 
-//init
+//init passport
 require('./local/passport').setup(User, config);
 require('./github/passport').setup(User, config);
 // require('./twitter/passport').setup(User, config);

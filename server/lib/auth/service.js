@@ -3,9 +3,7 @@ import * as tokenHelper from '../utility/token';
 import * as utility from '../utility';
 import config from '../../config';
 
-/*
- * Initialization token session with local and social networks
- */
+// Initialization token session with local and social networks
 
 export function start(req, res, type) {
     //var user = req.user;

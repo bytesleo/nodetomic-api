@@ -28,7 +28,7 @@ new Vue({
             $.post("http://localhost:8000/auth/local", user, function(data) {
 
                 if (data.token) {
-                    self.token = data.token;
+                    self.token = 'Bearer ' + data.token;
                 }
             });
 

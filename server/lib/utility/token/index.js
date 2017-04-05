@@ -9,7 +9,7 @@ import config from '../../../config';
 
 export function createToken(id, callback) {
 
-    const helper = utility.setRedisKey(id);
+    const helper = utility.setSessionKey(id);
 
     const token = jwt.sign({
         _id: id,

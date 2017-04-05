@@ -34,10 +34,10 @@ export default {
         port: 35729
     },
     /*
-     *redirect
+     *login
      */
     login : {
-        redirect: '/home'
+        redirect: '/home' // redirect when login success
     },
     /*
      ** Session

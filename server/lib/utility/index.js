@@ -1,26 +1,19 @@
-import * as crypto from 'crypto';
+import * as cryptoJS from 'crypto-js';
 import config from '../../config';
-const algorithm = 'aes-256-ctr';
 
 //encrypt
 
 export function encrypt(text) {
 
-    const cipher = crypto.createCipher(algorithm, config.secret);
-    let crypted = cipher.update(text, 'utf8', 'hex');
-    crypted += cipher.final('hex');
-    return crypted;
-
+    return cryptoJS.AES.encrypt(text, config.secret).toString();
 }
 
 //decrypt
 
-export function decrypt(text) {
+export function decrypt(ciphertext) {
 
-    const decipher = crypto.createDecipher(algorithm, config.secret);
-    let dec = decipher.update(text, 'hex', 'utf8');
-    dec += decipher.final('utf8');
-    return dec;
+    var bytes = cryptoJS.AES.decrypt(ciphertext.toString(), config.secret);
+    return bytes.toString(cryptoJS.enc.Utf8);
 
 }
 
@@ -35,12 +28,11 @@ export function makeid(length) {
     return text;
 }
 
-/*
- * Calculate time by Rol (concat time in multiples roles)
- */
+// calculate time rol
+
 export function getTimeRol(roles) {
 
-    if (roles.length) {
+    if (roles.length > 0) {
         let time = 0;
         roles.forEach(rol => {
             config.roles.forEach(item => {
@@ -50,29 +42,33 @@ export function getTimeRol(roles) {
             });
         });
         return (time * 60);
+    } else {
+        return false;
     }
 
 }
 
-// Redis
+// Generate Key session
 
-export function setRedisKey(id) {
+export function setSessionKey(id) {
 
-    const verify = this.makeid(20);
-    const key = `${this.encrypt(id.toString())}:${verify}`;
+    const verify = this.makeid(11);
+    const key = `${id.toString()}:${verify}`;
     return {key, verify}
 
 }
 
-export function getRedisKey(token) {
+// Get Key session
 
-    return `${this.encrypt(token._id)}:${token._verify}`;
+export function getSessionKey(token) {
 
+    return `${token._id}:${token._verify}`;
 }
 
-export function getRedisFilterByIdUser(key) {
+// Get only id_user in key
 
-    const id_session = key.split(':')[0];
-    return `${id_session}:*`;
+export function getSessionKeyId(key) {
+
+    return key.split(':')[0];
 
 }

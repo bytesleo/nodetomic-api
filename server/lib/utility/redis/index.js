@@ -34,7 +34,9 @@ export function setTokenWithData(token, data, ttl, callback) {
     if (timeToLive != null && typeof timeToLive !== 'number')
         throw new Error('TimeToLive is not a Number');
 
-    redisClient.setex(token.key, timeToLive, JSON.stringify(info), (err, reply) => {
+    var dataEncrypt = utility.encrypt(JSON.stringify(info));
+
+    redisClient.setex(token.key, timeToLive, dataEncrypt, (err, reply) => {
         if (err)
             callback(err);
         if (reply) {
@@ -57,17 +59,28 @@ export function getDataByToken(token, callback) {
     if (token == null)
         callback(new Error('Token is null'));
 
-    const key = utility.getRedisKey(token);
+    const key = utility.getSessionKey(token);
 
     redisClient.get(key, (err, userData) => {
-        if (err)
+        if (err) {
             callback(err);
-        if (userData != null)
-            callback(null, JSON.parse(userData));
-        else
+        }
+        if (userData != null) {
+
+            const keyId = utility.getSessionKeyId(key);
+
+            var dataDecrypt = JSON.parse(utility.decrypt(userData));
+
+            if (keyId != dataDecrypt._id) {
+                callback(new Error('Token Info no found'));
+            } else {
+                callback(null, dataDecrypt);
+            }
+
+        } else {
             callback(new Error('Token Not Found'));
         }
-    );
+    });
 }
 
 /*
@@ -94,10 +107,8 @@ export function expireToken(token, callback) {
 
 export function findByPattern(key, callback) {
 
-    const keyId = utility.getRedisFilterByIdUser(key);
-
-    console.log('->',keyId);
-    redisClient.delwild(`${keyId}`, (error, numberDeletedKeys) => {
-        console.log(numberDeletedKeys);
+    const keyId = utility.getSessionKeyId(key);
+    redisClient.delwild(`${keyId}:*`, (error, numberDeletedKeys) => {
+        console.log('Remove others sessions: ', numberDeletedKeys);
     });
 }
