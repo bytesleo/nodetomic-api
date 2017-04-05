@@ -11,12 +11,7 @@ export function setup(User, config) {
 
     }, (accessToken, refreshToken, profile, done) => {
 
-        User.findOne({
-            provider: 'facebook',
-            'social.id': profile.id
-        }, (err, user) => {
-            if (err)
-                return done(err);
+        User.findOne({provider: 'facebook', 'social.id': profile.id}).exec().then(user => {
 
             if (!user) {
 
@@ -46,9 +41,9 @@ export function setup(User, config) {
                         return done(err);
                     return done(err, user);
                 });
-
             }
-        });
+
+        }).catch(err => done(err));
 
     }));
 }

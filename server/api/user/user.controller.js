@@ -8,7 +8,6 @@ export function index(req, res) {
 }
 
 export function me(req, res) {
-
     const usuario = req.user; //get user
     usuario.ts = usuario.ttlRol - Math.floor(((new Date().getTime()) - usuario.ts) / 1000); //time session
     delete usuario.jwt;

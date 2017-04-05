@@ -1,5 +1,4 @@
-import crypto from 'crypto';
-import bcrypt from 'bcrypt';
+import * as crypto from 'crypto';
 import config from '../../config';
 const algorithm = 'aes-256-ctr';
 
@@ -41,26 +40,39 @@ export function makeid(length) {
  */
 export function getTimeRol(roles) {
 
-    let time = 0;
-    roles.forEach(rol => {
-        config.roles.forEach(item => {
-            if (rol === item.rol) {
-                time += item.time;
-            }
+    if (roles.length) {
+        let time = 0;
+        roles.forEach(rol => {
+            config.roles.forEach(item => {
+                if (rol === item.rol) {
+                    time += item.time;
+                }
+            });
         });
-    });
-    return (time * 60);
+        return (time * 60);
+    }
 
 }
 
 // Redis
 
-export function setRedisKey(id, verify) {
+export function setRedisKey(id) {
 
-    return `${this.encrypt(id.toString())}:${this.makeid(20)}`;
+    const verify = this.makeid(20);
+    const key = `${this.encrypt(id.toString())}:${verify}`;
+    return {key, verify}
+
 }
 
 export function getRedisKey(token) {
 
     return `${this.encrypt(token._id)}:${token._verify}`;
+
+}
+
+export function getRedisFilterByIdUser(key) {
+
+    const id_session = key.split(':')[0];
+    return `${id_session}:*`;
+
 }

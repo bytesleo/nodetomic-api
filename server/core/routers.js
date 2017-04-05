@@ -29,7 +29,7 @@ export default(app) => {
     // app.use('/api/hello', require('../api/hello'));
 
     //Paths clients
-    app.get('/:url(api|auth|bower_components|core|app|assets)/*', (req, res) => {
+    app.get('/:url(api|assets|lib|bower_components)/*', (req, res) => {
         res.status(404).sendFile(`${config.root}/server/views/404.html`);
     });
 

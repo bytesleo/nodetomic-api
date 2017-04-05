@@ -1,5 +1,6 @@
 // Libs
 import mongoose from 'mongoose';
+
 const Schema = mongoose.Schema;
 
 // Model
@@ -13,7 +14,6 @@ const UserSchema = new Schema({
     },
     password: {
         type: String,
-        required: true
     },
     email: {
         type: String,
@@ -22,9 +22,9 @@ const UserSchema = new Schema({
     provider: String,
     name: String,
     photo: String,
-    role: {
-        type: String,
-        default: 'user'
+    roles: {
+        type: Array,
+        default: ['user']
     },
     status: {
         type: Number,

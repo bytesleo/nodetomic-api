@@ -1,6 +1,6 @@
-import redisHelper from '../utility/redis';
-import tokenHelper from '../utility/token';
-import utility from '../utility';
+import * as redisHelper from '../utility/redis';
+import * as tokenHelper from '../utility/token';
+import * as utility from '../utility';
 import config from '../../config';
 
 /*
@@ -17,12 +17,12 @@ export function start(req, res, type) {
         provider: req.user.provider,
         photo: req.user.photo,
         status: req.user.status,
-        role: req.user.role
+        roles: req.user.roles
     };
 
     const ttl = req.user.ttl || utility.getTimeRol(req.user.roles);
 
-    this.createAndStoreToken(user, null, (err, token) => { //key, data, time session
+    this.createAndStoreToken(user, ttl, (err, token) => { //key, data, time session
         if (err) {
             return res.status(400);
         }
@@ -53,7 +53,7 @@ export function createAndStoreToken(data, ttl, callback) {
     if (ttl !== null && typeof ttl !== 'number')
         callback(new Error('ttl is not a valid Number'));
 
-    jwtHelper.createToken(data._id, (err, token) => {
+    tokenHelper.createToken(data._id, (err, token) => {
         if (err)
             callback(err);
 

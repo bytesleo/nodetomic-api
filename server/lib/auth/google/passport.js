@@ -10,12 +10,7 @@ export function setup(User, config) {
 
     }, (accessToken, refreshToken, profile, done) => {
 
-        User.findOne({
-            provider: 'google',
-            'social.id': profile.id
-        }, (err, user) => {
-            if (err)
-                return done(err);
+        User.findOne({provider: 'google', 'social.id': profile.id}).exec().then(user => {
 
             if (!user) {
 
@@ -46,6 +41,8 @@ export function setup(User, config) {
                 });
 
             }
-        });
+
+        }).catch(err => done(err));
+
     }));
 }

@@ -1,4 +1,4 @@
-import jwt from 'jsonwebtoken';
+import * as jwt from 'jsonwebtoken';
 import * as utility from '../index';
 import config from '../../../config';
 
@@ -33,22 +33,26 @@ export function createToken(id, callback) {
 
 export function extractTokenFromHeader(req, callback) {
 
-    const token = req.body.token || req.query.token || req.headers['x-access-token'];
-    if (!token)
-        return callback('No token provided');
-    req.headers.authorization = `Bearer ${token}`;
-    // verifies secret and checks exp
-    jwt.verify(token, config.secret, (err, decoded) => {
+    const bearerHeader = req.headers["authorization"];
 
-        if (err)
-            return callback('Token invalid.');
+    if (typeof bearerHeader !== 'undefined') {
+        const bearer = bearerHeader.split(" ");
+        req.token = bearer[1];
+        // verifies secret and checks exp
+        jwt.verify(req.token, config.secret, (err, decoded) => {
+            if (err)
+                return callback('Token invalid.');
 
-        // decode token
-        //req.decoded = decoded;
-        return callback(null, {
-            value: token,
-            decode: decoded
+            // decode token
+            //req.decoded = decoded;
+            return callback(null, {
+                value: req.token,
+                decode: decoded
+            });
+
         });
-    });
+    } else {
+        return callback('No token provided');
+    }
 
 }

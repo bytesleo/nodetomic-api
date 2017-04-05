@@ -18,7 +18,7 @@ export function isAuthenticated(rolesRequired) {
         tokenHelper.extractTokenFromHeader(req, (err, token) => { // Extract Token from header x-access-token
             if (err)
                 return res.status(401).send(err);
-
+            
             redisHelper.getDataByToken(token.decode, (err, data) => {
 
                 if (err)

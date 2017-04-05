@@ -1,6 +1,6 @@
 import express from 'express';
 import passport from 'passport';
-import auth from '../service';
+import * as auth from '../service';
 
 const router = express.Router();
 

@@ -2,7 +2,10 @@ import config from './../config';
 import morgan from 'morgan';
 
 export default(app) => {
-    app.use(require('connect-livereload')({src: `http://${config.livereload.ip}:${config.livereload.port}/livereload.js`}));
+
+    if (config.livereload.enabled)
+        app.use(require('connect-livereload')({src: `http://${config.livereload.ip}:${config.livereload.port}/livereload.js`}));
+
     if (config.log) {
         app.use(morgan('dev', {
             //            skip: function (req, res) {

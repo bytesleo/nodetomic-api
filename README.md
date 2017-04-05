@@ -10,6 +10,7 @@
 <img src="https://avatars0.githubusercontent.com/u/8770005?v=3&s=400" width="80">
 <img src="https://nodemon.io/nodemon.svg" width="80">
 <img src="https://pbs.twimg.com/profile_images/599259952574693376/DMrPoJtc.png" width="80">
+<img src="http://bluebirdjs.com/img/logo.png" width="80">
 <img src="http://www.erikasland.com/static/images/mongoose.png" width="80">
 
 Easy server RESTful, based in MongoDb, Express, Redis, NodeJS.

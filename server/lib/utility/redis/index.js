@@ -24,11 +24,11 @@ export function setTokenWithData(token, data, ttl, callback) {
     if (data != null && typeof data !== 'object')
         throw new Error('data is not an Object');
 
-    const info = {
-        ts: new Date(),
-        user: data,
-        jwt: token.value
-    };
+    var info = data;
+    info.jwt = token.value;
+    info.ttl = ttl;
+    info.ttlRol = data.ttlRol || ttl;
+    info.ts = data.ts || (new Date().getTime()); //created
 
     const timeToLive = ttl;
     if (timeToLive != null && typeof timeToLive !== 'number')
@@ -93,8 +93,11 @@ export function expireToken(token, callback) {
 }
 
 export function findByPattern(key, callback) {
-    const id_session = key.split(':')[0];
-    redisClient.delwild(`${id_session}:*`, (error, numberDeletedKeys) => {
+
+    const keyId = utility.getRedisFilterByIdUser(key);
+
+    console.log('->',keyId);
+    redisClient.delwild(`${keyId}`, (error, numberDeletedKeys) => {
         console.log(numberDeletedKeys);
     });
 }

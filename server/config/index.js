@@ -29,6 +29,7 @@ export default {
      * livereload
      */
     livereload : {
+        enabled: false,
         ip: 'localhost',
         port: 35729
     },
@@ -81,7 +82,7 @@ export default {
             ip: '127.0.0.1',
             port: 6379,
             time: (60 * 60 * 24), // by default 60*60*24 = 24 hours,
-            multiple: true // if you want multiples logins or only 1 device
+            multiple: false // if you want multiples logins or only 1 device
         }
     },
     /*
@@ -108,8 +109,8 @@ export default {
             callbackURL: '/auth/google/callback'
         },
         github: {
-            clientID: 'b44946eddc69246251be',
-            clientSecret: 'bdaa938b78c5fd1c50ecc744a99002612b5eaea7',
+            clientID: '52be92c9a41f77a959eb',
+            clientSecret: '76c9bb03c689d098506822fa80dba372a1fe29c8',
             callbackURL: '/auth/github/callback'
         },
         bitbucket: {

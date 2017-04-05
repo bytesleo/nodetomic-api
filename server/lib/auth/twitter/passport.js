@@ -11,12 +11,7 @@ export function setup(User, config) {
 
     }, (token, tokenSecret, profile, done) => {
 
-        User.findOne({
-            provider: 'twitter',
-            'social.id': profile.id
-        }, (err, user) => {
-            if (err)
-                return done(err);
+        User.findOne({provider: 'twitter', 'social.id': profile.id}).exec().then(user => {
 
             if (!user) {
 
@@ -47,6 +42,8 @@ export function setup(User, config) {
                 });
 
             }
-        });
+
+        }).catch(err => done(err));
+
     }));
 }

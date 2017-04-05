@@ -15,7 +15,7 @@ passport.deserializeUser((user, done) => {
 
 //init
 require('./local/passport').setup(User, config);
-// require('./github/passport').setup(User, config);
+require('./github/passport').setup(User, config);
 // require('./twitter/passport').setup(User, config);
 // require('./facebook/passport').setup(User, config);
 // require('./google/passport').setup(User, config);
@@ -27,7 +27,7 @@ const router = express.Router();
 //Rest Api social
 
 router.use('/local', require('./local').default);
-// router.use('/github', require('./github').default);
+router.use('/github', require('./github').default);
 // router.use('/twitter', require('./twitter').default);
 // router.use('/facebook', require('./facebook').default);
 // router.use('/google', require('./google').default);
