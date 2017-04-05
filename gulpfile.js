@@ -1,6 +1,6 @@
 /*
 *@Author: Leonardo Rico
-@Github: https://github.com/kevoj
+*@Github: https://github.com/kevoj
 */
 
 var gulp = require('gulp'),
