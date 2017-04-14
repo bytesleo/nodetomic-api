@@ -5,11 +5,11 @@ import bodyParser from 'body-parser';
 import compression from 'compression';
 import methodOverride from 'method-override';
 import cookieParser from 'cookie-parser';
-import config from './../config';
 import passport from 'passport';
 import session from 'express-session';
 import cors from 'cors';
 import fileUpload from 'express-fileupload';
+import config from './../config';
 
 export default(app) => {
 

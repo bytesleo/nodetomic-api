@@ -1,7 +1,7 @@
 import express from 'express';
 import passport from 'passport';
-import config from '../../config';
 import User from '../../api/user/user.model';
+import config from '../../config';
 
 //Call back login Social
 // req.user

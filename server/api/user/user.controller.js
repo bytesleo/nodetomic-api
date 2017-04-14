@@ -1,15 +1,17 @@
 // models
 import User from './user.model';
 
-export function index(req, res) {
-    User.find({}, (err, users) => {
-        res.status(200).json(users);
+export function all(req, res) {
+
+    User.find({}, {password: 0}).exec().then(users => {
+        return res.status(200).json(users)
+    }).catch(err => {
+        return res.status(500).json(err)
     });
 }
 
 export function me(req, res) {
-    const usuario = req.user; //get user
-    usuario.ts = usuario.ttlRol - Math.floor(((new Date().getTime()) - usuario.ts) / 1000); //time session
-    delete usuario.jwt;
-    res.status(200).json(usuario);
+    const user = req.user; //get user
+    user.ttl.current = user.ttl.asign - Math.floor(((new Date().getTime()) - user.ttl.created) / 1000); //time session
+    return res.status(200).json(user);
 }

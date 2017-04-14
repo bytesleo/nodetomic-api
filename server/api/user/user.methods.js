@@ -1,4 +1,3 @@
-//libs
 import bcrypt from 'bcrypt';
 
 export default(User) => {

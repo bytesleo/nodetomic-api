@@ -1,8 +1,7 @@
-// Libs
 import mongoose from 'mongoose';
+import mongoosePaginate from 'mongoose-paginate';
 const Schema = mongoose.Schema;
 
-// Model
 const HelloSchema = new Schema({
     greet: {
         type: String,
@@ -13,5 +12,7 @@ const HelloSchema = new Schema({
         required: true
     }
 });
+
+HelloSchema.plugin(mongoosePaginate);
 
 export default mongoose.model('Hello', HelloSchema);

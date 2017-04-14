@@ -1,13 +1,13 @@
-import config from './../config';
-import morgan from 'morgan';
+import Morgan from 'morgan';
+import Config from './../config';
 
 export default(app) => {
 
-    if (config.livereload.enabled)
-        app.use(require('connect-livereload')({src: `http://${config.livereload.ip}:${config.livereload.port}/livereload.js`}));
+    if (Config.livereload.enabled) 
+        app.use(require('connect-livereload')({src: `http://${Config.livereload.ip}:${Config.livereload.port}/livereload.js`}));
 
-    if (config.log) {
-        app.use(morgan('dev', {
+    if (Config.log) {
+        app.use(Morgan('dev', {
             //            skip: function (req, res) {
             //                if (res.statusCode == 304) {
             //                    return true;

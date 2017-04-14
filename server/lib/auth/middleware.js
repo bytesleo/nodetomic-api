@@ -1,58 +1,61 @@
-import * as redisHelper from '../utility/redis';
-import * as tokenHelper from '../utility/token';
-import config from '../../config';
+import * as Redis from '../redis';
+import * as Token from '../token';
+import * as utility from '../utility';
 
-/*
- * Middleware to verify the token and store the user data in req._user
- */
-
+// Middleware
 export function isAuthenticated(rolesRequired) {
-
+    var self = this;
     return function(req, res, next) {
 
-        const headers = req.headers;
+        try {
+            let [type,
+                token] = req.headers["authorization"].split(" ");
 
-        if (headers === null)
-            return res.status(401).send('401');
+            if (type !== 'Bearer')
+                return res.status(403).send('Type Authorization invalid');
 
-        tokenHelper.extractTokenFromHeader(req, (err, token) => { // Extract Token from header x-access-token
-            if (err)
-                return res.status(401).send(err);
+            Token.extract(token).then(decode => {
 
-            redisHelper.getDataByToken(token.decode, (err, data) => {
+                Redis.get(decode.key).then(info => {
 
-                if (err)
-                    return res.status(401).send('Unauthorized');
+                    var info = JSON.parse(utility.decrypt(info));
 
-                if (token.value !== data.jwt)
-                    return res.status(401).send('Unauthorized, token in new device...');
+                    if (decode.id !== info._id)
+                        return res.status(401).send('Unauthorized: id not equals');
 
-                if (rolesRequired !== undefined)
-                    if (!this.hasRole(rolesRequired, data.roles))
-                        return res.status(403).send('Rol Unauthorized');
+                    if (rolesRequired !== undefined)
+                        if (!self.hasRole(rolesRequired, info.roles))
+                            return res.status(403).send('Rol Unauthorized');
 
-                req.user = data;
-                next();
-            });
-        });
+                    req.user = info;
+                    next();
+                }).catch(err => {
+                    return res.status(401).send('Unauthorized Token not found');
+                })
+
+            }).catch(err => {
+                return res.status(401).send('Unauthorized Token Invalid');
+            })
+
+        } catch (err) {
+            return res.status(401).send('Unauthorized');
+        }
     }
 }
 
-/*
- * hasRole
- */
-
+// hasRole
 export function hasRole(rolesRequired, rolesUser) {
-    //console.log('rolesRequired ',rolesRequired);
-    //console.log('rolesUser ',rolesUser);
-    let isAuthorized = false;
-    rolesRequired.forEach(rolReq => {
-        rolesUser.forEach(RolUser => {
-            if (rolReq === RolUser) {
-                isAuthorized = true;
-            }
+    try {
+        let isAuthorized = false;
+        rolesRequired.forEach(rolReq => {
+            rolesUser.forEach(RolUser => {
+                if (rolReq === RolUser) {
+                    isAuthorized = true;
+                }
+            });
         });
-    });
-
-    return isAuthorized;
+        return isAuthorized;
+    } catch (err) {
+        return false;
+    }
 }

@@ -1,0 +1,11 @@
+{
+    "parser": "babel-eslint",
+    "env": {
+        "node": true,
+        "es6": true
+    },
+    "rules": {
+        "vars-on-top": 2,
+        "no-undef": 2
+    }
+}

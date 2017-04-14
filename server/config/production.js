@@ -1,89 +1,62 @@
 /*
- * MODE PRODUCTION
+ * MODE DEVELOPMENT
 */
-
 import path from 'path';
 
 export default {
-    /*
-   ** Mode: development / production
-   */
-    mode : 'production',
-    /*
-     ** Path Root
-     */
+    // Mode: development / production
+    mode : 'development',
+    // Path Root
     root : path.normalize(`${__dirname}/../../`),
-    /*
-     ** Folder Client
-     */
+    //Folder Client
     client : 'dist',
-    /*
-     ** IP
-     */
-    ip : 'localhost',
-    /*
-     ** Port
-     */
-    port : 8001,
-    /*
-     *redirect
-     */
-    login : {
-        redirect: '/home'
+    //Server listen
+    server : {
+        ip: 'localhost',
+        port: 8001
     },
-    /*
-     ** Session
-     */
-    secret : 's3kr3t_$k3y_&5ess10n?!%_pro',
-    /*
-     ** DataBase
-     */
+    //Redis
+    redis : {
+        token: {
+            ip: '127.0.0.1',
+            port: 6379,
+            time: (60 * 60 * 24), // by default 60*60*24 = 24 hours,
+            multiple: false // if you want multiples logins or only 1 device
+        }
+    },
+    //Secret
+    secret : 's3kr3t_$k3y_&5ess10n?!%',
+    //login
+    login : {
+        redirect: '/home' // redirect when login success
+    },
+    //DataBase
     database : {
         //MongoDb
         mongo: {
             db: {
-                uri: 'mongodb://localhost/nodetomic-dev',
+                uri: 'mongodb://localhost/nodetomic',
                 options: {
                     db: {
                         safe: true
                     }
                 },
                 seed: {
-                    user: false,
-                    hello: false
+                    user: true,
+                    hello: true
                 }
             }
         }
         //Other DataBase
     },
-    /*
-     * Roles
-     */
+    //Roles
     roles : [
         {
             rol: 'user',
             time: 60 //minutes
         }
     ],
-
-    /**
-     * Redis
-     */
-    redis : {
-        token: {
-            ip: '127.0.0.1',
-            port: 6379,
-            time: (60 * 60 * 24), // by default 60*60*24 = 24 hours,
-            multiple: true // if you want multiples logins or only 1 device
-        }
-    },
-    /*
-     ** Log request in console?
-     */
-    log : false,
-    /*
-     *	oAuth
-     */
+    //oAuth
     oAuth : {
         facebook: {
             clientID: '',
@@ -101,8 +74,8 @@ export default {
             callbackURL: '/auth/google/callback'
         },
         github: {
-            clientID: '',
-            clientSecret: '',
+            clientID: '52be92c9a41f77a959eb',
+            clientSecret: '76c9bb03c689d098506822fa80dba372a1fe29c8',
             callbackURL: '/auth/github/callback'
         },
         bitbucket: {
@@ -110,5 +83,8 @@ export default {
             clientSecret: '',
             callbackURL: '/auth/bitbucket/callback'
         }
+    },
+    router : { // api/exmaple
+        ignore: ['example'] //No autoload
     }
 };

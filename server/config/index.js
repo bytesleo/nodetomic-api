@@ -1,51 +1,42 @@
 /*
  * MODE DEVELOPMENT
 */
-
 import path from 'path';
 
 export default {
-    /*
-   ** Mode: development / production
-   */
+    // Mode: development / production
     mode : 'development',
-    /*
-     ** Path Root
-     */
+    // Path Root
     root : path.normalize(`${__dirname}/../../`),
-    /*
-     ** Folder Client
-     */
+    //Folder Client
     client : 'src',
-    /*
-     ** IP
-     */
-    ip : 'localhost',
-    /*
-     ** Port
-     */
-    port : 8000,
-    /*
-     * livereload
-     */
+    //Server listen
+    server : {
+        ip: 'localhost',
+        port: 8000
+    },
+    //livereload:dev
     livereload : {
         enabled: false,
         ip: 'localhost',
         port: 35729
     },
-    /*
-     *login
-     */
+    //Redis
+    redis : {
+        token: {
+            ip: '127.0.0.1',
+            port: 6379,
+            time: (60 * 60 * 24), // by default 60*60*24 = 24 hours,
+            multiple: false // if you want multiples logins or only 1 device
+        }
+    },
+    //Secret
+    secret : 's3kr3t_$k3y_&5ess10n?!%_dev',
+    //login
     login : {
         redirect: '/home' // redirect when login success
     },
-    /*
-     ** Session
-     */
-    secret : 's3kr3t_$k3y_&5ess10n?!%_dev',
-    /*
-     ** DataBase
-     */
+    //DataBase
     database : {
         //MongoDb
         mongo: {
@@ -64,34 +55,16 @@ export default {
         }
         //Other DataBase
     },
-    /*
-     * Roles
-     */
+    //Roles
     roles : [
         {
             rol: 'user',
-            time: 60 //minutes
+            time: 5 //minutes
         }
     ],
-
-    /**
-     * Redis
-     */
-    redis : {
-        token: {
-            ip: '127.0.0.1',
-            port: 6379,
-            time: (60 * 60 * 24), // by default 60*60*24 = 24 hours,
-            multiple: false // if you want multiples logins or only 1 device
-        }
-    },
-    /*
-     ** Log request in console?
-     */
+    //Log request in console?:dev
     log : true,
-    /*
-     *	oAuth
-     */
+    //oAuth
     oAuth : {
         facebook: {
             clientID: '',
@@ -118,5 +91,8 @@ export default {
             clientSecret: '',
             callbackURL: '/auth/bitbucket/callback'
         }
+    },
+    router : { // api/exmaple
+        ignore: ['example'] //No autoload
     }
 };

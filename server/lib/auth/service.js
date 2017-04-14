@@ -1,10 +1,9 @@
-import * as redisHelper from '../utility/redis';
-import * as tokenHelper from '../utility/token';
+import * as Redis from '../redis';
+import * as Token from '../token';
 import * as utility from '../utility';
 import config from '../../config';
 
 // Initialization token session with local and social networks
-
 export function start(req, res, type) {
     //var user = req.user;
     const user = {
@@ -20,78 +19,26 @@ export function start(req, res, type) {
 
     const ttl = req.user.ttl || utility.getTimeRol(req.user.roles);
 
-    this.createAndStoreToken(user, ttl, (err, token) => { //key, data, time session
-        if (err) {
-            return res.status(400);
-        }
-        switch (type) {
-            case 'local':
-                res.status(200).json({token, redirect: config.login.redirect});
-                break;
-            case 'social':
-                res.cookie('token', JSON.stringify(token));
-                res.redirect(config.login.redirect);
-                break;
-        }
-
-    });
-}
-
-/*
- * Create a new token, stores it in redis with data during ttl time in seconds
- * callback(err, token);
- */
-export function createAndStoreToken(data, ttl, callback) {
-
-    data = data || {};
-    ttl = ttl || config.redis.token.time;
-
-    if (data !== null && typeof data !== 'object')
-        callback(new Error('data is not an Object'));
-    if (ttl !== null && typeof ttl !== 'number')
-        callback(new Error('ttl is not a valid Number'));
-
-    tokenHelper.createToken(data._id, (err, token) => {
-        if (err)
-            callback(err);
+    Token.create(user._id).then(data => {
 
         if (!config.redis.token.multiple) { //delete all sessions tokens
-            redisHelper.findByPattern(token.key, (err, exits) => {
-                if (err)
-                    callback(err);
-                }
-            );
+            Redis.findByPattern(data.key);
         }
 
-        redisHelper.setTokenWithData(token, data, ttl, (err, success) => {
-            if (err)
-                callback(err);
-            if (success) {
-                callback(null, token.value);
-            } else {
-                callback(new Error('Error when saving token'));
+        Redis.set(data.key, ttl, user).then(result => {
+
+            switch (type) {
+                case 'local':
+                    res.status(200).json({token: data.token, redirect: config.login.redirect});
+                    break;
+                case 'social':
+                    res.cookie('token', JSON.stringify(data.token));
+                    res.redirect(config.login.redirect);
+                    break;
             }
-        });
-    });
 
-}
+        }).catch(err => res.status(500).send('Error creating redis' + err));
 
-/*
- * Expires the token (remove from redis)
- */
-export function expireToken(headers, callback) {
-    if (headers === null)
-        callback(new Error('Headers are null'));
+    }).catch(err => res.status(500).send('Error creating token' + err));
 
-    // Get token
-    try {
-        const token = tokenHelper.extractTokenFromHeader(headers);
-        if (token === null)
-            callback(new Error('Token is null'));
-
-        redisHelper.expireToken(token, callback);
-    } catch (err) {
-        console.log(err);
-        return callback(err);
-    }
 }

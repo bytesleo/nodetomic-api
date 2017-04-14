@@ -1,9 +1,7 @@
-// Libs
 import mongoose from 'mongoose';
-
+import mongoosePaginate from 'mongoose-paginate';
 const Schema = mongoose.Schema;
 
-// Model
 const UserSchema = new Schema({
     username: {
         type: String,
@@ -13,7 +11,7 @@ const UserSchema = new Schema({
         }
     },
     password: {
-        type: String,
+        type: String
     },
     email: {
         type: String,
@@ -42,6 +40,8 @@ const UserSchema = new Schema({
         info: {}
     }
 });
+
+UserSchema.plugin(mongoosePaginate);
 
 require('./user.methods').default(UserSchema);
 
