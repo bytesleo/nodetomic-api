@@ -5,7 +5,7 @@
     "main": "server/app.js",
     "scripts": {
         "start": "nodemon server/app.js --exec babel-node",
-        "build": "gulp serve:build:clean && babel server -d dist/server && gulp serve:build:replace",
+        "build": "gulp build",
         "serve": "node dist/server/app.js",
         "test": "mocha --compilers js:babel-register"
     },
@@ -55,6 +55,7 @@
         "connect-livereload": "^0.6.0",
         "eslint": "^3.19.0",
         "gulp": "^3.9.1",
+        "gulp-babel": "^6.1.2",
         "gulp-clean": "^0.3.2",
         "gulp-color": "0.0.1",
         "gulp-json-modify": "^1.0.2",
