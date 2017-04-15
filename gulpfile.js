@@ -24,7 +24,7 @@ gulp.task('build-clean', function() {
 });
 
 gulp.task('build-babel', function() {
-    return gulp.src('src/**/*.js').pipe(babel()).pipe(gulp.dest(dist_server));
+    return gulp.src(['src/**/*.js']).pipe(babel()).pipe(gulp.dest(dist_server));
 });
 
 gulp.task('build-replace', function() {
@@ -35,6 +35,8 @@ gulp.task('build-replace', function() {
     ], {read: false}).pipe(clean({force: true}));
     gulp.src(dist_server + "/core/engine.js").pipe(replace_string("require('./dev').default(app);", '')).pipe(gulp.dest(dist_server + '/core/'));
     gulp.src('package.json').pipe(jsonModify({'key': 'devDependencies', value: {}})).pipe(gulp.dest(dist));
+    gulp.src(['src/views/*']).pipe(gulp.dest(dist_server + '/views'));
+    gulp.src(['src/assets/*']).pipe(gulp.dest(dist_server + '/assets'));
     setTimeout(function() {
         console.log(color('Build success!', 'GREEN'));
     }, 500);
