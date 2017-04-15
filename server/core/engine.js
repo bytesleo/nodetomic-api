@@ -22,36 +22,10 @@ export default(app) => {
     app.use(helmet());
     app.use(cors({origin: true, credentials: true}));
 
-    /*SessionStore with Mongo*/
-    /*
-     const mongoStore = require('connect-mongo')(session);
-     const mongoose = require('mongoose');
-     app.use(session({
-     secret: config.secret,
-     saveUninitialized: true,
-     resave: true,
-     store: new mongoStore({
-     mongooseConnection: mongoose.connection,
-     collection: 'sessions' // default
-     })
-     }));
-     */
-
-    /*SessionStore with Redis*/
-    //const RedisStore = require('connect-redis')(session);
-    //Use for Twitter Auth -_-
-    app.use(session({
-        /* store: new RedisStore({
-         //client: redisClient,
-         host: config.redis.session.ip,
-         port: config.redis.session.port,
-         db: config.redis.session.db,
-         ttl: config.redis.session.time
-         }),*/
-        secret: config.secret,
-        resave: false,
-        saveUninitialized: true
-    }));
+    //Required for Twitter oAuth
+    require('./session/defaultStore').default(app, session);
+    // require('./session/mongoStore').default(app, session);
+    // require('./session/redisStore').default(app, session);
 
     app.use(passport.initialize());
     app.use(passport.session());

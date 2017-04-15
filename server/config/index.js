@@ -9,7 +9,7 @@ export default {
     // Path Root
     root : path.normalize(`${__dirname}/../../`),
     //Folder Client
-    client : 'src',
+    client : 'client',
     //Server listen
     server : {
         ip: 'localhost',
@@ -45,6 +45,9 @@ export default {
                 options: {
                     db: {
                         safe: true
+                    },
+                    server: {
+                        auto_reconnect: true
                     }
                 },
                 seed: {

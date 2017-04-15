@@ -25,9 +25,9 @@ export default(app) => {
 
     //Folder client
 
-    app.get('/*', (req, res) => {
+    /*app.get('/*', (req, res) => {
         res.sendFile(`${config.root}/${config.client}/index.html`);
-    });
+    });*/
 
     //other folder client
     // app.get('/:url(admin)/*', (req, res) => {

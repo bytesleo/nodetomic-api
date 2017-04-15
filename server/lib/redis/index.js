@@ -1,4 +1,5 @@
 import * as Redis from 'redis';
+import colors from 'colors';
 import Promise from 'bluebird';
 import * as utility from '../utility';
 import config from '../../config';
@@ -10,11 +11,12 @@ require('redis-delete-wildcard')(Redis);
 const db = Redis.createClient(config.redis.token.port, config.redis.token.ip);
 
 db.on("connect", () => {
-    console.log(`Redis connected on ${config.redis.token.ip}:${config.redis.token.port}`);
+    console.log(`Redis connected on ${config.redis.token.ip}:${config.redis.token.port}`.bgGreen);
 });
 
 db.on("error", err => {
-    console.log("Redis-> " + err);
+    console.log(`Redis-> ${err}`.bgRed);
+    process.exit(-1);
 });
 
 export function set(key, ttl, value) {

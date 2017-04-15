@@ -1,3 +1,4 @@
+import colors from 'colors';
 import User from '../../../api/user/user.model';
 
 const data = [
@@ -13,6 +14,6 @@ const data = [
 
 User.find({}).remove(() => {
     User.create(data, () => {
-        console.log('----------------->Published User seed');
+        console.log(`Seed: Published User`.bgBlue);
     });
 });

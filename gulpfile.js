@@ -12,7 +12,7 @@ const gulp = require('gulp'),
     jsonModify = require('gulp-json-modify'),
     babel = require('gulp-babel');
 
-const dist = './../dist';
+const dist = './dist';
 const dist_server = dist + '/server';
 
 gulp.task('build', function() {

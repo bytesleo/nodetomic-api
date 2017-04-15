@@ -1,3 +1,4 @@
+import colors from 'colors';
 import Hello from '../../../api/hello/hello.model';
 
 const data = [
@@ -24,6 +25,6 @@ const data = [
 
 Hello.find({}).remove(() => {
     Hello.create(data, () => {
-        console.log('----------------->Published Hello seed');
+        console.log(`Seed: Published Hello`.bgBlue);
     });
 });
