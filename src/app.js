@@ -1,4 +1,3 @@
-// Get dependencies
 import express from 'express';
 import http from 'http';
 import colors from 'colors';

@@ -1,5 +1,3 @@
-// Get dependencies
-
 import helmet from 'helmet';
 import bodyParser from 'body-parser';
 import compression from 'compression';

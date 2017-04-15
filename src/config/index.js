@@ -1,6 +1,5 @@
-/*
- * MODE DEVELOPMENT
-*/
+// MODE DEVELOPMENT
+
 import path from 'path';
 
 export default {
@@ -14,12 +13,6 @@ export default {
     server : {
         ip: 'localhost',
         port: 8000
-    },
-    //livereload:dev
-    livereload : {
-        enabled: false,
-        ip: 'localhost',
-        port: 35729
     },
     //Redis
     redis : {
@@ -65,8 +58,6 @@ export default {
             time: 5 //minutes
         }
     ],
-    //Log request in console?:dev
-    log : true,
     //oAuth
     oAuth : {
         facebook: {
@@ -97,5 +88,14 @@ export default {
     },
     router : { // api/exmaple
         ignore: ['example'] //No autoload
-    }
+    },
+    //DEV
+    //livereload
+    livereload : {
+        enabled: false,
+        ip: 'localhost',
+        port: 35729
+    },
+    //Log request in console?
+    log : true
 };

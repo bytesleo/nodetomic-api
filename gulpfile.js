@@ -24,7 +24,7 @@ gulp.task('build-clean', function() {
 });
 
 gulp.task('build-babel', function() {
-    return gulp.src('server/**/*.js').pipe(babel()).pipe(gulp.dest(dist_server));
+    return gulp.src('src/**/*.js').pipe(babel()).pipe(gulp.dest(dist_server));
 });
 
 gulp.task('build-replace', function() {

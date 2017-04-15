@@ -1,15 +1,14 @@
-/*
- * MODE DEVELOPMENT
-*/
+// MODE PRODUCTION
+
 import path from 'path';
 
 export default {
     // Mode: development / production
-    mode : 'development',
+    mode : 'production',
     // Path Root
     root : path.normalize(`${__dirname}/../../`),
     //Folder Client
-    client : 'dist',
+    client : 'client',
     //Server listen
     server : {
         ip: 'localhost',
@@ -25,7 +24,7 @@ export default {
         }
     },
     //Secret
-    secret : 's3kr3t_$k3y_&5ess10n?!%',
+    secret : 's3kr3t_$k3y_&5ess10n?!%_pro',
     //login
     login : {
         redirect: '/home' // redirect when login success
@@ -35,10 +34,13 @@ export default {
         //MongoDb
         mongo: {
             db: {
-                uri: 'mongodb://localhost/nodetomic',
+                uri: 'mongodb://localhost/nodetomic-pro',
                 options: {
                     db: {
                         safe: true
+                    },
+                    server: {
+                        auto_reconnect: true
                     }
                 },
                 seed: {
@@ -53,7 +55,7 @@ export default {
     roles : [
         {
             rol: 'user',
-            time: 60 //minutes
+            time: 5 //minutes
         }
     ],
     //oAuth
