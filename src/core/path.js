@@ -14,7 +14,7 @@ export default(app) => {
 
     //Paths clients
     app.get('/:url(api|assets|lib|bower_components)/*', (req, res) => {
-        res.status(404).sendFile(`${config.root}/server/views/404.html`);
+        res.status(404).sendFile(`${config.base}/views/404.html`);
     });
 
     // Point static path to client

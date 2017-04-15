@@ -1,5 +1,5 @@
 
-# Nodetomic
+# Nodetomic-serve
 
 <img src="http://solucionesit.ldtsynergy.com/-/Srvs015/MongoDB/file/view/mongodb.png/547250106/315x368/mongodb.png" width="80">
 <img src="http://code.runnable.com/images/provider-icons/icon-express-alt.svg" width="80">
@@ -28,7 +28,7 @@ npm install
 ```bash
 .
 ├── /dist/                     # The compiled output
-├── /server/                   # Node.js application source files
+├── /src/                      # Node.js application source files
 │   ├── /api/                  # api RESTful
 │   ├── /assets/               # Assets, example : Upload files
 │   ├── /config/               # Global Config (development | production)
@@ -36,9 +36,10 @@ npm install
 │   ├── /lib/                  # Libs
 │   ├── /views/                # Views, example: 404.html
 │   └── /app.js                # Node.js server (entry point)
-├── /src/                      # Client
+├── /client/                   # Client
 ├── /test/                     # Test with Mocha
 ├── .babelrc                   # babel
+├── .eslintrc                  # lint
 ├── gulpfile.js                # gulpfile
 └── package.json               # The list of project dependencies
 ```

@@ -7,6 +7,8 @@ export default {
     mode : 'development',
     // Path Root
     root : path.normalize(`${__dirname}/../../`),
+    // Path Root
+    base : path.normalize(`${__dirname}/..`),
     //Folder Client
     client : 'client',
     //Server listen
