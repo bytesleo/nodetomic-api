@@ -4,58 +4,58 @@ import * as utility from '../utility';
 
 // Middleware
 export function isAuthenticated(rolesRequired) {
-    var self = this;
-    return function(req, res, next) {
+  var self = this;
+  return function(req, res, next) {
 
-        try {
-            let [type,
-                token] = req.headers["authorization"].split(" ");
+    try {
+      let [type,
+        token] = req.headers["authorization"].split(" ");
 
-            if (type !== 'Bearer')
-                return res.status(403).send('Type Authorization invalid');
+      if (type !== 'Bearer')
+        return res.status(403).send('Type Authorization invalid');
 
-            Token.extract(token).then(decode => {
+      Token.extract(token).then(decode => {
 
-                Redis.get(decode.key).then(info => {
+        Redis.get(decode.key).then(info => {
 
-                    var info = JSON.parse(utility.decrypt(info));
+          var info = JSON.parse(utility.decrypt(info));
 
-                    if (decode.id !== info._id)
-                        return res.status(401).send('Unauthorized: id not equals');
+          if (decode.id !== info._id)
+            return res.status(401).send('Unauthorized: id not equals');
 
-                    if (rolesRequired !== undefined)
-                        if (!self.hasRole(rolesRequired, info.roles))
-                            return res.status(403).send('Rol Unauthorized');
+          if (rolesRequired !== undefined)
+            if (!self.hasRole(rolesRequired, info.roles))
+              return res.status(403).send('Rol Unauthorized');
 
-                    req.user = info;
-                    next();
-                }).catch(err => {
-                    return res.status(401).send('Unauthorized Token not found');
-                })
+          req.user = info;
+          next();
+        }).catch(err => {
+          return res.status(401).send('Unauthorized Token not found');
+        })
 
-            }).catch(err => {
-                return res.status(401).send('Unauthorized Token Invalid');
-            })
+      }).catch(err => {
+        return res.status(401).send('Unauthorized Token Invalid');
+      })
 
-        } catch (err) {
-            return res.status(401).send('Unauthorized');
-        }
+    } catch (err) {
+      return res.status(401).send('Unauthorized');
     }
+  }
 }
 
 // hasRole
 export function hasRole(rolesRequired, rolesUser) {
-    try {
-        let isAuthorized = false;
-        rolesRequired.forEach(rolReq => {
-            rolesUser.forEach(RolUser => {
-                if (rolReq === RolUser) {
-                    isAuthorized = true;
-                }
-            });
-        });
-        return isAuthorized;
-    } catch (err) {
-        return false;
-    }
+  try {
+    let isAuthorized = false;
+    rolesRequired.forEach(rolReq => {
+      rolesUser.forEach(RolUser => {
+        if (rolReq === RolUser) {
+          isAuthorized = true;
+        }
+      });
+    });
+    return isAuthorized;
+  } catch (err) {
+    return false;
+  }
 }

@@ -3,18 +3,17 @@ import passport from 'passport';
 import User from '../../api/user/user.model';
 import config from '../../config';
 
-//Call back login Social
-// req.user
+//Call back login Social return info in req.user
 
 passport.serializeUser((user, done) => {
-    done(null, user);
+  done(null, user);
 });
 
 passport.deserializeUser((user, done) => {
-    done(null, user);
+  done(null, user);
 });
 
-//init passport
+//initialize passport
 require('./local/passport').setup(User, config);
 require('./github/passport').setup(User, config);
 // require('./twitter/passport').setup(User, config);
@@ -22,10 +21,8 @@ require('./github/passport').setup(User, config);
 // require('./google/passport').setup(User, config);
 // require('./bitbucket/passport').setup(User, config);
 
-//Router
+//Routers
 const router = express.Router();
-
-//Rest Api social
 
 router.use('/local', require('./local').default);
 router.use('/github', require('./github').default);

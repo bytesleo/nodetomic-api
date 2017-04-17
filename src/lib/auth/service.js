@@ -5,40 +5,41 @@ import config from '../../config';
 
 // Initialization token session with local and social networks
 export function start(req, res, type) {
-    //var user = req.user;
-    const user = {
-        _id: req.user._id,
-        name: req.user.name,
-        username: req.user.username,
-        email: req.user.email,
-        provider: req.user.provider,
-        photo: req.user.photo,
-        status: req.user.status,
-        roles: req.user.roles
-    };
+  //In this point exists var req.user;
+  const user = {
+    _id: req.user._id,
+    name: req.user.name,
+    username: req.user.username,
+    email: req.user.email,
+    provider: req.user.provider,
+    photo: req.user.photo,
+    status: req.user.status,
+    roles: req.user.roles
+  };
 
-    const ttl = req.user.ttl || utility.getTimeRol(req.user.roles);
+  //Calculate time by rol
+  const ttl = req.user.ttl || utility.getTimeRol(req.user.roles);
 
-    Token.create(user._id).then(data => {
+  Token.create(user._id).then(token => {
 
-        if (!config.redis.token.multiple) { //delete all sessions tokens
-            Redis.findByPattern(data.key);
-        }
+    //If config.redis.token.multiple is false then all sessions associated with that user are removed
+    if (!config.redis.token.multiple)
+      Redis.findAndRemoveById(token.key);
 
-        Redis.set(data.key, ttl, user).then(result => {
+    Redis.set(token.key, ttl, user).then(result => {
 
-            switch (type) {
-                case 'local':
-                    res.status(200).json({token: data.token, redirect: config.login.redirect});
-                    break;
-                case 'social':
-                    res.cookie('token', JSON.stringify(data.token));
-                    res.redirect(config.login.redirect);
-                    break;
-            }
+      switch (type) {
+        case 'local':
+          res.status(200).json({token: token.value, redirect: config.login.redirect});
+          break;
+        case 'social':
+          res.cookie('token', JSON.stringify(token.value));
+          res.redirect(config.login.redirect);
+          break;
+      }
 
-        }).catch(err => res.status(500).send('Error creating redis' + err));
+    }).catch(err => res.status(500).send('Error creating redis' + err));
 
-    }).catch(err => res.status(500).send('Error creating token' + err));
+  }).catch(err => res.status(500).send('Error creating token' + err));
 
 }

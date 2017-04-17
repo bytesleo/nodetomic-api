@@ -11,22 +11,22 @@ import config from './../config';
 
 export default(app) => {
 
-    app.use(bodyParser.json({limit: '5mb'}));
-    app.use(bodyParser.urlencoded({extended: false}));
-    app.use(fileUpload());
-    app.use(cookieParser());
-    app.use(methodOverride());
-    app.use(compression());
-    app.use(helmet());
-    app.use(cors({origin: true, credentials: true}));
+  app.use(bodyParser.json({limit: '5mb'}));
+  app.use(bodyParser.urlencoded({extended: false}));
+  app.use(fileUpload());
+  app.use(cookieParser());
+  app.use(methodOverride());
+  app.use(compression());
+  app.use(helmet());
+  app.use(cors({origin: true, credentials: true}));
 
-    //Required for Twitter oAuth
-    require('./session/defaultStore').default(app, session);
-    // require('./session/mongoStore').default(app, session);
-    // require('./session/redisStore').default(app, session);
+  //Session: Required for Twitter oAuth
+  require('./session/defaultStore').default(app, session);
+  // require('./session/mongoStore').default(app, session);
+  // require('./session/redisStore').default(app, session);
 
-    app.use(passport.initialize());
-    app.use(passport.session());
+  app.use(passport.initialize());
+  app.use(passport.session());
 
-    require('./dev').default(app);
+  require('./dev').default(app);
 };

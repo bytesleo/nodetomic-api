@@ -12,12 +12,12 @@ require('./status').default(db, config.database.mongo.db.uri);
 
 // Seed
 if (config.database.mongo.db.seed.user) {
-    setTimeout(() => {
-        require('./seed/user');
-    }, 800);
+  setTimeout(() => {
+    require('./seed/user');
+  }, 800);
 }
 if (config.database.mongo.db.seed.hello) {
-    setTimeout(() => {
-        require('./seed/hello');
-    }, 800);
+  setTimeout(() => {
+    require('./seed/hello');
+  }, 800);
 }
