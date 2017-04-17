@@ -16,6 +16,7 @@ export function create(id) {
   }, config.secret);
 
   return Promise.resolve({key, value});
+
 }
 
 //verify jwt

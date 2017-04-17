@@ -5,6 +5,7 @@ import config from '../../config';
 export function encrypt(text) {
 
   return CryptoJS.AES.encrypt(text, config.secret).toString();
+
 }
 
 //decrypt
@@ -20,13 +21,15 @@ export function makeid(length) {
 
   let text = "";
   const possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-  for (let i = 0; i < length; i++) 
+  for (let i = 0; i < length; i++)
     text += possible.charAt(Math.floor(Math.random() * possible.length));
   return text;
+
 }
 
 // calculate time rol
 export function getTimeRol(roles) {
+
   try {
     if (roles.length > 0) {
       let time = 0;
@@ -44,4 +47,5 @@ export function getTimeRol(roles) {
   } catch (err) {
     return false;
   }
+
 }
