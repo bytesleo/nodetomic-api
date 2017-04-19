@@ -23,7 +23,7 @@ export function start(req, res, type) {
   Token.create(user._id).then(token => {
 
     //If config.redis.token.multiple is false then all sessions associated with that user are removed
-    if (!config.redis.token.multiple)
+    if (!config.redis.token.multiple) 
       Redis.findAndRemoveById(token.key);
 
     Redis.set(token.key, ttl, user).then(result => {

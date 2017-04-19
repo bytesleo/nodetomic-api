@@ -12,6 +12,6 @@ export function all(req, res) {
 
 export function me(req, res) {
   const user = req.user; //get user
-  user.ttl.current = user.ttl.asign - Math.floor(((new Date().getTime()) - user.ttl.created) / 1000); //time session
+  user.ttl.available = user.ttl.assigned - Math.floor(((new Date().getTime()) - user.ttl.created) / 1000); //time session
   return res.status(200).json(user);
 }

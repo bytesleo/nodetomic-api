@@ -14,7 +14,7 @@ require('./status').default(db);
 export function set(key, ttl, value) {
 
   value.ttl = {
-    asign: ttl,
+    assigned: ttl,
     created: value.ts || (new Date().getTime())
   }
   let dataEncrypt = utility.encrypt(JSON.stringify(value));
