@@ -33,10 +33,9 @@ export function index(req, res) {
 
   // send mail with defined transport object
   transporter.sendMail(mailOptions, (error, info) => {
-    if (error) {
-      return console.log(error);
-    }
-    console.log('Message %s sent: %s', info.messageId, info.response);
+    if (error)
+      return res.status(500).json(error);
+    return res.status(200).json(info);
   });
 
 }

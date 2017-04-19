@@ -9,7 +9,7 @@ require('redis-delete-wildcard')(Redis);
 
 const db = Redis.createClient({url: config.redis.token.uri});
 
-require('./status').default(db);
+require('./status').default(db, config.redis.token.uri);
 
 export function set(key, ttl, value) {
 
@@ -25,6 +25,12 @@ export function set(key, ttl, value) {
 export function get(key) {
 
   return db.getAsync(key);
+
+}
+
+export function remove(key) {
+
+  return db.delAsync(key);
 
 }
 

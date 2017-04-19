@@ -8,10 +8,13 @@ export function all(req, res) {
   }).catch(err => {
     return res.status(500).json(err)
   });
+
 }
 
 export function me(req, res) {
-  const user = req.user; //get user
+
+  const user = req.user;
   user.ttl.available = user.ttl.assigned - Math.floor(((new Date().getTime()) - user.ttl.created) / 1000); //time session
   return res.status(200).json(user);
+
 }
