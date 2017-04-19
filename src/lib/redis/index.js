@@ -7,7 +7,8 @@ Promise.promisifyAll(Redis);
 
 require('redis-delete-wildcard')(Redis);
 
-const db = Redis.createClient(config.redis.token.port, config.redis.token.ip);
+const db = Redis.createClient({url: config.redis.token.uri});
+// const db = Redis.createClient({host: config.redis.token.ip, port: config.redis.token.port, db: config.redis.token.db, password: config.redis.token.password});
 
 require('./status').default(db);
 

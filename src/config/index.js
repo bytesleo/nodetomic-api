@@ -1,4 +1,4 @@
-// MODE DEVELOPMENT
+// #development
 
 import path from 'path';
 
@@ -19,9 +19,8 @@ export default {
   //Redis
   redis : {
     token: {
-      ip: '127.0.0.1',
-      port: 6379,
-      time: (60 * 60 * 24), // by default 60*60*24 = 24 hours,
+      uri: 'redis://127.0.0.1:6379/0', //format-> redis://user:password@host:port/db-number?db=db-number&password=bar&option=value
+      time: 1440, // by default 1440 = 24 hours,
       multiple: false // if you want multiples logins or only 1 device
     }
   },
@@ -36,7 +35,7 @@ export default {
     //MongoDb
     mongo: {
       db: {
-        uri: 'mongodb://localhost/nodetomic-dev',
+        uri: 'mongodb://localhost:27017/nodetomic-dev', //format-> mongodb://username:password@host:port/database?options
         options: {
           db: {
             safe: true

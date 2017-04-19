@@ -23,27 +23,6 @@ git clone [repo Nodetomic]
 npm install
 ```
 
-## Directory Layout
-
-```bash
-.
-├── /dist/                     # The compiled output
-├── /src/                      # Node.js application source files
-│   ├── /api/                  # api RESTful
-│   ├── /assets/               # Assets, example : Upload files
-│   ├── /config/               # Global Config (development | production)
-│   ├── /core/                 # Core
-│   ├── /lib/                  # Libs
-│   ├── /views/                # Views, example: 404.html
-│   └── /app.js                # Node.js server (entry point)
-├── /client/                   # Client
-├── /test/                     # Test with Mocha
-├── .babelrc                   # babel
-├── .eslintrc                  # lint
-├── gulpfile.js                # gulpfile
-└── package.json               # The list of project dependencies
-```
-
 ## Start [Development]
 
 `npm start`

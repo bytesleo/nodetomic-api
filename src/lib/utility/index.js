@@ -40,7 +40,7 @@ export function getTimeRol(roles) {
           }
         });
       });
-      return (time * 60);
+      return ((time || config.redis.token.time) * 60);
     } else {
       return false;
     }
