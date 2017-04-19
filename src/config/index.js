@@ -20,7 +20,7 @@ export default {
   redis : {
     token: {
       uri: 'redis://127.0.0.1:6379/0', //format-> redis://user:password@host:port/db-number?db=db-number&password=bar&option=value
-      time: 1440, // by default 1440 = 24 hours,
+      time: 1440, // by default 1440 minutes = 24 hours,
       multiple: false // if you want multiples logins or only 1 device
     }
   },
@@ -56,7 +56,7 @@ export default {
   roles : [
     {
       rol: 'user',
-      time: 5 //minutes
+      time: 30 //minutes
     }
   ],
   //oAuth

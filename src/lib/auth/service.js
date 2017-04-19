@@ -18,7 +18,7 @@ export function start(req, res, type) {
   };
 
   //Calculate time by rol
-  const ttl = req.user.ttl || utility.getTimeRol(req.user.roles);
+  const ttl = req.user.ttl || utility.getTimeRol(req.user.roles) || config.redis.token.time;
 
   Token.create(user._id).then(token => {
 
