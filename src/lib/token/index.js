@@ -3,13 +3,12 @@ import Promise from 'bluebird';
 import * as utility from '../utility';
 import config from '../../config';
 
-//Create jwt
+//Create Token
 export function create(id) {
 
   let verify = utility.makeid(11);
   let key = `${id.toString()}:${verify}`;
 
-  //generate value token
   var value = Jwt.encode({
     _id: id,
     _verify: verify
@@ -19,7 +18,7 @@ export function create(id) {
 
 }
 
-//verify jwt
+//Extract Token
 export function extract(token) {
 
   let decoded = Jwt.decode(token, config.secret, true);
