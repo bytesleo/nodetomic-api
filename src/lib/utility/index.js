@@ -1,8 +1,7 @@
 import * as CryptoJS from 'crypto-js';
 import Hogan from 'hogan.js';
-// import fs from 'fs';
-var Promise = require('bluebird');
-var fs = Promise.promisifyAll(require('fs'));
+const Promise = require('bluebird');
+const fs = Promise.promisifyAll(require('fs'));
 import config from '../../config';
 
 // Encrypt
