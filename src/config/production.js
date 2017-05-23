@@ -1,4 +1,4 @@
-// #config production
+// #config development
 import path from 'path';
 const mode = 'production'; //development / production
 
@@ -58,6 +58,16 @@ export default {
       }
     }
     // Other DataBase
+  },
+  // Config email
+  email : {
+    host: 'hostexample',
+    secure: true,
+    port: 465,
+    auth: {
+      user: 'example@gmail.com',
+      pass: 'examplePassword'
+    }
   },
   // Redis
   redis : {
