@@ -1,34 +1,14 @@
-import * as nodemailer from 'nodemailer';
-import * as smtpTransport from 'nodemailer-smtp-transport';
 import * as utility from '../../lib/utility';
+import * as email from '../../lib/email';
 const MantraTemplate = utility.getTemplate('email/mantra/welcome');
 
 export function index(req, res) {
 
-  // create reusable transporter object using the default SMTP transport
-  let transporter = nodemailer.createTransport({
-    service: 'gmail',
-    auth: {
-      user: 'example@gmail.com',
-      pass: 'examplepass'
-    }
-  });
-
-  // let transporter = nodemailer.createTransport(smtpTransport({
-  //     host: 'hostexample',
-  //     secure: true,
-  //     port: 465,
-  //     auth: {
-  //         user: 'example@gmail.com',
-  //         pass: 'examplepass'
-  //     }
-  // }));
-
   // setup email data with unicode symbols
   let mailOptions = {
-    from: '"Fred Foo 👻" <foo@blurdybloop.com>', // sender address
-    to: 'example@gmail.com, baz@blurdybloop.com', // list of receivers
-    subject: 'Hello ✔', // Subject line
+    from: '"Nodetomic 👻" <foo@blurdybloop.com>', // sender address
+    to: 'example1@gmail.com, example2@gmail.com', // list of receivers
+    subject: 'Welcome ✔', // Subject line
     text: 'Hello world ?', // plain text body
     html: '' // html body
   };
@@ -38,16 +18,7 @@ export function index(req, res) {
   };
 
   MantraTemplate.then(template => {
-
-    let rendered = utility.setTemplate(template, values);
-    mailOptions.html = rendered;
-    // send mail with defined transport object
-    transporter.sendMail(mailOptions, (error, info) => {
-      if (error)
-        return res.status(500).json(error);
-      res.json(info);
-    });
-
+    mailOptions.html = utility.setTemplate(template, values);
+    email.send(mailOptions).then(result => res.json(result)).catch(err => res.status(500).json(err));
   });
-
 }

@@ -59,6 +59,16 @@ export default {
     }
     // Other DataBase
   },
+  // Config email
+  email : {
+    host: 'hostexample',
+    secure: true,
+    port: 465,
+    auth: {
+      user: 'example@gmail.com',
+      pass: 'examplePassword'
+    }
+  },
   // Redis
   redis : {
     token: {
