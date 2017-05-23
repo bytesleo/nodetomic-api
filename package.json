@@ -1,6 +1,6 @@
 {
   "name": "nodetomic",
-  "version": "1.4.3",
+  "version": "1.4.5",
   "description": "Easy server RESTful, based in MongoDb, Express, Redis, NodeJS.",
   "main": "src/app.js",
   "scripts": {
