@@ -7,10 +7,11 @@ export default(app, session) => {
 
   app.use(session({
     secret: config.secret,
-    saveUninitialized: true,
     resave: true,
+    saveUninitialized: true,
     store: new mongoStore({
-      mongooseConnection: mongoose.connection, collection: 'sessions' // default
+      mongooseConnection: mongoose.connection,
+      collection: 'sessions'
     })
   }));
 
