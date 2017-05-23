@@ -6,9 +6,9 @@ export function all(req, res) {
     .find({})
     .exec()
     .then(greets => {
-      return res.status(200).json(greets);
+      res.json(greets);
     }).catch(err => {
-      return res.status(500).json(err);
+      res.status(500).json(err);
     });
-    
+
 }

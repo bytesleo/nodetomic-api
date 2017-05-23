@@ -12,6 +12,7 @@
 <img src="https://pbs.twimg.com/profile_images/599259952574693376/DMrPoJtc.png" width="80">
 <img src="http://www.erikasland.com/static/images/mongoose.png" width="80">
 <img src="https://nr-platform.s3.amazonaws.com/uploads/platform/published_extension/branding_icon/300/PKpktytKH9.png" width="80">
+<img src="https://awesomes.oss-cn-beijing.aliyuncs.com/repo/151017151426-82-1.jpg?x-oss-process=style/repo" width="80">
 
 
 Easy server RESTful, based in MongoDb, Express, Redis, NodeJS.

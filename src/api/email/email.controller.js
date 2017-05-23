@@ -1,5 +1,7 @@
 import * as nodemailer from 'nodemailer';
 import * as smtpTransport from 'nodemailer-smtp-transport';
+import * as utility from '../../lib/utility';
+const MantraTemplate = utility.getTemplate('email/mantra/welcome');
 
 export function index(req, res) {
 
@@ -28,14 +30,24 @@ export function index(req, res) {
     to: 'example@gmail.com, baz@blurdybloop.com', // list of receivers
     subject: 'Hello ✔', // Subject line
     text: 'Hello world ?', // plain text body
-    html: '<b>Hello world ?</b>' // html body
+    html: '' // html body
   };
 
-  // send mail with defined transport object
-  transporter.sendMail(mailOptions, (error, info) => {
-    if (error)
-      return res.status(500).json(error);
-    return res.status(200).json(info);
+  var values = {
+    name: "Nodetomic"
+  };
+
+  MantraTemplate.then(template => {
+
+    let rendered = utility.setTemplate(template, values);
+    mailOptions.html = rendered;
+    // send mail with defined transport object
+    transporter.sendMail(mailOptions, (error, info) => {
+      if (error)
+        return res.status(500).json(error);
+      res.json(info);
+    });
+
   });
 
 }

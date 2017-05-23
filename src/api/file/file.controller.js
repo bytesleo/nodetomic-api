@@ -11,16 +11,16 @@ export function upload(req, res) {
 
       file.mv(path, err => {
         if (err)
-          return res.status(500).send(err);
-
-        res.status(200).json({message: 'File uploaded!', path});
+          throw new Error(err);
+          
+        res.json({message: 'File uploaded!', path});
       });
 
     } else {
-      res.status(200).json({error: 'Not files found'});
+      throw new Error('Not files found');
     }
   } catch (err) {
-    return res.status(500).send(err);
+    res.status(500).send(err);
   }
 
 }

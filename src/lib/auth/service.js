@@ -22,26 +22,36 @@ export function start(req, res, type) {
   // Calculate time by rol
   const ttl = req.user.ttl || utility.getTimeRol(req.user.roles) || config.redis.token.time;
 
-  Token.create(user._id).then(token => {
+  try {
 
-    // If config.redis.token.multiple is false then all sessions associated with that user are removed
-    if (!config.redis.token.multiple)
-      Redis.findAndRemoveById(token.key);
+    Token.create(user._id).then(token => {
 
-    Redis.set(token.key, ttl, user).then(result => {
+      // If config.redis.token.multiple is false then all sessions associated with that user are removed
+      if (!config.redis.token.multiple)
+        Redis.findAndRemoveById(token.key);
 
-      switch (type) {
-        case 'local':
-          res.status(200).json({token: token.value, redirect: config.login.redirect});
-          break;
-        case 'social':
-          res.cookie('token', JSON.stringify(token.value));
-          res.redirect(config.login.redirect);
-          break;
-      }
+      Redis.set(token.key, ttl, user).then(result => {
 
-    }).catch(err => res.status(500).send('Error creating redis' + err));
+        switch (type) {
+          case 'local':
+            res.json({token: token.value, redirect: config.login.redirect});
+            break;
+          case 'social':
+            res.cookie('token', JSON.stringify(token.value));
+            res.redirect(config.login.redirect);
+            break;
+        }
 
-  }).catch(err => res.status(500).send('Error creating token' + err));
+      }).catch(err => {
+        res.status(500).send('Error creating redis');
+      });
+
+    }).catch(err => {
+      res.status(500).send('Error creating token');
+    });
+
+  } catch (err) {
+    res.status(500).send(err);
+  }
 
 }

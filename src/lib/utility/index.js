@@ -1,4 +1,8 @@
 import * as CryptoJS from 'crypto-js';
+import Hogan from 'hogan.js';
+// import fs from 'fs';
+var Promise = require('bluebird');
+var fs = Promise.promisifyAll(require('fs'));
 import config from '../../config';
 
 // Encrypt
@@ -47,5 +51,20 @@ export function getTimeRol(roles) {
   } catch (err) {
     return false;
   }
+
+}
+
+// Get Template
+export function getTemplate(path) {
+
+  return fs.readFileAsync(`${config.base}/views/${path}.html`, 'utf8');
+
+}
+
+// Replace in Template
+export function setTemplate(template, values) {
+
+  let HoganTemplate = Hogan.compile(template);
+  return HoganTemplate.render(values);
 
 }
