@@ -6,27 +6,27 @@ import config from '../config';
 
 export default(app) => {
 
-  // Assets specifics
-  // app.use('/bower_components', express.static(`${config.root}/bower_components`));
-  // app.use('/vendor.bundle.js', express.static(config.root + '/dist-admin/vendor.bundle.js'));
-
-  // Paths clients
-  app.get('/:url(api|assets|lib|bower_components)/*', (req, res) => {
+  // Paths 404 from url
+  app.get(config.path.disabled, (req, res) => {
     res.status(404).sendFile(`${config.base}/views/404.html`);
   });
 
   // Point static path to client
-  if (fs.existsSync(config.root + config.client)) {
-    app.use(express.static(config.root + config.client));
+  if (fs.existsSync(`${config.root}/${config.client}`)) {
+    app.use(express.static(`${config.root}/${config.client}`));
     app.use(favicon(path.join(config.root, config.client, 'favicon.ico')));
   }
+
+  // Paths specials from client
+  // app.use('/bower_components', express.static(`${config.root}/bower_components`));
+  // app.use('/example.js', express.static(`${config.root}/admin/example.js`));
 
   // Folder client
   app.get('/*', (req, res) => {
     res.sendFile(`${config.root}/${config.client}/index.html`);
   });
 
-  // other folder client
+  // Other folder client
   // app.get('/:url(admin)/*', (req, res) => {
   //     res.sendFile(`${config.root}/${config.clientAdmin}/example.html`);
   // });

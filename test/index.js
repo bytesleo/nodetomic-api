@@ -1,21 +1,30 @@
 import http from 'http';
 import assert from 'assert';
-import config from '../server/config';
+import config from '../src/config';
 
 describe('Server', () => {
 
-    var host = 'http://' + config.ip + ':' + config.port;
+  const host = `http://${config.server.ip}:${config.server.port}`;
 
-    it('should return 200', done => {
-        http.get(host, res => {
-            assert.equal(200, res.statusCode);
-            done();
-        });
+  it('host should return 200', done => {
+    http.get(host, res => {
+      assert.equal(200, res.statusCode);
+      done();
     });
-    it('Hello should return 200', done => {
-        http.get(host + '/api/hello/index', res => {
-            assert.equal(200, res.statusCode);
-            done();
-        });
+  });
+
+  it('/hello/all should return 200', done => {
+    http.get(host + '/api/hello/all', res => {
+      assert.equal(200, res.statusCode);
+      done();
     });
+  });
+
+  it('/user/me should return 401', done => {
+    http.get(host + '/api/user/me', res => {
+      assert.equal(401, res.statusCode);
+      done();
+    });
+  });
+
 });

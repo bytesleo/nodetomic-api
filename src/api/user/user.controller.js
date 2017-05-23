@@ -1,13 +1,15 @@
-// models
 import User from './user.model';
 
 export function all(req, res) {
 
-  User.find({}, {password: 0}).exec().then(users => {
-    return res.status(200).json(users)
-  }).catch(err => {
-    return res.status(500).json(err)
-  });
+  User
+    .find({}, {password: 0})
+    .exec()
+    .then(users => {
+      return res.status(200).json(users)
+    }).catch(err => {
+      return res.status(500).json(err)
+    });
 
 }
 
