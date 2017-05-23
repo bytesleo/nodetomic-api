@@ -1,9 +1,9 @@
-import config from './../../config';
 import mongoose from 'mongoose';
+import config from './../../config';
+
+const mongoStore = require('connect-mongo')(session);
 
 export default(app, session) => {
-
-  const mongoStore = require('connect-mongo')(session);
 
   app.use(session({
     secret: config.secret,

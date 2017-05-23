@@ -1,9 +1,9 @@
 import * as redis from 'redis';
 import config from './../../config';
 
-export default(app, session) => {
+const RedisStore = require('connect-redis')(session);
 
-  const RedisStore = require('connect-redis')(session);
+export default(app, session) => {
 
   app.use(session({
     secret: config.secret,
