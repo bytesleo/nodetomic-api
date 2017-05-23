@@ -3,7 +3,7 @@ import Promise from 'bluebird';
 import * as utility from '../utility';
 import config from '../../config';
 
-//Create Token
+// Create Token
 export function create(id) {
 
   let verify = utility.makeid(11);
@@ -18,7 +18,7 @@ export function create(id) {
 
 }
 
-//Extract Token
+// Extract Token
 export function extract(token) {
 
   let decoded = Jwt.decode(token, config.secret, true);

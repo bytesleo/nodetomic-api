@@ -11,7 +11,7 @@ export default(app) => {
       }
     });
 
-  //Routers Manual
+  // Routers Manual
   app.use('/auth', require('../lib/auth').default);
   // app.use('/api/hello', require('../api/hello'));
 

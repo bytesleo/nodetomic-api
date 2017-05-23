@@ -4,38 +4,38 @@ import path from 'path';
 
 export default {
   // Mode: development / production
-  mode : 'production',
+  mode : 'development',
   // Path Root
   root : path.normalize(`${__dirname}/../../`),
   // Path Root
   base : path.normalize(`${__dirname}/..`),
-  //Folder Client
+  // Folder Client
   client : 'client',
-  //Server listen
+  // Server listen
   server : {
     ip: 'localhost',
     port: 8000
   },
-  //Redis
+  // Redis
   redis : {
     token: {
-      uri: 'redis://127.0.0.1:6379/0', //format-> redis://user:password@host:port/db-number?db=db-number&password=bar&option=value
-      time: 1440, // by default 1440 = 24 hours,
-      multiple: false // if you want multiples logins or only 1 device
+      uri: 'redis://127.0.0.1:6379/0', // [format-> redis://user:password@host:port/db-number?db=db-number&password=bar&option=value]
+      time: 1440, // by default 1440 minutes = 24 hours,
+      multiple: false // if you want multiples logins or only one device in same time
     }
   },
-  //Secret
+  // Secret
   secret : 's3kr3t_$k3y_&5ess10n?!%_pro',
-  //login
+  // login
   login : {
     redirect: '/home' // redirect when login success
   },
-  //DataBase
+  // DataBase
   database : {
-    //MongoDb
+    // MongoDb
     mongo: {
       db: {
-        uri: 'mongodb://localhost:27017/nodetomic-pro', //format-> mongodb://username:password@host:port/database?options
+        uri: 'mongodb://localhost:27017/nodetomic-pro', // [format-> mongodb://username:password@host:port/database?options]
         options: {
           db: {
             safe: true
@@ -50,16 +50,16 @@ export default {
         }
       }
     }
-    //Other DataBase
+    // Other DataBase
   },
-  //Roles
+  // Roles
   roles : [
     {
       rol: 'user',
-      time: 5 //minutes
+      time: 30 // minutes
     }
   ],
-  //oAuth
+  // oAuth
   oAuth : {
     facebook: {
       clientID: '',

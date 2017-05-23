@@ -1,14 +1,14 @@
 import * as CryptoJS from 'crypto-js';
 import config from '../../config';
 
-//encrypt
+// Encrypt
 export function encrypt(text) {
 
   return CryptoJS.AES.encrypt(text, config.secret).toString();
 
 }
 
-//decrypt
+// Decrypt
 export function decrypt(ciphertext) {
 
   var bytes = CryptoJS.AES.decrypt(ciphertext.toString(), config.secret);
@@ -16,7 +16,7 @@ export function decrypt(ciphertext) {
 
 }
 
-// make random string
+// Make random string
 export function makeid(length) {
 
   let text = "";
@@ -27,7 +27,7 @@ export function makeid(length) {
 
 }
 
-// calculate time rol
+// Calculate time rol
 export function getTimeRol(roles) {
 
   try {

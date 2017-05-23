@@ -20,7 +20,7 @@ export default(app) => {
   app.use(helmet());
   app.use(cors({origin: true, credentials: true}));
 
-  //Session: Required for Twitter oAuth
+  // For oAuth Twitter: Uncomment any to enable! :/
   require('./session/defaultStore').default(app, session);
   // require('./session/mongoStore').default(app, session);
   // require('./session/redisStore').default(app, session);
