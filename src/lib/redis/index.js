@@ -37,8 +37,8 @@ export function remove(key) {
 export function findAndRemoveById(key) {
 
   let id = key.split(':')[0];
-  db.delwild(`${id}:*`, function(err, res) {
-    console.log('sessions deleted->', res);
+  db.delwild(`${id}:*`, (err, res) => {
+    console.log('sessions deleted-> ', res);
   });
 
 }
