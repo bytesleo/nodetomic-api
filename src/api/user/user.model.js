@@ -21,15 +21,15 @@ const Schema = mongoose.Schema;
  *       photo:
  *         type: string
  *       roles:
- *         type: string
+ *         type: array
  *       status:
- *         type: string
+ *         type: number
  *       date:
  *         type: string
  *       last_login:
  *         type: string
  *       social:
- *         type: string
+ *         type: object
  */
 
 const UserSchema = new Schema({
