@@ -1,10 +1,10 @@
 {
   "name": "nodetomic",
-  "version": "1.5.9",
+  "version": "1.6.7",
   "description": "Easy server RESTful, based in MongoDb, Express, Redis, NodeJS.",
   "main": "src/app.js",
   "scripts": {
-    "start": "nodemon src/app.js --exec babel-node",
+    "start": "nodemon src/app.js --exec babel-node -e js,yaml",
     "build": "gulp build",
     "serve": "node dist/server/app.js",
     "test": "mocha --compilers js:babel-register"

@@ -1,7 +1,7 @@
 var swaggerJSDoc = require('swagger-jsdoc');
 import config from '../config';
 
-export default(app) => {
+export default (app) => {
 
   // swagger definition
   var swaggerDefinition = {
@@ -28,7 +28,7 @@ export default(app) => {
       Bearer: {
         type: 'apiKey',
         name: 'Authorization',
-        in: 'header'
+        in : 'header'
       }
     }
   };
@@ -38,17 +38,48 @@ export default(app) => {
     // import swaggerDefinitions
     swaggerDefinition: swaggerDefinition,
     // path to the API docs
-    apis: [`${config.base}/**/*.js`]
+    apis: [`${config.base}/**/*.yaml`]
   };
-
 
   // initialize swagger-jsdoc
   var swaggerSpec = swaggerJSDoc(options);
 
   // serve swagger
   app.get('/swagger.json', function(req, res) {
-    res.setHeader('Content-Type', 'application/json');
-    res.send(swaggerSpec);
+    res.json(swaggerSpec);
   });
+
+  // If you want Swagger into .js = ${config.base}/**/*.js
+
+  /**
+   * @swagger
+   * definitions:
+   *   Example:
+   *     properties:
+   *       field1:
+   *         type: string
+   *       field2:
+   *         type: string
+   */
+
+  /**
+   * @swagger
+   * /api/example:
+   *   get:
+   *     tags:
+   *       - Example
+   *     description: Returns all Example's
+   *     produces:
+   *       - application/json
+   *     responses:
+   *       200:
+   *         description: An array of Example's
+   *         schema:
+   *           type: array
+   *           items:
+   *            $ref: '/definitions/Example'
+   *       500:
+   *         description: Invalid status value
+   */
 
 };

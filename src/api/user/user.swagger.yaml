@@ -1,0 +1,61 @@
+definitions:
+  User:
+    properties:
+      username:
+        type: "string"
+      password:
+        type: "string"
+      email:
+        type: "string"
+      provider:
+        type: "string"
+      name:
+        type: "string"
+      photo:
+        type: "string"
+      roles:
+        type: "array"
+      status:
+        type: "number"
+      date:
+        type: "string"
+      last_login:
+        type: "string"
+      social:
+        type: "object"
+/api/user:
+  # all
+  get:
+    tags:
+      - "User"
+    description: "Returns list of Users"
+    produces:
+      - "application/json"
+    responses:
+      200:
+        description: "An array of User"
+        schema:
+          type: "array"
+          items:
+            $ref: "#/definitions/User"
+      401:
+        description: "Error Unauthorized"
+    security:
+      - Bearer: []
+/api/user/me:
+  # me
+  get:
+    tags:
+      - "User"
+    description: "Returns session User"
+    produces:
+      - "application/json"
+    responses:
+      200:
+        description: "An array of User"
+        schema:
+          $ref: "#/definitions/User"
+      401:
+        description: "Error Unauthorized"
+    security:
+      - Bearer: []

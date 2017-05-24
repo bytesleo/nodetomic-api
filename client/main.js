@@ -4,7 +4,8 @@ new Vue({
     greets: [],
     username: '',
     password: '',
-    token: ''
+    token: '',
+    version: 'v1.6.7'
   },
   created: function() {
     this.fetchData()
@@ -23,9 +24,8 @@ new Vue({
         password: this.password
       }
       $.post("http://localhost:8000/auth/local", user, function(data) {
-        if (data.token) {
-          self.token = 'Bearer ' + data.token;
-        }
+        if (data.token)
+          self.token = data.token;
       });
     }
   }

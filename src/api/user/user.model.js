@@ -2,36 +2,6 @@ import mongoose from 'mongoose';
 import mongoosePaginate from 'mongoose-paginate';
 const Schema = mongoose.Schema;
 
-
-/**
- * @swagger
- * definitions:
- *   User:
- *     properties:
- *       username:
- *         type: string
- *       password:
- *         type: string
- *       email:
- *         type: string
- *       provider:
- *         type: string
- *       name:
- *         type: string
- *       photo:
- *         type: string
- *       roles:
- *         type: array
- *       status:
- *         type: number
- *       date:
- *         type: string
- *       last_login:
- *         type: string
- *       social:
- *         type: object
- */
-
 const UserSchema = new Schema({
   username: {
     type: String,

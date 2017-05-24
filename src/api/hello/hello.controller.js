@@ -7,12 +7,13 @@ export function all(req, res) {
   }).catch(err => {
     res.status(500).json(err);
   });
-
 }
 
 export function read(req, res) {
 
-  Hello.findOne({_id: req.params.id}).exec().then(result => {
+  Hello.findOne({
+    _id: req.params.id
+  }).exec().then(result => {
     res.json(result);
   }).catch(err => {
     res.status(500).json(err);
@@ -37,7 +38,9 @@ export function create(req, res) {
 
 export function update(req, res) {
 
-  Hello.findOne({_id: req.params.id}).exec().then(result => {
+  Hello.findOne({
+    _id: req.params.id
+  }).exec().then(result => {
 
     result.greet = req.body.greet;
     result.language = req.body.language;
@@ -55,7 +58,9 @@ export function update(req, res) {
 
 export function remove(req, res) {
 
-  Hello.deleteOne({_id: req.params.id}).then(result => {
+  Hello.deleteOne({
+    _id: req.params.id
+  }).then(result => {
     res.json(result);
   }).catch(err => {
     res.status(500).json(err);

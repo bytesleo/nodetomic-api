@@ -14,12 +14,12 @@ passport.deserializeUser((user, done) => {
 });
 
 //initialize passport
-require('./local/passport').setup(User, config);
-require('./github/passport').setup(User, config);
-// require('./twitter/passport').setup(User, config);
-// require('./facebook/passport').setup(User, config);
-// require('./google/passport').setup(User, config);
-// require('./bitbucket/passport').setup(User, config);
+require('./local/local.passport').setup(User, config);
+require('./github/github.passport').setup(User, config);
+// require('./twitter/twitter.passport').setup(User, config);
+// require('./facebook/facebook.passport').setup(User, config);
+// require('./google/google.passport').setup(User, config);
+// require('./bitbucket/bitbucket.passport').setup(User, config);
 
 //Routers
 const router = express.Router();

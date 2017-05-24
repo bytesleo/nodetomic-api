@@ -5,14 +5,17 @@ import * as utility from '../utility';
 // Middleware
 export function isAuthenticated(rolesRequired) {
   var self = this;
-  return function(req, res, next) {
+  return (req, res, next) => {
 
     try {
-      let [type,
-        token] = req.headers["authorization"].split(" ");
 
-      if (type !== 'Bearer')
-        return res.status(403).send('Type Authorization invalid');
+      let token = req.headers["authorization"];
+
+      if (token !== undefined) {
+        req.headers.authorization = `Bearer ${token}`;
+      } else {
+        return res.status(403).send('Unauthorized: Not Token provided');
+      }
 
       Token.extract(token).then(decode => {
 
@@ -25,16 +28,17 @@ export function isAuthenticated(rolesRequired) {
 
           if (rolesRequired !== undefined)
             if (!self.hasRole(rolesRequired, info.roles))
-              return res.status(403).send('Rol Unauthorized');
+              return res.status(403).send(
+                'Unauthorized: Rol Unauthorized');
 
           req.user = info;
           next();
         }).catch(err => {
-          return res.status(401).send('Unauthorized Token not found');
+          return res.status(401).send('Unauthorized: Token not found');
         })
 
       }).catch(err => {
-        return res.status(401).send('Unauthorized Token Invalid');
+        return res.status(401).send('Unauthorized: Token Invalid');
       })
 
     } catch (err) {

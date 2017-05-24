@@ -1,0 +1,27 @@
+definitions:
+  Login:
+    properties:
+      username:
+        type: "string"
+      password:
+        type: "string"
+/auth/local:
+  # Passport
+  post:
+    tags:
+      - "Login"
+    description: "Login user"
+    produces:
+      - "application/json"
+    parameters:
+      - in: "body"
+        name: "body"
+        description: "Login user"
+        required: true
+        schema:
+          $ref: "#/definitions/Login"
+    responses:
+      200:
+        description: "An array of User"
+      400:
+        description: "Login Invalid"
