@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 
 /**
  * @swagger
- * definition:
+ * definitions:
  *   Hello:
  *     properties:
  *       greet:

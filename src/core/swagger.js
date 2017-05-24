@@ -20,7 +20,17 @@ export default(app) => {
       }
     },
     host: `${config.server.ip}:${config.server.port}`,
-    basePath: '/api'
+    basePath: '/',
+    schemes: [
+      'http', 'https'
+    ],
+    securityDefinitions: {
+      Bearer: {
+        type: 'apiKey',
+        name: 'Authorization',
+        in: 'header'
+      }
+    }
   };
 
   // options for the swagger docs
@@ -28,8 +38,9 @@ export default(app) => {
     // import swaggerDefinitions
     swaggerDefinition: swaggerDefinition,
     // path to the API docs
-    apis: [config.base + '/**/*.js']
+    apis: [`${config.base}/**/*.js`]
   };
+
 
   // initialize swagger-jsdoc
   var swaggerSpec = swaggerJSDoc(options);

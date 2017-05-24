@@ -12,7 +12,7 @@ new Vue({
   methods: {
     fetchData: function() {
       var self = this;
-      $.get("http://localhost:8000/api/hello/all", function(data) {
+      $.get("http://localhost:8000/api/hello/", function(data) {
         self.greets = data;
       });
     },
