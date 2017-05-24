@@ -29,6 +29,12 @@ export default (app) => {
         type: 'apiKey',
         name: 'Authorization',
         in : 'header'
+      },
+      "iss_a": {
+        "type": "oauth2",
+        "authorizationUrl": `http://${config.server.ip}:${config.server.port}/auth/github`,
+        "flow": "authorization_code",
+        // "tokenUrl": "https://xxxxxxxxxxxx.xxx.co...",
       }
     }
   };
