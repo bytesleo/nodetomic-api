@@ -7,6 +7,8 @@ const app = express();
 require('./core/engine').default(app);
 // Routers
 require('./core/router').default(app);
+// Swagger
+require('./core/swagger').default(app);
 // Paths
 require('./core/path').default(app);
 // MongoDB

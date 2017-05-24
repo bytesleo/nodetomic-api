@@ -7,8 +7,9 @@ import config from '../../config';
 const transporter = nodemailer.createTransport({service: 'gmail', auth: config.email.auth});
 // const transporter = nodemailer.createTransport(smtpTransport(config.email));
 
-// Decrypt
-export function send(mailOptions) {
+// send email
+export function send(message) {
   // send mail with defined transport object
-  return Promise.resolve(transporter.sendMail(mailOptions));
+  return Promise.resolve(transporter.sendMail(message), transporter.close());
+
 }

@@ -20,6 +20,7 @@ export default(app) => {
   // Paths specials from client
   // app.use('/bower_components', express.static(`${config.root}/bower_components`));
   // app.use('/example.js', express.static(`${config.root}/admin/example.js`));
+  app.use('/api-docs/', express.static(`${config.root}/api-docs`));
 
   // Folder client
   app.get('/*', (req, res) => {
