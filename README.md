@@ -21,6 +21,10 @@
 
 Easy server RESTful, based in MongoDb, Express, Redis, NodeJS.
 
+## Horizontal scalability
+
+<img src="https://applicationarchitecture.files.wordpress.com/2010/06/f0028-horizontal-scalability-typical-scenario.png" width="800">
+
 ## Instructions
 
 ```bash

@@ -14,5 +14,4 @@ const HelloSchema = new Schema({
 });
 
 HelloSchema.plugin(mongoosePaginate);
-
 export default mongoose.model('Hello', HelloSchema);

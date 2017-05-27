@@ -41,7 +41,7 @@ export default (User) => {
 
     if (err.name === 'MongoError' && err.code === 11000) {
       next(
-       `'username "${doc.username}" not available'`
+       `'username "${doc.username}" not available.'`
       );
     } else {
       next(err);
