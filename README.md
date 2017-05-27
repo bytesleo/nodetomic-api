@@ -28,13 +28,13 @@ Easy server RESTful, based in MongoDb, Express, Redis, NodeJS.
 
 <img src="https://applicationarchitecture.files.wordpress.com/2010/06/f0028-horizontal-scalability-typical-scenario.png" width="800">
 
-## Instructions
+## Install
 
 ```bash
-git clone [repo Nodetomic]
-npm install
 install mongodb
 install redis
+git clone [nodetomic]
+npm install
 ```
 
 ## Start [Development]
