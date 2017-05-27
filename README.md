@@ -1,5 +1,9 @@
 # Nodetomic-serve
 
+Easy server RESTful, based in MongoDb, Express, Redis, NodeJS.
+
+## Technologies
+
 <img src="http://solucionesit.ldtsynergy.com/-/Srvs015/MongoDB/file/view/mongodb.png/547250106/315x368/mongodb.png" width="80">
 <img src="http://code.runnable.com/images/provider-icons/icon-express-alt.svg" width="80">
 <img src="https://chris.lu/upload/images/redis.png" width="80">
@@ -18,10 +22,9 @@
 <img src="https://i2.wp.com/community.nodemailer.com/wp-content/uploads/2015/10/n2-2.png?fit=422%2C360&ssl=1" width="80">
 <img src="https://avatars2.githubusercontent.com/u/7658037?v=3&s=400" width="80">
 
-
-Easy server RESTful, based in MongoDb, Express, Redis, NodeJS.
-
 ## Horizontal scalability
+
+[Cluster PM2 + Redis]
 
 <img src="https://applicationarchitecture.files.wordpress.com/2010/06/f0028-horizontal-scalability-typical-scenario.png" width="800">
 
