@@ -41,7 +41,7 @@ npm install
 
 `npm start`
 
-output: <http://localhost:8000>
+Listen: <http://localhost:8000>
 
 ## Build
 
@@ -53,15 +53,13 @@ output: `dist`
 
 `npm test`
 
-output: `dist`
+## Start [Production]
 
-## Run after 'build' [Production]
-
-DIST folder must exist!
+DIST folder must exist! (npm run build)
 
 `npm run serve`
 
-output: <http://localhost:8000>
+Listen: <http://localhost:8000>
 
 ## License
 
