@@ -1,4 +1,4 @@
-// #config production
+// #config development
 import path from 'path';
 const mode = 'production'; //development / production
 
@@ -53,10 +53,10 @@ export default {
         },
         seeds: [
           {
-            name: 'users',
-            seed: 'once'  //once - alway - none
+            model: 'User',
+            seed: 'once' //once - alway - none
           }, {
-            name: 'hellos',
+            model: 'Hello',
             seed: 'once'
           }
         ]
@@ -77,7 +77,7 @@ export default {
   swagger : {
     info: {
       title: 'Nodetomic Swagger API',
-      version: '1.7.3',
+      version: '1.9.3',
       description: 'Nodetomic RESTful API with Swagger',
       "contact": {
         "name": "Nodetomic Developer",

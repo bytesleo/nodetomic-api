@@ -53,10 +53,10 @@ export default {
         },
         seeds: [
           {
-            name: 'users',
+            model: 'User',
             seed: 'once' //once - alway - none
           }, {
-            name: 'hellos',
+            model: 'Hello',
             seed: 'once'
           }
         ]

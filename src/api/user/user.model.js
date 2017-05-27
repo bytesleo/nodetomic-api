@@ -3,7 +3,6 @@ import mongoosePaginate from 'mongoose-paginate';
 const Schema = mongoose.Schema;
 
 const UserSchema = new Schema({
-  // _id: Object
   username: {
     type: String,
    required: [true, 'Username is required.'],

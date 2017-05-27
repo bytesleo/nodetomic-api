@@ -17,15 +17,15 @@ export default(mongoose, conf) => {
           case 'once':
             let found;
             names.forEach(elem => {
-              if (seed.name == elem.name) {
+              if (`${seed.model.toLowerCase()}s` == elem.name) {
                 found = true;
               }
             });
             if (!found)
-              require(`./seed/${seed.name}`);
+              require(`./seed/${seed.model}`);
             break;
           case 'alway':
-            require(`./seed/${seed.name}`);
+            require(`./seed/${seed.model}`);
             break;
           case 'none':
             console.log('No seeds were sown :)');

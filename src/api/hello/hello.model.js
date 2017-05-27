@@ -5,11 +5,11 @@ const Schema = mongoose.Schema;
 const HelloSchema = new Schema({
   greet: {
     type: String,
-    required: true
+    required: [true, 'Greet is required.']
   },
   language: {
     type: String,
-    required: true
+    required: [true, 'Language is required.']
   }
 });
 
