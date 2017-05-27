@@ -1,21 +1,50 @@
 import colors from 'colors';
 
-export default(mongoose, uri) => {
+export default(mongoose, conf) => {
 
   // When successfully connected
   mongoose.connection.on('connected', (err) => {
-    console.log(`MongoDB-> connected on ${uri}`.bgGreen);
+    console.log(`MongoDB-> connected on ${conf.uri}`.bgGreen);
+  });
+
+  mongoose.connection.on('open', () => {
+    // Seed
+    mongoose.connection.db.listCollections().toArray(function(err, names) {
+      if (err)
+        console.log(err);
+      conf.seeds.forEach(seed => {
+        switch (seed.seed) {
+          case 'once':
+            let found;
+            names.forEach(elem => {
+              if (seed.name == elem.name) {
+                found = true;
+              }
+            });
+            if (!found)
+              require(`./seed/${seed.name}`);
+            break;
+          case 'alway':
+            require(`./seed/${seed.name}`);
+            break;
+          case 'none':
+            console.log('No seeds were sown :)');
+            break;
+          default:
+        }
+      });
+    });
   });
 
   // If the connection throws an error
   mongoose.connection.on('error', err => {
-    console.log(`MongoDB-> connection error: ${uri} details->${err}`.bgRed);
+    console.log(`MongoDB-> connection error: ${conf.uri} details->${err}`.bgRed);
     process.exit(-1);
   });
 
   // When the connection is disconnected
   mongoose.connection.on('disconnected', (err) => {
-    console.log(`MongoDB-> disconnected: ${uri}`.bgRed);
+    console.log(`MongoDB-> disconnected: ${conf.uri}`.bgRed);
   });
 
 };

@@ -3,30 +3,37 @@ import mongoosePaginate from 'mongoose-paginate';
 const Schema = mongoose.Schema;
 
 const UserSchema = new Schema({
+  // _id: Object
   username: {
     type: String,
-    required: true,
-    index: {
-      unique: true
-    }
+   required: [true, 'Username is required.'],
+    unique: true
   },
   password: {
     type: String
   },
+  name: {
+    type: String
+  },
+  lastname: String,
   email: {
     type: String,
     lowercase: true
   },
-  provider: String,
-  name: String,
   photo: String,
+  provider: {
+    type: String,
+   required: [true, 'Provider is required.'],
+    default: 'local'
+  },
   roles: {
     type: Array,
     default: ['user']
   },
   status: {
     type: Number,
-    default: 1
+    default: 1,
+   required: [true, 'Status is required.']
   },
   date: {
     type: Date,

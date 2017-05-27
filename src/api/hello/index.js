@@ -3,7 +3,7 @@ import * as controller from './hello.controller';
 
 const router = express.Router();
 
-router.get('/', controller.all);
+router.get('/', controller.list);
 router.post('/', controller.create);
 router.get('/:id', controller.read);
 router.put('/:id', controller.update);

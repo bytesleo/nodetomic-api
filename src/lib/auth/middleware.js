@@ -14,7 +14,7 @@ export function isAuthenticated(rolesRequired) {
       if (token !== undefined) {
         req.headers.authorization = `Bearer ${token}`;
       } else {
-        return res.status(403).send('Unauthorized: Not Token provided');
+        return res.status(403).json({error:'Unauthorized: Not Token provided'});
       }
 
       Token.extract(token).then(decode => {
@@ -24,25 +24,24 @@ export function isAuthenticated(rolesRequired) {
           var info = JSON.parse(utility.decrypt(info));
 
           if (decode.id !== info._id)
-            return res.status(401).send('Unauthorized: id not equals');
+            return res.status(401).json({error:'Unauthorized: id not equals'});
 
           if (rolesRequired !== undefined)
             if (!self.hasRole(rolesRequired, info.roles))
-              return res.status(403).send(
-                'Unauthorized: Rol Unauthorized');
+              return res.status(403).json({error: 'Unauthorized role'});
 
           req.user = info;
           next();
         }).catch(err => {
-          return res.status(401).send('Unauthorized: Token not found');
+          return res.status(401).json({error: 'Unauthorized: Token not found'});
         })
 
       }).catch(err => {
-        return res.status(401).send('Unauthorized: Token Invalid');
+        return res.status(401).json({error: 'Unauthorized: Token Invalid'});
       })
 
     } catch (err) {
-      return res.status(401).send('Unauthorized');
+      return res.status(401).json({error: 'Unauthorized'});
     }
   }
 }
@@ -53,10 +52,10 @@ export function hasRole(rolesRequired, rolesUser) {
     let isAuthorized = false;
     rolesRequired.forEach(rolReq => {
       rolesUser.forEach(RolUser => {
-        if (rolReq === RolUser) {
+        if (rolReq === RolUser)
           isAuthorized = true;
         }
-      });
+      );
     });
     return isAuthorized;
   } catch (err) {

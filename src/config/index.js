@@ -27,7 +27,7 @@ export default {
   roles : [
     {
       rol: 'user',
-      time: 30 // minutes
+      time: 60 // minutes
     }
   ],
   // Routers ignore
@@ -51,10 +51,15 @@ export default {
             auto_reconnect: true
           }
         },
-        seed: {
-          user: true,
-          hello: true
-        }
+        seeds: [
+          {
+            name: 'users',
+            seed: 'once' //once - alway - none
+          }, {
+            name: 'hellos',
+            seed: 'once'
+          }
+        ]
       }
     }
     // Other DataBase
@@ -67,6 +72,22 @@ export default {
     auth: {
       user: 'example@gmail.com',
       pass: 'examplePassword'
+    }
+  },
+  swagger : {
+    info: {
+      title: 'Nodetomic Swagger API',
+      version: '1.9.3',
+      description: 'Nodetomic RESTful API with Swagger',
+      "contact": {
+        "name": "Nodetomic Developer",
+        "url": "http://www.example.com",
+        "email": "example@example.com"
+      },
+      "license": {
+        "name": "MIT",
+        "url": "https://opensource.org/licenses/MIT"
+      }
     }
   },
   // Redis

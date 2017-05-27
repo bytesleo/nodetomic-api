@@ -12,7 +12,7 @@ export function upload(req, res) {
       file.mv(path, err => {
         if (err)
           throw new Error(err);
-          
+
         res.json({message: 'File uploaded!', path});
       });
 
@@ -20,7 +20,7 @@ export function upload(req, res) {
       throw new Error('Not files found');
     }
   } catch (err) {
-    res.status(500).send(err);
+    res.status(500).json({error:err});
   }
 
 }

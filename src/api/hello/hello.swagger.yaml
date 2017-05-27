@@ -6,7 +6,7 @@ definitions:
       language:
         type: "string"
 /api/hello:
-  # all
+  # list
   get:
     tags:
       - "Hello"
@@ -80,7 +80,7 @@ definitions:
     responses:
       200:
         description: "object Hello updated"
-  # remove    
+  # remove
   delete:
     tags:
       - "Hello"

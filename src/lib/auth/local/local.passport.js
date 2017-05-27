@@ -12,19 +12,16 @@ export function setup(User, config) {
     User.findOne({username: username, provider: 'local'}).exec().then(user => {
 
       if (!user)
-        return done(null, false, {message: `'${username}' is not registered.`}); // You can register user here
+        return done(null, false, {error: `'${username}' is not registered.`}); // You can register user here
 
       user.authenticate(password).then((isMatch) => { //validate password
 
         if (!isMatch) {
-          return done(null, false, {message: 'This password is not correct.'});
+          return done(null, false, {error: 'This password is not correct.'});
         }
         user.last_login = Date.now(); //save log last_login
-        user.save(err => {
-          if (err)
-            return done(err);
-          return done(null, user);
-        });
+
+        user.save().then(user => done(null, user)).catch(err => done(err));
       });
 
     }).catch(err => done(err));

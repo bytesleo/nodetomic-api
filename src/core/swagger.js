@@ -5,20 +5,7 @@ export default (app) => {
 
   // swagger definition
   var swaggerDefinition = {
-    info: {
-      title: 'Nodetomic Swagger API',
-      version: '1.4.5',
-      description: 'Nodetomic RESTful API with Swagger',
-      "contact": {
-        "name": "Nodetomic Developer",
-        "url": "http://www.example.com",
-        "email": "example@example.com"
-      },
-      "license": {
-        "name": "MIT",
-        "url": "https://opensource.org/licenses/MIT"
-      }
-    },
+    info: config.swagger.info,
     host: `${config.server.ip}:${config.server.port}`,
     basePath: '/',
     schemes: [

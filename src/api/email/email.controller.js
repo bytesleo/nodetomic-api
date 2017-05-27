@@ -19,6 +19,9 @@ export function index(req, res) {
 
   MantraTemplate.then(template => {
     mailOptions.html = utility.setTemplate(template, values);
-    email.send(mailOptions).then(result => res.json(result)).catch(err => res.status(500).json(err));
+    email.send(mailOptions).then(result => res.json(result)).catch(err =>
+      res.status(500).json({
+        error: err
+      }));
   });
 }

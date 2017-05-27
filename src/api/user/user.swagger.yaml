@@ -7,11 +7,13 @@ definitions:
         type: "string"
       email:
         type: "string"
-      provider:
-        type: "string"
       name:
         type: "string"
+      lastname:
+        type: "string"
       photo:
+        type: "string"
+      provider:
         type: "string"
       roles:
         type: "array"
@@ -24,7 +26,7 @@ definitions:
       social:
         type: "object"
 /api/user:
-  # all
+  # list
   get:
     tags:
       - "User"
@@ -40,6 +42,62 @@ definitions:
             $ref: "#/definitions/User"
       401:
         description: "Error Unauthorized"
+    security:
+      - Bearer: []
+  # create
+  post:
+    tags:
+      - "User"
+    description: "Creates a new User"
+    produces:
+      - "application/json"
+    parameters:
+      - in: "body"
+        name: "body"
+        description: "Create new User"
+        required: true
+        schema:
+          $ref: "#/definitions/User"
+    responses:
+      200:
+        description: "Result"
+/api/user/{id}:
+  # read
+  get:
+    tags:
+      - "User"
+    description: "Returns a single User"
+    produces:
+      - "application/json"
+    parameters:
+      - name: "id"
+        description: "User's id"
+        in: "path"
+        required: true
+        type: "string"
+    responses:
+      200:
+        description: "A single User"
+        schema:
+          $ref: "#/definitions/User"
+    security:
+      - Bearer: []
+  # remove
+  delete:
+    tags:
+      - "User"
+    description: "Deletes a single User"
+    produces:
+      - "application/json"
+    parameters:
+      - name: "id"
+        description: "User's id"
+        in: "path"
+        required: true
+        type: "string"
+    responses:
+      200:
+        description: "Result Operation"
     security:
       - Bearer: []
 /api/user/me:

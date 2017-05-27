@@ -43,15 +43,15 @@ export function start(req, res, type) {
         }
 
       }).catch(err => {
-        res.status(500).send('Error creating redis');
+        res.status(500).json({'error': 'Error creating redis'});
       });
 
     }).catch(err => {
-      res.status(500).send('Error creating token');
+      res.status(500).json({'error': 'Error creating redis'});
     });
 
   } catch (err) {
-    res.status(500).send(err);
+    res.status(500).json({'error': err});
   }
 
 }

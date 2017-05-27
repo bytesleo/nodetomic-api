@@ -13,7 +13,7 @@ router.post('/', (req, res, next) => {
       return res.status(400).json(error);
     if (!user)
       return res.status(404).json({
-        message: 'Something went wrong, please try again.'
+        error: 'Something went wrong, please try again.'
       });
 
     req.user = user;

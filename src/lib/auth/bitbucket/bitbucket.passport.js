@@ -27,11 +27,7 @@ export function setup(User, config) {
         user.last_login = Date.now();
       }
 
-      user.save(err => {
-        if (err)
-          return done(err);
-        done(err, user);
-      });
+      user.save().then(user => done(null, user)).catch(err => done(err));
 
     }).catch(err => done(err));
 

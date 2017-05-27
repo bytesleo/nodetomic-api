@@ -1,57 +1,52 @@
 import Hello from './hello.model';
 
-export function all(req, res) {
+export function list(req, res) {
 
-  Hello.find({}).exec().then(greets => {
+  Hello.find().exec().then(greets => {
     res.json(greets);
   }).catch(err => {
-    res.status(500).json(err);
+    res.status(500).json({error:err});
   });
 }
 
 export function read(req, res) {
 
-  Hello.findOne({
-    _id: req.params.id
-  }).exec().then(result => {
+  Hello.findById(req.params.id).exec().then(result => {
     res.json(result);
   }).catch(err => {
-    res.status(500).json(err);
+    res.status(500).json({error:err});
   });
 
 }
 
 export function create(req, res) {
 
-  let newHello = new Hello();
+  let create = new Hello();
 
-  newHello.greet = req.body.greet;
-  newHello.language = req.body.language;
+  create.greet = req.body.greet;
+  create.language = req.body.language;
 
-  newHello.save().then(result => {
+  create.save().then(result => {
     res.json(result);
   }).catch(err => {
-    res.status(500).json(err);
+    res.status(500).json({error:err});
   })
 
 }
 
 export function update(req, res) {
 
-  Hello.findOne({
-    _id: req.params.id
+  Hello.findByIdAndUpdate(req.params.id, {
+    $set: {
+      greet: req.body.greet,
+      language: req.body.language,
+    }
+  }, {
+    new: true
   }).exec().then(result => {
-
-    result.greet = req.body.greet;
-    result.language = req.body.language;
-
-    result.save().then(result => {
-      res.json(result);
-    }).catch(err => {
-      res.status(500).json(err);
-    })
+    res.json(result);
   }).catch(err => {
-    res.status(500).json(err);
+    res.status(500).json({error:err});
   });
 
 }
@@ -63,7 +58,7 @@ export function remove(req, res) {
   }).then(result => {
     res.json(result);
   }).catch(err => {
-    res.status(500).json(err);
+    res.status(500).json({error:err});
   });
 
 }

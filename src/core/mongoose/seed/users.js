@@ -7,8 +7,18 @@ const data = [
     password: '123',
     email: 'admin@admin.com',
     provider: 'local',
-    name: 'Administrator',
-    photo: 'https://goo.gl/iRM3yA'
+    name: 'Admin',
+    lastname: 'Main',
+    photo: 'https://goo.gl/iRM3yA',
+    roles:['admin']
+  }, {
+    username: 'user',
+    password: '123',
+    email: 'anthony@user.com',
+    name: 'Anthony',
+    lastname: 'Kiedis',
+    photo: 'https://goo.gl/iRM3yA',
+    roles:['user']
   }
 ];
 

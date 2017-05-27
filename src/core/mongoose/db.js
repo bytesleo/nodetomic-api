@@ -8,11 +8,4 @@ mongoose.Promise = require('bluebird');
 const db = mongoose.connect(config.database.mongo.db.uri, config.database.mongo.db.options);
 
 // Events
-require('./status').default(db, config.database.mongo.db.uri);
-
-// Seed
-if (config.database.mongo.db.seed.user) 
-  setTimeout(() => require('./seed/user'), 500);
-
-if (config.database.mongo.db.seed.hello)
-  setTimeout(() => require('./seed/hello'), 500);
+require('./status').default(db, config.database.mongo.db);
