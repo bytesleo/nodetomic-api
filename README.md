@@ -1,6 +1,7 @@
 # Nodetomic-serve
 
-Easy server RESTful, based in MongoDb, Express, Redis, NodeJS.
+- node >= 6.x.x (Recommended 8.x.x)
+- Easy server RESTful, based in MongoDb, Express, Redis, NodeJS.
 
 ## Technologies
 
@@ -30,8 +31,8 @@ Easy server RESTful, based in MongoDb, Express, Redis, NodeJS.
 
 ## Install
 
-Install mongodb: <https://www.mongodb.com>
-Install Redis: <https://redis.io/>
+- Install mongodb: <https://www.mongodb.com>
+- Install Redis: <https://redis.io/>
 
 ```bash
 git clone https://github.com/kevoj/nodetomic-server
