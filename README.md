@@ -5,9 +5,9 @@
 
 ## Technologies
 
-<img src="http://solucionesit.ldtsynergy.com/-/Srvs015/MongoDB/file/view/mongodb.png/547250106/315x368/mongodb.png" width="80">
-<img src="http://code.runnable.com/images/provider-icons/icon-express-alt.svg" width="80">
-<img src="https://chris.lu/upload/images/redis.png" width="80">
+.right[![Right-aligned image]<img src="http://solucionesit.ldtsynergy.com/-/Srvs015/MongoDB/file/view/mongodb.png/547250106/315x368/mongodb.png" width="80">]
+.right[![Right-aligned image]<img src="http://code.runnable.com/images/provider-icons/icon-express-alt.svg" width="80">]
+.right[![Right-aligned image]<img src="https://chris.lu/upload/images/redis.png" width="80">]
 <img src="http://oraclelinuxworld.com/wp-content/uploads/2016/01/NodeJS-Small-Blog-Feature-Image-.jpg" width="80">
 <img src="http://www.themightycribb.com/wp-content/uploads/2016/08/gulpjs-logo.jpg" width="80">
 <img src="https://cms-assets.tutsplus.com/uploads/users/16/posts/24511/preview_image/babel-1.png" width="80">
