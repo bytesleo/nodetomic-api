@@ -1,6 +1,6 @@
 import * as utility from '../../lib/utility';
 import * as email from '../../lib/email';
-const MantraTemplate = utility.getTemplate('email/mantra/welcome');
+const MantraTemplate = utility.getTemplate('email/welcome');
 
 export function index(req, res) {
 
