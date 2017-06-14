@@ -5,7 +5,7 @@
 
 ## Technologies
 
-[<img src="http://solucionesit.ldtsynergy.com/-/Srvs015/MongoDB/file/view/mongodb.png/547250106/315x368/mongodb.png" width="80">
+<img src="http://solucionesit.ldtsynergy.com/-/Srvs015/MongoDB/file/view/mongodb.png/547250106/315x368/mongodb.png" width="80">
 <img src="http://code.runnable.com/images/provider-icons/icon-express-alt.svg" width="80">
 <img src="https://chris.lu/upload/images/redis.png" width="80">
 <img src="http://oraclelinuxworld.com/wp-content/uploads/2016/01/NodeJS-Small-Blog-Feature-Image-.jpg" width="80">
@@ -21,7 +21,7 @@
 <img src="https://seeklogo.com/images/E/eslint-logo-DDFB6EBCF6-seeklogo.com.png" width="80">
 <img src="https://avatars3.githubusercontent.com/u/2824157?v=3&s=400" width="80">
 <img src="https://i2.wp.com/community.nodemailer.com/wp-content/uploads/2015/10/n2-2.png?fit=422%2C360&ssl=1" width="80">
-<img src="https://avatars2.githubusercontent.com/u/7658037?v=3&s=400" width="80">]
+<img src="https://avatars2.githubusercontent.com/u/7658037?v=3&s=400" width="80">
 
 ## Horizontal scalability
 
@@ -31,11 +31,12 @@
 
 ## Install
 
-- Install mongodb: <https://www.mongodb.com>
-- Install Redis: <https://redis.io/>
+- Mongodb: <https://www.mongodb.com>
+- Redis: <https://redis.io/>
 
 ```bash
 git clone https://github.com/kevoj/nodetomic-server
+cd nodetomic-server
 npm install
 ```
 
@@ -57,16 +58,14 @@ output: `dist`
 
 ## Start [Production]
 
-DIST folder must exist! (npm run build)
+before execute [npm run build]
 
 `npm run serve`
 
 Listen: <http://localhost:8000>
 
-## Author
-
-Leonardo Rico G. <https://github.com/kevoj>
-
 ## License
 
-MIT
+Copyright (C) 2017 Leonardo Rico Guevara. <https://github.com/kevoj>
+
+Distributed under the MIT license, see LICENSE.md for the full text.
