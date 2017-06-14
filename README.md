@@ -1,7 +1,11 @@
 # Nodetomic-serve
 
-- node >= 6.x.x (Recommended 8.x.x)
-- Easy server RESTful, based in MongoDb, Express, Redis, NodeJS.
+Simple RESTful server designed for horizontal scalability, based on [MERN] MongoDb, Express, Redis, NodeJS.
+
+- Node >= 6.x.x (Recommended 8.x.x)
+- Npm  >= 3.x.x (Recommended 5.x.x)
+- MongoDB  >= 3.x.x
+- Redis  >= 3.x.x
 
 ## Technologies
 
@@ -25,7 +29,7 @@
 
 ## Horizontal scalability
 
-[Cluster PM2 + Redis]
+[Cluster + Redis]
 
 <img src="https://applicationarchitecture.files.wordpress.com/2010/06/f0028-horizontal-scalability-typical-scenario.png" width="800">
 
