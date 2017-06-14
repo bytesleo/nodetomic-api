@@ -40,7 +40,7 @@ Simple RESTful server designed for horizontal scalability, based on [MERN] Mongo
 
 ```bash
 git clone https://github.com/kevoj/nodetomic-api
-cd nodetomic-server
+cd nodetomic-api
 npm install
 ```
 

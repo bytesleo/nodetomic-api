@@ -1,7 +1,7 @@
 {
   "name": "nodetomic-api",
   "version": "1.9.3",
-  "description": "Easy server RESTful, based in MongoDb, Express, Redis, NodeJS.",
+  "description": "Simple RESTful server designed for horizontal scalability, based on [MERN] MongoDb, Express, Redis, NodeJS.",
   "main": "src/app.js",
   "scripts": {
     "start": "nodemon src/app.js --exec babel-node -e js,yaml",
