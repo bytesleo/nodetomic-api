@@ -1,7 +1,7 @@
 import * as utility from '../../lib/utility';
 import * as email from '../../lib/email';
-const EmailTemplate = utility.getTemplate('email/welcome.js');//example with JS
-const OtherTemplate = utility.getTemplate('other/hi.html');//Example with .html, .mustache
+const EmailTemplate = utility.getTemplate('email/welcome.js'); //example with JS
+const OtherTemplate = utility.getTemplate('other/hi.html'); //Example with .html, .mustache
 
 export function index(req, res) {
 
@@ -27,4 +27,16 @@ export function index(req, res) {
         error: err
       }));
   });
+}
+
+export function preview(req, res) {
+
+  const PreviewTemplate = utility.getTemplate(`${req.params.folder}/${req.params.name}`);
+
+  PreviewTemplate.then(template => {
+    res.send(template);
+  }).catch(err => res.status(500).json({
+    error: err
+  }))
+
 }
