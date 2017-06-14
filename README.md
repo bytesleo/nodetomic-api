@@ -30,10 +30,11 @@ Easy server RESTful, based in MongoDb, Express, Redis, NodeJS.
 
 ## Install
 
+Install mongodb: <https://www.mongodb.com>
+Install Redis: <https://redis.io/>
+
 ```bash
-install mongodb
-install redis
-git clone [nodetomic]
+git clone https://github.com/kevoj/nodetomic-server
 npm install
 ```
 
