@@ -61,6 +61,10 @@ DIST folder must exist! (npm run build)
 
 Listen: <http://localhost:8000>
 
+## Author
+
+Leonardo Rico G. <https://github.com/kevoj>
+
 ## License
 
 MIT
