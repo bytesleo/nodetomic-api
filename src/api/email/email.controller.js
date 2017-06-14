@@ -1,6 +1,7 @@
 import * as utility from '../../lib/utility';
 import * as email from '../../lib/email';
-const MantraTemplate = utility.getTemplate('email/welcome');
+const EmailTemplate = utility.getTemplate('email/welcome.js');//example with JS
+const OtherTemplate = utility.getTemplate('other/hi.html');//Example with .html, .mustache
 
 export function index(req, res) {
 
@@ -14,11 +15,13 @@ export function index(req, res) {
   };
 
   var values = {
-    name: "Nodetomic"
+    name: "Nodetomic",
+    title: "Hi!"
   };
 
-  MantraTemplate.then(template => {
+  EmailTemplate.then(template => {
     mailOptions.html = utility.setTemplate(template, values);
+    //res.send(mailOptions.html); Uncomment to preview html
     email.send(mailOptions).then(result => res.json(result)).catch(err =>
       res.status(500).json({
         error: err

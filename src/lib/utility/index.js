@@ -56,7 +56,11 @@ export function getTimeRol(roles) {
 // Get Template
 export function getTemplate(path) {
 
-  return fs.readFileAsync(`${config.base}/views/${path}.mustache`, 'utf8');
+  if (path.indexOf('.js') > -1) {
+    return Promise.resolve(require(`${config.base}/views/${path}`).default);
+  } else {
+    return fs.readFileAsync(`${config.base}/views/${path}`, 'utf8');
+  }
 
 }
 
