@@ -1,4 +1,4 @@
-# Nodetomic-serve
+# Nodetomic-api
 
 Simple RESTful server designed for horizontal scalability, based on [MERN] MongoDb, Express, Redis, NodeJS.
 
@@ -39,7 +39,7 @@ Simple RESTful server designed for horizontal scalability, based on [MERN] Mongo
 - Redis: <https://redis.io/>
 
 ```bash
-git clone https://github.com/kevoj/nodetomic-server
+git clone https://github.com/kevoj/nodetomic-api
 cd nodetomic-server
 npm install
 ```
@@ -72,4 +72,4 @@ Listen: <http://localhost:8000>
 
 Copyright (C) 2017 - Leonardo Rico Guevara - https://github.com/kevoj
 
-Distributed under the MIT license, see LICENSE.md for the full text.
+Distributed under the MIT license, see LICENSE file for the full text.
