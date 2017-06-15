@@ -61,6 +61,25 @@ definitions:
     responses:
       200:
         description: "Result"
+  # update
+  put:
+    tags:
+      - "User"
+    description: "update a single User"
+    produces:
+      - "application/json"
+    parameters:
+      - in: "body"
+        name: "body"
+        description: "Fields for the User resource"
+        schema:
+          type: "array"
+          $ref: "#/definitions/User"
+    responses:
+      200:
+        description: "Result Operation"
+    security:
+      - Bearer: []
 /api/user/{id}:
   # read
   get:
@@ -95,6 +114,30 @@ definitions:
         in: "path"
         required: true
         type: "string"
+    responses:
+      200:
+        description: "Result Operation"
+    security:
+      - Bearer: []
+  # update
+  put:
+    tags:
+      - "User"
+    description: "update a single User"
+    produces:
+      - "application/json"
+    parameters:
+      - name: "id"
+        description: "User's id"
+        in: "path"
+        required: true
+        type: "string"
+      - in: "body"
+        name: "body"
+        description: "Fields for the User resource"
+        schema:
+          type: "array"
+          $ref: "#/definitions/User"
     responses:
       200:
         description: "Result Operation"

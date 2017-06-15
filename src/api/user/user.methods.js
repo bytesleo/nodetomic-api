@@ -1,6 +1,6 @@
 import bcrypt from 'bcrypt';
 
-export default (User) => {
+export default(User) => {
 
   User.methods = {
 
@@ -12,10 +12,9 @@ export default (User) => {
 
   };
 
-  User.pre('save', function(next, done) {
+  User.pre('save', function(next) {
 
-    const user = this;
-
+    let user = this;
     // only hash the password if it has been modified (or is new)
     if (!user.isModified('password'))
       return next();
@@ -35,14 +34,12 @@ export default (User) => {
         next();
       });
     });
+
   });
 
   User.post('save', function(err, doc, next) {
-
     if (err.name === 'MongoError' && err.code === 11000) {
-      next(
-       `'username "${doc.username}" not available.'`
-      );
+      next(`'username "${doc.username}" not available.'`);
     } else {
       next(err);
     }

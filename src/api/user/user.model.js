@@ -49,4 +49,5 @@ const UserSchema = new Schema({
 
 UserSchema.plugin(mongoosePaginate);
 require('./user.methods').default(UserSchema);
+
 export default mongoose.model('User', UserSchema);
