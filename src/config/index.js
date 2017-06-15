@@ -11,7 +11,7 @@ export default {
     ip: 'localhost',
     port: 8000
   },
-  secret : `s3kr3t_$k3y_&5ess10n?%-${mode}`, // Secret key to Token
+  secret : `s3kr3t_$k3y_&5ess10n?%-${mode}`, // Secret key
   session : 'defaultStore', // defaultStore, mongoStore, redisStore / [Required for Twitter oAuth or sessions local...]
   login : {
     redirect: '/home' // redirect when login success

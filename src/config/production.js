@@ -11,7 +11,7 @@ export default {
     ip: 'localhost',
     port: 8000
   },
-  secret : `s3kr3t_$k3y_&5ess10n?%-${mode}`, // Secret key to Token
+  secret : `s3kr3t_$k3y_&5ess10n?%-${mode}`, // Secret key
   session : 'defaultStore', // defaultStore, mongoStore, redisStore / [Required for Twitter oAuth or sessions local...]
   login : {
     redirect: '/home' // redirect when login success
@@ -44,7 +44,7 @@ export default {
         seeds: [
           {
             model: 'User',
-            seed: 'once' //once - alway - none
+            seed: 'once' //once - alway - never
           }, {
             model: 'Hello',
             seed: 'once'
@@ -67,10 +67,10 @@ export default {
     enabled: true,
     info: {
       title: 'Nodetomic Swagger API',
-      version: '1.9.3',
+      version: '1.9.4',
       description: 'Nodetomic RESTful API with Swagger',
       "contact": {
-        "name": "Nodetomic Developer",
+        "name": "Developer",
         "url": "http://www.example.com",
         "email": "example@example.com"
       },
@@ -113,5 +113,12 @@ export default {
       clientSecret: '',
       callbackURL: '/auth/bitbucket/callback'
     }
-  }
+  },
+  // DEV
+  livereload : { // livereload
+    enabled: false,
+    ip: 'localhost',
+    port: 35729
+  },
+  log : true // Log request in console?
 };
