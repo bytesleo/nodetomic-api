@@ -1,5 +1,5 @@
 /*
-*@Author: Leonardo Rico G
+*@Author: Leonardo Rico Guevara
 *@Github: https://github.com/kevoj
 */
 
@@ -29,13 +29,15 @@ gulp.task('build-babel', function() {
 
 gulp.task('build-replace', function() {
   gulp.src([dist_server + "/config/production.js"]).pipe(rename('index.js')).pipe(gulp.dest(dist_server + '/config'));
+  gulp.src(['api-docs/*']).pipe(gulp.dest(`${dist}/api-docs`));
+  gulp.src(['src/**/*.yaml']).pipe(gulp.dest(dist_server));
   gulp.src([
     dist_server + "/config/production.js",
     dist_server + "/core/dev.js"
   ], {read: false}).pipe(clean({force: true}));
   gulp.src(dist_server + "/core/engine.js").pipe(replace_string("require('./dev').default(app);", '')).pipe(gulp.dest(dist_server + '/core/'));
   gulp.src('package.json').pipe(jsonModify({'key': 'devDependencies', value: {}})).pipe(gulp.dest(dist));
-  gulp.src(['src/views/*']).pipe(gulp.dest(dist_server + '/views'));
+  gulp.src(['src/views/**/*.html']).pipe(gulp.dest(dist_server + '/views'));
   gulp.src(['src/assets/*']).pipe(gulp.dest(dist_server + '/assets'));
   setTimeout(function() {
     console.log(color('Build success!', 'GREEN'));
