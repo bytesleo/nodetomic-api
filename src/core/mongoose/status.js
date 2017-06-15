@@ -27,7 +27,7 @@ export default(mongoose, conf) => {
           case 'alway':
             require(`./seed/${seed.model}`);
             break;
-          case 'none':
+          case 'never':
             console.log('No seeds were sown :)');
             break;
           default:

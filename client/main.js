@@ -5,7 +5,7 @@ new Vue({
     username: '',
     password: '',
     token: '',
-    version: 'v1.9.3'
+    version: 'v1.9.4'
   },
   created: function() {
     this.fetchData()

@@ -44,7 +44,7 @@ export default {
         seeds: [
           {
             model: 'User',
-            seed: 'once' //once - alway - none
+            seed: 'once' //once - alway - never
           }, {
             model: 'Hello',
             seed: 'once'
@@ -67,10 +67,10 @@ export default {
     enabled: true,
     info: {
       title: 'Nodetomic Swagger API',
-      version: '1.9.3',
+      version: '1.9.4',
       description: 'Nodetomic RESTful API with Swagger',
       "contact": {
-        "name": "Nodetomic Developer",
+        "name": "Developer",
         "url": "http://www.example.com",
         "email": "example@example.com"
       },
