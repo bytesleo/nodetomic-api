@@ -1,3 +1,4 @@
+var host = location.origin;
 new Vue({
   el: '#nodetomicApp',
   data: {
@@ -13,7 +14,7 @@ new Vue({
   methods: {
     fetchData: function() {
       var self = this;
-      $.get("http://localhost:8000/api/hello/", function(data) {
+      $.get(host + "/api/hello/", function(data) {
         self.greets = data;
       });
     },
@@ -23,7 +24,7 @@ new Vue({
         username: this.username,
         password: this.password
       }
-      $.post("http://localhost:8000/auth/local", user, function(data) {
+      $.post(host + "/auth/local", user, function(data) {
         if (data.token)
           self.token = data.token;
       });
