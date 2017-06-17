@@ -7,6 +7,7 @@ import babel from 'gulp-babel';
 import rename from 'gulp-rename';
 import clean from 'gulp-rimraf';
 import color from 'gulp-color';
+import minify from 'gulp-minifier';
 import replace_string from 'gulp-replace';
 import runSequence from 'run-sequence';
 import jsonModify from 'gulp-json-modify';
@@ -33,7 +34,7 @@ gulp.task('build-babel', () => {
 
 gulp.task('build-replace', () => {
   gulp.src(["src/config/production.js"]).pipe(babel()).pipe(rename('index.js')).pipe(gulp.dest(`${dist_server}/config`));
-  gulp.src(['src/views/**/*.html']).pipe(gulp.dest(`${dist_server}/views`));
+  gulp.src(['src/views/**/*.{html,css}']).pipe(minify({minify: true, collapseWhitespace: true, conservativeCollapse: true, minifyJS: true, minifyCSS: true})).pipe(gulp.dest(`${dist_server}/views`));
   gulp.src(['src/assets/**/*']).pipe(gulp.dest(`${dist_server}/assets`));
   gulp.src(['src/**/*.yaml']).pipe(gulp.dest(dist_server));
   gulp.src([`api-docs/*`]).pipe(gulp.dest(dist_swagger));

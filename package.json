@@ -63,6 +63,7 @@
     "gulp-clean": "^0.3.2",
     "gulp-color": "0.0.1",
     "gulp-json-modify": "^1.0.2",
+    "gulp-minifier": "^0.2.2",
     "gulp-rename": "^1.2.2",
     "gulp-replace": "^0.5.4",
     "gulp-rimraf": "^0.2.1",
