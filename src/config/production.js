@@ -66,9 +66,9 @@ export default {
   swagger : { // Swagger Config
     enabled: true,
     info: {
-      title: 'Nodetomic Swagger API',
-      version: '1.9.4',
-      description: 'Nodetomic RESTful API with Swagger',
+      title: 'Swagger API',
+      version: '1.9.5',
+      description: 'RESTful API',
       "contact": {
         "name": "Developer",
         "url": "http://www.example.com",
