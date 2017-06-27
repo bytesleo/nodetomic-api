@@ -1,6 +1,8 @@
 // #config development
-import path from 'path';
 const mode = 'development'; // development, production
+const project = 'nodetomic-api';
+
+import path from 'path';
 
 export default {
   mode : mode, // Mode
@@ -11,7 +13,7 @@ export default {
     ip: 'localhost',
     port: 8000
   },
-  secret : `s3kr3t_$k3y_&5ess10n?%-${mode}`, // Secret key
+  secret : `s3kr3t_$k3y_&5ess10n?%-${project}-${mode}`, // Secret key
   session : 'defaultStore', // defaultStore, mongoStore, redisStore / [Required for Twitter oAuth or sessions local...]
   login : {
     redirect: '/home' // redirect when login success
@@ -32,14 +34,9 @@ export default {
   database : { // DataBase
     mongo: { // MongoDb
       db: {
-        uri: `mongodb://localhost:27017/nodetomic-${mode}`, // [format-> mongodb://username:password@host:port/database?options]
+        uri: `mongodb://localhost:27017/${project}-${mode}`, // [format-> mongodb://username:password@host:port/database?options]
         options: {
-          db: {
-            safe: true
-          },
-          server: {
-            auto_reconnect: true
-          }
+          useMongoClient: true
         },
         seeds: [
           {
@@ -68,7 +65,7 @@ export default {
     info: {
       title: 'Swagger API',
       version: '1.9.5',
-      description: 'RESTful API',
+      description: `RESTful API ${project}`,
       "contact": {
         "name": "Developer",
         "url": "http://www.example.com",
