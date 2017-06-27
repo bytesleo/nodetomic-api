@@ -1,15 +1,15 @@
 import colors from 'colors';
 
-export default(mongoose, conf) => {
+export default(db, conf) => {
 
   // When successfully connected
-  mongoose.connection.on('connected', (err) => {
+  db.on('connected', (err) => {
     console.log(`MongoDB-> connected on ${conf.uri}`.bgGreen);
   });
 
-  mongoose.connection.on('open', () => {
+  db.once('open', () => {
     // Seed
-    mongoose.connection.db.listCollections().toArray(function(err, names) {
+    db.db.listCollections().toArray((err, names) => {
       if (err)
         console.log(err);
       conf.seeds.forEach(seed => {
@@ -37,14 +37,14 @@ export default(mongoose, conf) => {
   });
 
   // If the connection throws an error
-  mongoose.connection.on('error', err => {
-    console.log(`MongoDB-> connection error: ${conf.uri} details->${err}`.bgRed);
-    process.exit(-1);
+  db.on('error',err => {
+      console.log(`MongoDB-> connection error: ${conf.uri} details->${err}`.bgRed);
+      process.exit(-1);
   });
 
   // When the connection is disconnected
-  mongoose.connection.on('disconnected', (err) => {
-    console.log(`MongoDB-> disconnected: ${conf.uri}`.bgRed);
+  db.on('disconnected',err => {
+      console.log(`MongoDB-> disconnected: ${conf.uri}`.bgRed);
   });
 
 };
