@@ -36,15 +36,15 @@ export default {
       db: {
         uri: `mongodb://localhost:27017/${project}-${mode}`, // [format-> mongodb://username:password@host:port/database?options]
         options: {
-          useMongoClient: true
+          useMongoClient: false
         },
         seeds: [
           {
             model: 'User',
-            seed: 'once' //once - alway - never
+            seed: 'alway' //once - alway - never
           }, {
             model: 'Hello',
-            seed: 'once'
+            seed: 'alway'
           }
         ]
       }
