@@ -9,95 +9,80 @@
   <meta name="author" content="nodetomic">
   <title>Nodetomic Api</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i" rel="stylesheet">
   <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
 </head>
 
 <body ng-app="angularRestfulAuth">
   <div id="nodetomicApp">
     <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
-      <header class="mdl-layout__header">
-        <div class="mdl-layout__header-row">
-          <span class="mdl-layout-title">Nodetomic Api</span>
-          <div class="mdl-layout-spacer"></div>
-          <nav class="mdl-navigation mdl-layout--large-screen-only">
-            <a class="mdl-navigation__link" href="">Link</a>
-            <a class="mdl-navigation__link" href="">Link</a>
-            <a class="mdl-navigation__link" href="">Link</a>
-            <a class="mdl-navigation__link" href="">Link</a>
-          </nav>
-        </div>
-      </header>
-      <div class="mdl-layout__drawer">
-        <span class="mdl-layout-title">Login</span>
-        <main class="mdl-layout__content imlogin">
-          <div>
-            <b>User:</b> admin <b>Password:</b> 123
-          </div>
-          <div class="mdl-textfield mdl-js-textfield">
-            <input class="mdl-textfield__input" type="text" id="username" v-model="username" />
-            <label class="mdl-textfield__label" for="username">Username</label>
-          </div>
-          <div class="mdl-textfield mdl-js-textfield">
-            <input class="mdl-textfield__input" type="password" v-model="password" id="userpass" />
-            <label class="mdl-textfield__label" for="userpass">Password</label>
-          </div>
-          <div class="mdl-textfield mdl-js-textfield" v-if="token">
-            <b>Token:</b>
-            <textarea rows="9" class="mdl-textfield__input" type="text" v-model="token" id="token"></textarea>
-          </div>
-          <div class="center">
-            <button class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" v-on:click="login">Log in</button>
-            <a class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored github" href="/auth/github">Login with Github</a>
-          </div>
-        </main>
-      </div>
       <main class="mdl-layout__content">
         <div class="page-content">
           <div class="mdl-grid">
-            <div class="mdl-cell mdl-cell--4-col mdl-cell--8-col-tablet"></div>
-            <div class="mdl-cell mdl-cell--4-col mdl-cell--8-col-tablet">
-              <ul class="demo-list-two mdl-list">
-                <li class="mdl-list__item mdl-list__item--two-line" v-for="greet in greets">
-                  <span class="mdl-list__item-primary-content">
-                            <i class="material-icons mdl-list__item-avatar">tag_faces</i>
-                            <span>{{ greet.greet }}</span>
-                  <span class="mdl-list__item-sub-title">{{ greet.language }}</span>
-                  </span>
-                  <span class="mdl-list__item-secondary-content">
-                            <span class="mdl-list__item-secondary-info">Great</span>
-                  <a class="mdl-list__item-secondary-action" href="#"><i class="material-icons">star</i></a>
-                  </span>
-                </li>
-              </ul>
+            <div class="mdl-cell mdl-cell--12-col mdl-cell--12-col-tablet">
+              <div class="typo-styles__demo mdl-typography--display-3">
+                <div class="logo">
+                  <img src="logo.png" />
+                </div>
+                {{project}}
+              </div>
             </div>
-            <div class="mdl-cell mdl-cell--4-col mdl-cell--8-col-tablet"></div>
           </div>
         </div>
-        <div class='center clean-a'>
-          <a href="/api-docs" target="_blank">API-DOCS</a><br/> Nodetomic-api {{version}} by <a href="https://github.com/kevoj" target="_blank">kevoj</a>
+        <div class='center'>
+          <div class="docs">
+            <a href="/api-docs/?version=1" target="_blank">(Docs api/v1)</a>
+            <a href="/api-docs/?version=2" target="_blank">(Docs api/v2)</a>
+          </div>
+          <div class="footer">
+            Nodetomic API <span>{{version}}</span> by
+            <a href="https://github.com/kevoj" target="_blank">kevoj</a>
+          </div>
         </div>
       </main>
     </div>
   </div>
   <style>
-    .imlogin {
-      padding: 20px;
+    html,
+    body {
+      font-family: 'Open Sans', sans-serif;
+      background: #efefef;
+    }
+
+    .typo-styles__demo {
+      margin-top: 20vh;
+      text-align: center;
+      color: #555;
     }
 
     .center {
       text-align: center;
     }
 
-    .clean-a a {
-      text-decoration: none;
-    }
-    #token{
-      font-size: 12px;
-      padding: 5px;
+    .logo{
+      text-align: center;
+      margin-bottom: 20px;
     }
 
-    .github {
-      background-color: #ff5722 !important;
+    .logo img{
+      width: 100px;
+    }
+
+    .docs {
+      margin-bottom: 20px;
+    }
+    .docs a{
+      margin: 0 5px;
+      font-size: 20px;
+      text-decoration: none;
+    }
+
+    .footer {
+      color: #555;
+    }
+    .footer span{
+
+      color : rgb(255,64,129);
     }
   </style>
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js">
