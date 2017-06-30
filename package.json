@@ -1,6 +1,6 @@
 {
   "name": "nodetomic-api",
-  "version": "1.9.5",
+  "version": "1.9.13",
   "description": "Simple RESTful server designed for horizontal scalability, based on [MERN] MongoDb, Express, Redis, NodeJS.",
   "main": "src/app.js",
   "repository": {
