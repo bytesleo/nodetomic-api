@@ -1,46 +1,53 @@
 import swaggerJSDoc from 'swagger-jsdoc';
 import config from '../config';
+import fs from 'fs';
 
 export default(app) => {
 
   if (config.swagger.enabled) {
 
-    // swagger definition
-    let swaggerDefinition = {
-      info: config.swagger.info,
-      basePath: '/',
-      schemes: [
-        'http', 'https'
-      ],
-      securityDefinitions: {
-        Bearer: {
-          type: 'apiKey',
-          name: 'Authorization', in: 'header'
+    fs.readdirSync(`${config.base}/api`).forEach(version => {
+
+      let options = {
+        // import swaggerDefinitions
+        swaggerDefinition: {
+          info: {
+            version : version,
+            title : config.swagger.title,
+            description : config.swagger.description,
+            contact : config.swagger.contact,
+            license : config.swagger.license,
+          },
+          // basePath: `/api/${version}`,
+          basePath: `/`,
+          schemes: [
+            'http', 'https'
+          ],
+          securityDefinitions: {
+            Bearer: {
+              type: 'apiKey',
+              name: 'Authorization', in: 'header'
+            },
+            "iss_a": {
+              "type": "oauth2",
+              "authorizationUrl": `/auth/github`,
+              "flow": "authorization_code",
+              // "tokenUrl": "https://xxxxxxxxxxxx.xxx.co...",
+            }
+          }
         },
-        "iss_a": {
-          "type": "oauth2",
-          "authorizationUrl": `/auth/github`,
-          "flow": "authorization_code",
-          // "tokenUrl": "https://xxxxxxxxxxxx.xxx.co...",
-        }
-      }
-    };
-    
-    // options for the swagger docs
-    let options = {
-      // import swaggerDefinitions
-      swaggerDefinition: swaggerDefinition,
-      // path to the API docs
-      apis: [`${config.base}/**/*.yaml`]
-    };
+        // path to the API docs
+        apis:  [`${config.base}/api/${version}/**/*.yaml`,`${config.base}/lib/**/*.yaml`]
+      };
 
-    // initialize swagger-jsdoc
-    let swaggerSpec = swaggerJSDoc(options);
+      let swaggerSpec = swaggerJSDoc(options);
 
-    // serve swagger
-    app.get('/swagger.json', function(req, res) {
-      res.json(swaggerSpec);
+      app.get(`/${version}/swagger.json`, function(req, res) {
+        res.json(swaggerSpec);
+      });
+
     });
+
   }
 
   // If you want use Swagger into .js = ${config.base}/**/*.js
