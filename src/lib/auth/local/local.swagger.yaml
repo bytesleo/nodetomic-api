@@ -11,7 +11,7 @@
     parameters:
       - name: "username"
         in: "query"
-        description: "The user name for login"
+        description: "The username for login"
         required: true
         type: "string"
       - name: "password"
@@ -21,6 +21,6 @@
         type: "string"
     responses:
       200:
-        description: "An array of User"
+        description: "successful operation"
       400:
         description: "Login Invalid"
