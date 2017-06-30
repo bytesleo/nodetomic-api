@@ -69,7 +69,7 @@ definitions:
   put:
     tags:
       - "User"
-    summary: "Update user [Rol admin]"
+    summary: "Update current user [Signed]"
     description: "update a single User"
     produces:
       - "application/json"
