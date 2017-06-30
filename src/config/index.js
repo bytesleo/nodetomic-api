@@ -77,7 +77,7 @@ export default {
       },
       "license": {
         "name": "MIT",
-        "url": "https://opensource.org/licenses/MIT"
+        "url": "https://github.com/kevoj/nodetomic-api/blob/master/LICENSE"
       }
     }
   },
