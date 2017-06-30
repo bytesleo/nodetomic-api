@@ -10,6 +10,7 @@ definitions:
   get:
     tags:
       - "Hello"
+    summary: "Get list Hello's"
     description: "Returns all hello"
     produces:
       - "application/json"
@@ -26,6 +27,7 @@ definitions:
   post:
     tags:
       - "Hello"
+    summary: "Create Hello"
     description: "Creates a new Hello"
     produces:
       - "application/json"
@@ -44,6 +46,7 @@ definitions:
   get:
     tags:
       - "Hello"
+    summary: "Get Hello by Id"
     description: "Returns a single Hello"
     produces:
       - "application/json"
@@ -62,6 +65,7 @@ definitions:
   put:
     tags:
       - "Hello"
+    summary: "Update Hello by Id"
     description: "Updates a single Hello"
     produces:
       - "application/json"
@@ -84,6 +88,7 @@ definitions:
   delete:
     tags:
       - "Hello"
+    summary: "Delete Hello by Id"
     description: "Deletes a single Hello"
     produces:
       - "application/json"
