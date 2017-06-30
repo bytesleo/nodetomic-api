@@ -22,10 +22,10 @@ export default(db, conf) => {
               }
             });
             if (!found)
-              require(`./seed/${seed.model}`);
+              require(`../${seed.path}`);
             break;
           case 'alway':
-            require(`./seed/${seed.model}`);
+            require(`../${seed.path}`);
             break;
           case 'never':
             console.log('No seeds were sown :)');
