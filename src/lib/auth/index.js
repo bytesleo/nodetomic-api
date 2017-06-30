@@ -1,6 +1,6 @@
 import express from 'express';
 import passport from 'passport';
-import User from '../../api/user/user.model';
+import User from '../../api/v1/user/user.model';
 import config from '../../config';
 
 //Call back login Social return info in req.user
