@@ -10,16 +10,22 @@ definitions:
   post:
     tags:
       - "Login"
+    summary: "Logs user into the system"
     description: "Login user"
+    operationId: "loginUser"
     produces:
       - "application/json"
     parameters:
-      - in: "body"
-        name: "body"
-        description: "Login user"
+      - name: "username"
+        in: "query"
+        description: "The user name for login"
         required: true
-        schema:
-          $ref: "#/definitions/Login"
+        type: "string"
+      - name: "password"
+        in: "query"
+        description: "The password for login in clear text"
+        required: true
+        type: "string"
     responses:
       200:
         description: "An array of User"
