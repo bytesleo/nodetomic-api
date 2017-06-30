@@ -1,4 +1,4 @@
-// #config production
+// #config development
 const mode = 'production'; // development, production
 const project = 'nodetomic-api';
 
@@ -22,7 +22,11 @@ export default {
   roles : [
     {
       rol: 'user',
-      time: 60 // minutes
+      time: 120 // 120 minutes
+    },
+    {
+      rol: 'admin',
+      time: 1440 // 24 hours
     }
   ],
   router : {
@@ -64,7 +68,7 @@ export default {
     enabled: true,
     info: {
       title: 'Swagger API',
-      version: '1.9.5',
+      version: '1.9.13',
       description: `RESTful API ${project}`,
       "contact": {
         "name": "Developer",
