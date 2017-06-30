@@ -1,10 +1,3 @@
-definitions:
-  Login:
-    properties:
-      username:
-        type: "string"
-      password:
-        type: "string"
 /auth/local:
   # Passport
   post:
