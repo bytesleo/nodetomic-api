@@ -1,0 +1,103 @@
+definitions:
+  Hello:
+    properties:
+      greet:
+        type: "string"
+      language:
+        type: "string"
+/api/v2/hello:
+  # list
+  get:
+    tags:
+      - "Hello"
+    summary: "Get list Hello's"
+    description: "Returns all hello"
+    produces:
+      - "application/json"
+    responses:
+      200:
+        description: "An array of Hello"
+        schema:
+          type: "array"
+          items:
+            $ref: "#/definitions/Hello"
+      500:
+        description: "Invalid status value"
+  # create
+  post:
+    tags:
+      - "Hello"
+    summary: "Create Hello"
+    description: "Creates a new Hello"
+    produces:
+      - "application/json"
+    parameters:
+      - in: "body"
+        name: "body"
+        description: "Hello's greet"
+        required: true
+        schema:
+          $ref: "#/definitions/Hello"
+    responses:
+      200:
+        description: "object Hello created"
+/api/v2/hello/{id}:
+  # read
+  get:
+    tags:
+      - "Hello"
+    summary: "Get Hello by Id"
+    description: "Returns a single Hello"
+    produces:
+      - "application/json"
+    parameters:
+      - name: "id"
+        description: "Hello's id"
+        in: "path"
+        required: true
+        type: "string"
+    responses:
+      200:
+        description: "A single Hello"
+        schema:
+          $ref: "#/definitions/Hello"
+  # update
+  put:
+    tags:
+      - "Hello"
+    summary: "Update Hello by Id"
+    description: "Updates a single Hello"
+    produces:
+      - "application/json"
+    parameters:
+      - name: "id"
+        description: "Hello's id"
+        in: "path"
+        required: true
+        type: "string"
+      - in: "body"
+        name: "body"
+        description: "Fields for the Hello resource"
+        schema:
+          type: "array"
+          $ref: "#/definitions/Hello"
+    responses:
+      200:
+        description: "object Hello updated"
+  # remove
+  delete:
+    tags:
+      - "Hello"
+    summary: "Delete Hello by Id"
+    description: "Deletes a single Hello"
+    produces:
+      - "application/json"
+    parameters:
+      - name: "id"
+        description: "Hello's id"
+        in: "path"
+        required: true
+        type: "string"
+    responses:
+      200:
+        description: "object deleted"
