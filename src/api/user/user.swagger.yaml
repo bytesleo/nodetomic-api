@@ -30,6 +30,7 @@ definitions:
   get:
     tags:
       - "User"
+    summary: "Get list users [Rol admin]"
     description: "Returns list of Users"
     produces:
       - "application/json"
@@ -48,6 +49,7 @@ definitions:
   post:
     tags:
       - "User"
+    summary: "Create user"
     description: "Creates a new User"
     produces:
       - "application/json"
@@ -65,6 +67,7 @@ definitions:
   put:
     tags:
       - "User"
+    summary: "Update user [Rol admin]"
     description: "update a single User"
     produces:
       - "application/json"
@@ -85,6 +88,7 @@ definitions:
   get:
     tags:
       - "User"
+    summary: "Get user by id [Signed]"
     description: "Returns a single User"
     produces:
       - "application/json"
@@ -105,6 +109,7 @@ definitions:
   delete:
     tags:
       - "User"
+    summary: "Delete user by id [Rol admin]"
     description: "Deletes a single User"
     produces:
       - "application/json"
@@ -123,6 +128,7 @@ definitions:
   put:
     tags:
       - "User"
+    summary: "Update user by id [Rol admin]"
     description: "update a single User"
     produces:
       - "application/json"
@@ -148,6 +154,7 @@ definitions:
   get:
     tags:
       - "User"
+    summary: "Get current user [Signed]"
     description: "Returns session User"
     produces:
       - "application/json"
