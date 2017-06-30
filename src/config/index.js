@@ -7,7 +7,7 @@ import path from 'path';
 export default {
   mode : mode, // Mode
   root : path.normalize(`${__dirname}/../../`), // Path Root
-  base : path.normalize(`${__dirname}/..`), // Path Root
+  base : path.normalize(`${__dirname}/..`), // Path Base
   client : 'client', // Folder Client
   server : { // Server listen
     ip: 'localhost',
@@ -23,8 +23,7 @@ export default {
     {
       rol: 'user',
       time: 120 // 120 minutes
-    },
-    {
+    }, {
       rol: 'admin',
       time: 1440 // 24 hours
     }
@@ -45,9 +44,11 @@ export default {
         seeds: [
           {
             model: 'User',
+            path: '../api/v1/user/user.seed',
             seed: 'alway' //once - alway - never
           }, {
             model: 'Hello',
+            path: '../api/v2/hello/hello.seed',
             seed: 'alway'
           }
         ]
@@ -66,19 +67,16 @@ export default {
   },
   swagger : { // Swagger Config
     enabled: true,
-    info: {
-      title: 'Swagger API',
-      version: '1.9.13',
-      description: `RESTful API ${project}`,
-      "contact": {
-        "name": "Developer",
-        "url": "http://www.example.com",
-        "email": "example@example.com"
-      },
-      "license": {
-        "name": "MIT",
-        "url": "https://github.com/kevoj/nodetomic-api/blob/master/LICENSE"
-      }
+    title: `${project}`,
+    description: `RESTful API ${project}`,
+    "contact": {
+      "name": "Developer",
+      "url": "http://www.example.com",
+      "email": "example@example.com"
+    },
+    "license": {
+      "name": "MIT",
+      "url": "https://github.com/kevoj/nodetomic-api/blob/master/LICENSE"
     }
   },
   redis : { // Redis
