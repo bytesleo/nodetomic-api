@@ -1,7 +1,3 @@
-/*
-*@Author: Leonardo Rico Guevara
-*@Github: https://github.com/kevoj
-*/
 import gulp from 'gulp';
 import babel from 'gulp-babel';
 import rename from 'gulp-rename';
@@ -11,6 +7,7 @@ import minify from 'gulp-minifier';
 import replace_string from 'gulp-replace';
 import runSequence from 'run-sequence';
 import jsonModify from 'gulp-json-modify';
+import fs from 'fs';
 import config from './src/config';
 
 const dist = './dist';
@@ -40,5 +37,8 @@ gulp.task('build-replace', () => {
   gulp.src([`api-docs/*`]).pipe(gulp.dest(dist_swagger));
   gulp.src(`${dist_server}/core/engine.js`).pipe(replace_string("require('./dev').default(app);", '')).pipe(gulp.dest(`${dist_server}/core`));
   gulp.src('package.json').pipe(jsonModify({'key': 'devDependencies', value: {}})).pipe(gulp.dest(dist));
+  if (!fs.existsSync(`${dist}/client`)) {
+    gulp.src(['client']).pipe(gulp.dest(dist));
+  }
   setTimeout(() => console.log(color('Build success!', 'GREEN')), 500);
 });
