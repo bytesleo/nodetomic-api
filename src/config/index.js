@@ -44,11 +44,11 @@ export default {
         seeds: [
           {
             model: 'User',
-            path: '../api/v1/user/user.seed',
+            path: '/api/v1/user/user.seed',
             seed: 'alway' //once - alway - never
           }, {
             model: 'Hello',
-            path: '../api/v2/hello/hello.seed',
+            path: '/api/v2/hello/hello.seed',
             seed: 'alway'
           }
         ]
