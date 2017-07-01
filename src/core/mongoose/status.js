@@ -1,3 +1,4 @@
+import config from '../../config';
 import colors from 'colors';
 
 export default(db, conf) => {
@@ -22,10 +23,10 @@ export default(db, conf) => {
               }
             });
             if (!found)
-              require(`../${seed.path}`);
+              require(`${config.base}${seed.path}`);
             break;
           case 'alway':
-            require(`../${seed.path}`);
+            require(`${config.base}${seed.path}`);
             break;
           case 'never':
             console.log('No seeds were sown :)');
