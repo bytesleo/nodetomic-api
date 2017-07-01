@@ -8,4 +8,4 @@ mongoose.Promise = require('bluebird');
 mongoose.connect(config.database.mongo.db.uri, config.database.mongo.db.options);
 
 // Events
-require('./status').default(mongoose.connection, config.database.mongo.db)
+require('./status').default(mongoose.connection, config);
