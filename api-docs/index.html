@@ -75,7 +75,7 @@ window.onload = function() {
   //Nodetomic
   var url = new URL(location.href);
   var v = url.searchParams.get("version");
-  var path = location.origin + '/v' + v + '/swagger.json';
+  var path = location.origin + '/' + v + '/swagger.json';
 
   // Build a system
   const ui = SwaggerUIBundle({
