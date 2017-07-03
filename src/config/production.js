@@ -15,9 +15,6 @@ export default {
   },
   secret : `s3kr3t_$k3y_&5ess10n?%-${project}-${mode}`, // Secret key
   session : 'defaultStore', // defaultStore, mongoStore, redisStore / [Required for Twitter oAuth or sessions local...]
-  login : {
-    redirect: '/home' // redirect when login success
-  },
   // Roles
   roles : [
     {
