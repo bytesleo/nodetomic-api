@@ -34,11 +34,11 @@ export function start(req, res, type) {
 
         switch (type) {
           case 'local':
-            res.json({token: token.value, redirect: config.login.redirect});
+            res.json({token: token.value});
             break;
           case 'social':
             res.cookie('token', JSON.stringify(token.value));
-            res.redirect(config.login.redirect);
+            res.redirect('/');
             break;
         }
 
