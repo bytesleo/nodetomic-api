@@ -5,7 +5,7 @@ import * as auth from '../service';
 const router = express.Router();
 
 router.get('/', passport.authenticate('google')).get('/callback', passport.authenticate('google', {
-  failureRedirect: '/signup',
+  failureRedirect: '/login',
   session: false
 }), (req, res) => {
   auth.start(req, res, 'social');
