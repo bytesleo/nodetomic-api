@@ -45,7 +45,7 @@ export default {
             seed: 'alway' //once - alway - never
           }, {
             model: 'Hello',
-            path: '/api/v2/hello/hello.seed',
+            path: '/api/v1.1/hello/hello.seed',
             seed: 'alway'
           }
         ]
