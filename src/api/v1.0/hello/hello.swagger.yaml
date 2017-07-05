@@ -5,7 +5,7 @@ definitions:
         type: "string"
       language:
         type: "string"
-/api/v1.1/hello:
+/api/v1.0/hello:
   # list
   get:
     tags:
@@ -41,7 +41,7 @@ definitions:
     responses:
       200:
         description: "object Hello created"
-/api/v1.1/hello/{id}:
+/api/v1.0/hello/{id}:
   # read
   get:
     tags:

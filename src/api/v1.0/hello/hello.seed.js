@@ -23,8 +23,6 @@ const data = [
   }
 ];
 
-Hello.find({}).remove(() => {
-  Hello.create(data, () => {
-    console.log(`Seed: Published Hello`.bgBlue);
-  });
+Hello.create(data, () => {
+  console.log(`Seed: Published Hello`.bgBlue);
 });
