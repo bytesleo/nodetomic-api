@@ -9,19 +9,17 @@ const data = [
     provider: 'local',
     name: 'Admin',
     lastname: 'Main',
-    roles:['admin']
+    roles: ['admin']
   }, {
     username: 'user',
     password: '123',
     email: 'anthony@user.com',
     name: 'Anthony',
     lastname: 'Kiedis',
-    roles:['user']
+    roles: ['user']
   }
 ];
 
-User.find({}).remove(() => {
-   User.create(data, (err) => {
-     console.log(`Seed: Published User`.bgBlue);
-   });
+User.create(data, (err) => {
+  console.log(`Seed: Published User`.bgBlue);
 });
