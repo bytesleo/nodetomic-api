@@ -1,29 +1,32 @@
-export default(db,config) => {
+export default(connection, config) => {
 
-  db.db.listCollections().toArray((err, names) => {
-    if (err)
+  connection.db.listCollections().toArray((err, collections) => {
+    if (err) {
       console.log(err);
-    config.database.mongo.db.seeds.forEach(seed => {
-      switch (seed.seed) {
-        case 'once':
-          let found;
-          names.forEach(elem => {
-            if (`${seed.model.toLowerCase()}s` == elem.name) {
-              found = true;
-            }
-          });
-          if (!found)
+    } else {
+      config.database.mongo.db.seeds.forEach(seed => {
+        let model = seed.path.split('/').reverse()[0].match(/\S+(?=.seed)/g)[0] + 's';
+        switch (seed.plant) {
+          case 'once':
+            connection.db.collection(model).count((err, count) => {
+              if (count <= 0) {
+                connection.db.dropCollection(model, (err, res) => {
+                  require(`${config.base}${seed.path}`);
+                });
+              }
+            });
+            break;
+          case 'alway':
+            connection.db.dropCollection(model);
             require(`${config.base}${seed.path}`);
-          break;
-        case 'alway':
-          require(`${config.base}${seed.path}`);
-          break;
-        case 'never':
-          console.log('No seeds were sown :)');
-          break;
-        default:
-      }
-    });
+            break;
+          case 'never':
+            console.log('No seeds were sown :)');
+            break;
+          default:
+        }
+      });
+    }
   });
 
 }
