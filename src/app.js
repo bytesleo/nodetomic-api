@@ -12,7 +12,7 @@ require('./core/swagger').default(app);
 // Paths
 require('./core/path').default(app);
 // MongoDB
-require('./core/mongoose/db');
+require('./core/mongoose');
 // Create HTTP server.
 const server = http.createServer(app);
 // Listen Server
