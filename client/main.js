@@ -3,6 +3,6 @@ new Vue({
   el: '#nodetomicApp',
   data: {
     project: 'API',
-    version: 'v1.9.71'
+    version: 'v1.9.73'
   }
 });
