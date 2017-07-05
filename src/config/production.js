@@ -1,6 +1,6 @@
-// #config production
+//#production
 const mode = 'production'; // development, production
-const project = 'nodetomic-api';
+const project = 'nodetomic-api'; //DB example name: nodetomic-api-development / swagger title: nodetomic-api / secret: s3kr3t_$k3y_&5ess10n?%-nodetomic-api-development
 
 import path from 'path';
 
@@ -40,13 +40,11 @@ export default {
         },
         seeds: [
           {
-            model: 'User',
             path: '/api/v1/user/user.seed',
-            seed: 'alway' //once - alway - never
+            plant: 'once' //once - alway - never
           }, {
-            model: 'Hello',
             path: '/api/v1.1/hello/hello.seed',
-            seed: 'alway'
+            plant: 'once' //once - alway - never
           }
         ]
       }
