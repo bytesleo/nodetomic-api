@@ -10,15 +10,16 @@ export default(connection, config) => {
           case 'once':
             connection.db.collection(model).count((err, count) => {
               if (count <= 0) {
-                connection.db.dropCollection(model, (err, res) => {
+                connection.db.dropCollection(model, (err, result) => {
                   require(`${config.base}${seed.path}`);
                 });
               }
             });
             break;
           case 'alway':
-            connection.db.dropCollection(model);
-            require(`${config.base}${seed.path}`);
+            connection.db.dropCollection(model, (err, result) => {
+              require(`${config.base}${seed.path}`);
+            });
             break;
           case 'never':
             console.log('No seeds were sown :)');
