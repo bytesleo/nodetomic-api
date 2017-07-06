@@ -43,7 +43,7 @@ export default {
             path: '/api/v1/user/user.seed',
             plant: 'once' //once - alway - never
           }, {
-            path: '/api/v1.1/hello/hello.seed',
+            path: '/api/v1.x/hello/hello.seed',
             plant: 'once' //once - alway - never
           }
         ]
