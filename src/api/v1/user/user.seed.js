@@ -21,5 +21,5 @@ const data = [
 ];
 
 User.create(data, (err) => {
-  console.log(chalk.cyanBright(`Seed-> Published User!`));
+  console.log(chalk.cyanBright(`Seed-> Published User's!`));
 });
