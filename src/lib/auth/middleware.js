@@ -14,7 +14,7 @@ export function isAuthenticated(rolesRequired) {
       if (token !== undefined) {
         req.headers.authorization = `Bearer ${token}`;
       } else {
-        return res.status(403).json({error:'Unauthorized: Not Token provided'});
+        return res.status(401).json({error:'Unauthorized: Not Token provided'});
       }
 
       Token.extract(token).then(decode => {
