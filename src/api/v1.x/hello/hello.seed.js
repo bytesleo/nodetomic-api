@@ -24,5 +24,5 @@ const data = [
 ];
 
 Hello.create(data, () => {
-  console.log(chalk.cyanBright(`Seed-> Published Hello!`));
+  console.log(chalk.cyanBright(`Seed-> Published Hello's!`));
 });
