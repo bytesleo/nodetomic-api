@@ -1,3 +1,5 @@
+import chalk from 'chalk';
+
 export default(connection, config) => {
 
   connection.db.listCollections().toArray((err, collections) => {
@@ -11,6 +13,7 @@ export default(connection, config) => {
             connection.db.collection(model).count((err, count) => {
               if (count <= 0) {
                 connection.db.dropCollection(model, (err, result) => {
+                  console.log(chalk.cyan(`Seed-> Sowing seed ${model}...`));
                   require(`${config.base}${seed.path}`);
                 });
               }
@@ -18,11 +21,12 @@ export default(connection, config) => {
             break;
           case 'alway':
             connection.db.dropCollection(model, (err, result) => {
+              console.log(chalk.cyan(`Seed-> Sowing seed ${model}...`));
               require(`${config.base}${seed.path}`);
             });
             break;
           case 'never':
-            console.log('No seeds were sown :)');
+            //console.log(chalk.magentaBright(`Seed-> ${model} never`));
             break;
           default:
         }
