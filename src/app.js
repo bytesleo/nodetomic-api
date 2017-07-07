@@ -1,6 +1,6 @@
 import express from 'express';
 import http from 'http';
-import colors from 'colors';
+import chalk from 'chalk';
 import config from './config';
 const app = express();
 // Core
@@ -18,5 +18,5 @@ const server = http.createServer(app);
 // Listen Server
 server.listen(config.server.port, config.server.ip, () => {
   process.env.NODE_ENV = config.mode;
-  console.log(`Server listening on http://${config.server.ip}:${config.server.port} in mode [${config.mode}]`.bgGreen);
+  console.log(chalk.greenBright(`----------\nServer-> listening on http://${config.server.ip}:${config.server.port} in mode [${config.mode}]\n----------`));
 });
