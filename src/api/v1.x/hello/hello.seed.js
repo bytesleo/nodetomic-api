@@ -1,5 +1,5 @@
-import colors from 'colors';
 import Hello from './hello.model';
+import chalk from 'chalk';
 
 const data = [
   {
@@ -24,5 +24,5 @@ const data = [
 ];
 
 Hello.create(data, () => {
-  console.log(`Seed: Published Hello`.bgBlue);
+  console.log(chalk.cyanBright(`Seed-> Published Hello!`));
 });
