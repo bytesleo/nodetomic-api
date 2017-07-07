@@ -22,7 +22,7 @@ definitions:
           items:
             $ref: "#/definitions/Hello"
       500:
-        description: "Invalid status value"
+        description: "Error"
   # create
   post:
     tags:
@@ -41,6 +41,8 @@ definitions:
     responses:
       200:
         description: "object Hello created"
+      500:
+        description: "Error"
 /api/v1.x/hello/{id}:
   # read
   get:
@@ -61,6 +63,8 @@ definitions:
         description: "A single Hello"
         schema:
           $ref: "#/definitions/Hello"
+      500:
+        description: "Error"
   # update
   put:
     tags:
@@ -84,6 +88,8 @@ definitions:
     responses:
       200:
         description: "object Hello updated"
+      500:
+        description: "Error"
   # remove
   delete:
     tags:
@@ -101,3 +107,5 @@ definitions:
     responses:
       200:
         description: "object deleted"
+      500:
+        description: "Error"
