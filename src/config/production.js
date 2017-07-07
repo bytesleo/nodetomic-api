@@ -1,20 +1,21 @@
-//#production
-const mode = 'production'; // development, production
-const project = 'nodetomic-api'; //DB example name: nodetomic-api-development / swagger title: nodetomic-api / secret: s3kr3t_$k3y_&5ess10n?%-nodetomic-api-development
-
+//-------------production-----------------
 import path from 'path';
+const mode = 'production'; // development or production
+const project = 'nodetomic-api'; //DB example name: nodetomic-api-development / swagger title: nodetomic-api / secret: s3kr3t_$k3y_&5ess10n?%-nodetomic-api-development
+const pathRoot = path.normalize(`${__dirname}/../..`);
+const pathBase = path.normalize(`${__dirname}/..`);
 
 export default {
   mode : mode, // Mode
-  root : path.normalize(`${__dirname}/../../`), // Path Root
-  base : path.normalize(`${__dirname}/..`), // Path Base
-  client : 'client', // Folder Client
+  root : pathRoot, // Path Root
+  base : pathBase, // Path Base
+  client : `${pathRoot}/client`, // Path Client
   server : { // Server listen
     ip: 'localhost',
     port: 8000
   },
   secret : `s3kr3t_$k3y_&5ess10n?%-${project}-${mode}`, // Secret key
-  session : 'defaultStore', // defaultStore, mongoStore, redisStore / [Required for Twitter oAuth or sessions local...]
+  session : 'defaultStore', // defaultStore, mongoStore, redisStore / [Required for Twitter oAuth or sessions local (no redis)...]
   // Roles
   roles : [
     {
@@ -82,27 +83,35 @@ export default {
     }
   },
   oAuth : { // oAuth
+    local:{
+      enabled: true
+    },
     facebook: {
+      enabled: false,
       clientID: '',
       clientSecret: '',
       callbackURL: '/auth/facebook/callback'
     },
     twitter: {
+      enabled: false,
       clientID: '',
       clientSecret: '',
       callbackURL: '/auth/twitter/callback'
     },
     google: {
+      enabled: false,
       clientID: '',
       clientSecret: '',
       callbackURL: '/auth/google/callback'
     },
     github: {
-      clientID: '52be92c9a41f77a959eb',
-      clientSecret: '76c9bb03c689d098506822fa80dba372a1fe29c8',
+      enabled: false,
+      clientID: '',
+      clientSecret: '',
       callbackURL: '/auth/github/callback'
     },
     bitbucket: {
+      enabled: false,
       clientID: '',
       clientSecret: '',
       callbackURL: '/auth/bitbucket/callback'
