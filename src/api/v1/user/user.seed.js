@@ -1,5 +1,5 @@
-import colors from 'colors';
 import User from './user.model';
+import chalk from 'chalk';
 
 const data = [
   {
@@ -21,5 +21,5 @@ const data = [
 ];
 
 User.create(data, (err) => {
-  console.log(`Seed: Published User`.bgBlue);
+  console.log(chalk.cyanBright(`Seed-> Published User!`));
 });
