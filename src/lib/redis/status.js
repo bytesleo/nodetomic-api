@@ -1,13 +1,13 @@
-import colors from 'colors';
+import chalk from 'chalk';
 
 export default(db, uri) => {
 
   db.on("connect", () => {
-    console.log(`Redis-> connected on ${uri}`.bgGreen);
+    console.log(chalk.greenBright(`----------\nRedis-> connected on ${uri}\n----------`));
   });
 
   db.on("error", err => {
-    console.log(`Redis-> connection error: ${err}`.bgRed);
+    console.log(chalk.redBright(`Redis-> connection error: ${err}`));
     process.exit(-1);
   });
 
