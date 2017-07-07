@@ -24,3 +24,5 @@
         description: "successful operation"
       400:
         description: "Login Invalid"
+      500:
+        description: "Error"
