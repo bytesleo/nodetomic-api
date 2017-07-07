@@ -12,9 +12,9 @@ export default(app) => {
   });
 
   // Point static path to client
-  if (fs.existsSync(`${config.root}/${config.client}`)) {
-    app.use(express.static(`${config.root}/${config.client}`));
-    app.use(favicon(path.join(config.root, config.client, 'favicon.ico')));
+  if (fs.existsSync(config.client)) {
+    app.use(express.static(config.client));
+    app.use(favicon(path.join(config.client, 'favicon.ico')));
   }
 
   // Paths specials from client
@@ -25,12 +25,12 @@ export default(app) => {
 
   // Folder client
   app.get('/*', (req, res) => {
-    res.sendFile(`${config.root}/${config.client}/index.html`);
+    res.sendFile(`${config.client}/index.html`);
   });
 
   // Other folder client
   // app.get('/:url(admin)/*', (req, res) => {
-  //     res.sendFile(`${config.root}/${config.clientAdmin}/example.html`);
+  //     res.sendFile(`${config.clientAdmin}/index.html`);
   // });
 
 }
