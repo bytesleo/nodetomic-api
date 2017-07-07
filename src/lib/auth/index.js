@@ -13,22 +13,32 @@ passport.deserializeUser((user, done) => {
   done(null, user);
 });
 
-//initialize passport
-require('./local/local.passport').setup(User, config);
-require('./github/github.passport').setup(User, config);
-// require('./twitter/twitter.passport').setup(User, config);
-// require('./facebook/facebook.passport').setup(User, config);
-// require('./google/google.passport').setup(User, config);
-// require('./bitbucket/bitbucket.passport').setup(User, config);
-
-//Routers
 const router = express.Router();
 
-router.use('/local', require('./local').default);
-router.use('/github', require('./github').default);
-// router.use('/twitter', require('./twitter').default);
-// router.use('/facebook', require('./facebook').default);
-// router.use('/google', require('./google').default);
-// router.use('/bitbucket', require('./bitbucket').default);
+//Passport
+if (config.oAuth.local.enabled) {
+  require('./local/local.passport').setup(User, config);
+  router.use('/local', require('./local').default);
+}
+if (config.oAuth.github.enabled) {
+  require('./github/github.passport').setup(User, config);
+  router.use('/github', require('./github').default);
+}
+if (config.oAuth.twitter.enabled) {
+  require('./twitter/twitter.passport').setup(User, config);
+  router.use('/twitter', require('./twitter').default);
+}
+if (config.oAuth.facebook.enabled) {
+  require('./facebook/facebook.passport').setup(User, config);
+  router.use('/facebook', require('./facebook').default);
+}
+if (config.oAuth.google.enabled) {
+  require('./google/google.passport').setup(User, config);
+  router.use('/google', require('./google').default);
+}
+if (config.oAuth.bitbucket.enabled) {
+  require('./bitbucket/bitbucket.passport').setup(User, config);
+  router.use('/bitbucket', require('./bitbucket').default);
+}
 
 export default router;
