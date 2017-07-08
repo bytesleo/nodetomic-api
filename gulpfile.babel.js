@@ -2,11 +2,11 @@ import gulp from 'gulp';
 import babel from 'gulp-babel';
 import rename from 'gulp-rename';
 import clean from 'gulp-rimraf';
-import color from 'gulp-color';
+import chalk from 'chalk';
 import minify from 'gulp-minifier';
 import replace_string from 'gulp-replace';
 import runSequence from 'run-sequence';
-import jsonModify from 'gulp-json-modify';
+import jeditor from "gulp-json-editor";
 import fs from 'fs';
 import config from './src/config';
 
@@ -14,6 +14,7 @@ const dist = './dist';
 const dist_server = `${dist}/server`;
 const dist_swagger = `${dist}/api-docs`;
 const dist_package = `${dist}/package.json`;
+const dist_client = `${dist}/client`;
 
 gulp.task('build', () => {
   runSequence('build-clean', 'build-babel', 'build-replace');
@@ -36,9 +37,16 @@ gulp.task('build-replace', () => {
   gulp.src(['src/**/*.yaml']).pipe(gulp.dest(dist_server));
   gulp.src([`api-docs/*`]).pipe(gulp.dest(dist_swagger));
   gulp.src(`${dist_server}/core/engine.js`).pipe(replace_string("require('./dev').default(app);", '')).pipe(gulp.dest(`${dist_server}/core`));
-  gulp.src('package.json').pipe(jsonModify({'key': 'devDependencies', value: {}})).pipe(gulp.dest(dist));
+  gulp.src("package.json").pipe(jeditor((json) => {
+    delete json.devDependencies;
+    json.scripts = {
+      start: `node server/app.js`
+    };
+    return json;
+  })).pipe(gulp.dest(dist));
+
   if (!fs.existsSync(`${dist}/client`)) {
-    gulp.src(['client']).pipe(gulp.dest(dist));
+    gulp.src(['client/*']).pipe(gulp.dest(dist_client));
   }
-  setTimeout(() => console.log(color('Build success!', 'GREEN')), 500);
+  setTimeout(() => console.log(chalk.greenBright('\n---------\nBuild success!\n---------\n')), 500);
 });
