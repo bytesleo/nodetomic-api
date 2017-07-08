@@ -1,4 +1,5 @@
-# Nodetomic-api [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Dependency Status][daviddm-image]][daviddm-url]  [![Dev-Dependency Status]][daviddm-url-dev]
+# Nodetomic-api [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url]
+[![dependencies Status](https://david-dm.org/kevoj/nodetomic-api/status.svg)](https://david-dm.org/kevoj/nodetomic-api) [![devDependencies Status](https://david-dm.org/kevoj/nodetomic-api/dev-status.svg)](https://david-dm.org/kevoj/nodetomic-api?type=dev)
 
 > Simple RESTful server designed for horizontal scalability, based on [MERN] MongoDb, Express, Redis, NodeJS.
 
@@ -72,6 +73,3 @@ MIT © [Leonardo Rico](https://github.com/kevoj/nodetomic-api/blob/master/LICENS
 [npm-url]: https://npmjs.org/package/nodetomic-api
 [travis-image]: https://travis-ci.org/kevoj/nodetomic-api.svg?branch=master
 [travis-url]: https://travis-ci.org/kevoj/nodetomic-api
-[daviddm-image]: https://david-dm.org/kevoj/nodetomic-api.svg?theme=shields.io
-[daviddm-url]: https://david-dm.org/kevoj/nodetomic-api
-[daviddm-url-dev]: https://david-dm.org/kevoj/nodetomic-api#info=devDependencies
