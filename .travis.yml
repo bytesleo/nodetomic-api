@@ -10,6 +10,6 @@ services:
   - redis-server
 script:
   - npm run serve &
-  - npm test
   - sleep 10
+  - npm test
 fail_fast: true
