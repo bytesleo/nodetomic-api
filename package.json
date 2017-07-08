@@ -10,7 +10,7 @@
   "scripts": {
     "start": "nodemon src/app.js --exec babel-node -e js,yaml",
     "build": "gulp build",
-    "serve": "node dist/server/app.js",
+    "serve": "npm run build && node dist/server/app.js",
     "test": "mocha --compilers js:babel-register"
   },
   "author": "Leonardo Rico Guevara (https://github.com/kevoj)",
@@ -37,7 +37,7 @@
     "method-override": "^2.3.7",
     "mongoose": "4.10.8",
     "mongoose-paginate": "^5.0.3",
-    "nodemailer": "^3.1.8",
+    "nodemailer": "^4.0.1",
     "nodemailer-smtp-transport": "^2.7.2",
     "passport": "^0.3.2",
     "passport-bitbucket": "^2.0.0",
@@ -67,7 +67,7 @@
     "gulp-babel": "^6.1.2",
     "gulp-clean": "^0.3.2",
     "gulp-color": "0.0.1",
-    "gulp-json-modify": "^1.0.2",
+    "gulp-json-editor": "^2.2.1",
     "gulp-minifier": "^0.2.2",
     "gulp-rename": "^1.2.2",
     "gulp-replace": "^0.5.4",
