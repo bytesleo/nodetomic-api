@@ -4,10 +4,10 @@
 
 #### Example horizontal scalability
 
-<center><img src="https://applicationarchitecture.files.wordpress.com/2010/06/f0028-horizontal-scalability-typical-scenario.png" width="500"></center>
+<img src="https://applicationarchitecture.files.wordpress.com/2010/06/f0028-horizontal-scalability-typical-scenario.png" width="500">
 
 #### Technologies
-<center>
+
 <a><img src="http://solucionesit.ldtsynergy.com/-/Srvs015/MongoDB/file/view/mongodb.png/547250106/315x368/mongodb.png" width="60"></a>
 <a><img src="http://code.runnable.com/images/provider-icons/icon-express-alt.svg" width="60"></a>
 <a><img src="https://chris.lu/upload/images/redis.png" width="60"></a>
@@ -25,7 +25,7 @@
 <a><img src="https://avatars3.githubusercontent.com/u/2824157?v=3&s=400" width="60"></a>
 <a><img src="https://i2.wp.com/community.nodemailer.com/wp-content/uploads/2015/10/n2-2.png?fit=422%2C360&ssl=1" width="60"></a>
 <a><img src="https://avatars2.githubusercontent.com/u/7658037?v=3&s=400" width="60"></a>
-</center>
+
 
 ## Requirements
 
