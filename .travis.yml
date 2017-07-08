@@ -9,7 +9,7 @@ services:
   - mongodb
   - redis-server
 script:
-  - npm run build
-  - npm run serve
-  - npm start && npm test
+  - npm run serve &
+  - npm test
+  - sleep 10
 fail_fast: true
