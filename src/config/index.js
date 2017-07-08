@@ -10,6 +10,7 @@ export default {
   root : pathRoot, // Path Root
   base : pathBase, // Path Base
   client : `${pathRoot}/client`, // Path Client
+  name: project,
   server : { // Server listen
     ip: 'localhost',
     port: 8000
@@ -78,7 +79,7 @@ export default {
   redis : { // Redis
     token: {
       uri: 'redis://127.0.0.1:6379/0', // [format-> redis://user:password@host:port/db-number?db=db-number&password=bar&option=value]
-      time: 1440, // by default 1440 minutes = 24 hours,
+      time: 1440, // by default 1440 minutes = 24 hours (Only if have property time in roles),
       multiple: false // if you want multiples logins or only one device in same time
     }
   },
