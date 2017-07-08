@@ -10,6 +10,6 @@ services:
   - redis-server
 script:
   - npm run build
-  - npm start &
-  - npm test
+  - npm run serve
+  - npm start && npm test
 fail_fast: true
