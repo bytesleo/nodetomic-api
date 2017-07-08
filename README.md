@@ -1,4 +1,4 @@
-# Nodetomic-api [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![dependencies Status](https://david-dm.org/kevoj/nodetomic-api/status.svg)](https://david-dm.org/kevoj/nodetomic-api) [![devDependencies Status](https://david-dm.org/kevoj/nodetomic-api/dev-status.svg)](https://david-dm.org/kevoj/nodetomic-api?type=dev)
+# Nodetomic-api [![NPM version][npm-image]][npm-url] [![Build Status](https://travis-ci.org/kevoj/nodetomic-api.svg?branch=master)](https://travis-ci.org/kevoj/nodetomic-api) [![dependencies Status](https://david-dm.org/kevoj/nodetomic-api/status.svg)](https://david-dm.org/kevoj/nodetomic-api) [![devDependencies Status](https://david-dm.org/kevoj/nodetomic-api/dev-status.svg)](https://david-dm.org/kevoj/nodetomic-api?type=dev)
 
 > Simple RESTful server designed for horizontal scalability, based on [MERN] MongoDb, Express, Redis, NodeJS.
 
@@ -70,5 +70,3 @@ MIT © [Leonardo Rico](https://github.com/kevoj/nodetomic-api/blob/master/LICENS
 
 [npm-image]: https://badge.fury.io/js/nodetomic-api.svg
 [npm-url]: https://npmjs.org/package/nodetomic-api
-[travis-image]: https://travis-ci.org/kevoj/nodetomic-api.svg?branch=master
-[travis-url]: https://travis-ci.org/kevoj/nodetomic-api
