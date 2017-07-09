@@ -2,14 +2,13 @@ sudo: false
 language: node_js
 node_js:
   - node
-  - 6
   - 7
-  - 8
+  - 6
 services:
   - mongodb
   - redis-server
 script:
   - npm run serve &
-  - sleep 10
+  - sleep 20
   - npm test
 fail_fast: true
