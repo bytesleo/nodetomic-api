@@ -9,9 +9,10 @@
   },
   "scripts": {
     "start": "nodemon src/app.js --exec babel-node -e js,yaml",
-    "build": "gulp build",
+    "build": "npm run lint && gulp build",
     "serve": "npm run build && node dist/server/app.js",
-    "test": "mocha --compilers js:babel-register"
+    "test": "mocha --compilers js:babel-register",
+    "lint": "eslint src --ext .js"
   },
   "author": "Leonardo Rico Guevara (https://github.com/kevoj)",
   "license": "MIT",
