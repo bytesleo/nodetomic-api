@@ -14,7 +14,7 @@ export function index(req, res) {
     html: '' // html body
   };
 
-  var values = {
+  let values = {
     name: "Nodetomic",
     title: "Hi!"
   };

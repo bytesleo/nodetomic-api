@@ -14,7 +14,7 @@ export function encrypt(text) {
 // Decrypt
 export function decrypt(ciphertext) {
 
-  var bytes = CryptoJS.AES.decrypt(ciphertext.toString(), config.secret);
+  let bytes = CryptoJS.AES.decrypt(ciphertext.toString(), config.secret);
   return bytes.toString(CryptoJS.enc.Utf8);
 
 }

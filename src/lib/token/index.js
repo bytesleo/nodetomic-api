@@ -9,7 +9,7 @@ export function create(id) {
   let verify = utility.makeid(11);
   let key = `${id.toString()}:${verify}`;
 
-  var value = Jwt.encode({
+  let value = Jwt.encode({
     _id: id,
     _verify: verify
   }, config.secret);

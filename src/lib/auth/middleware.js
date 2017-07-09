@@ -4,7 +4,7 @@ import * as utility from '../utility';
 
 // Middleware
 export function isAuthenticated(rolesRequired) {
-  var self = this;
+  let self = this;
   return (req, res, next) => {
 
     try {
@@ -19,9 +19,9 @@ export function isAuthenticated(rolesRequired) {
 
       Token.extract(token).then(decode => {
 
-        Redis.get(decode.key).then(info => {
+        Redis.get(decode.key).then(infoEncrypt => {
 
-          var info = JSON.parse(utility.decrypt(info));
+          let info = JSON.parse(utility.decrypt(infoEncrypt));
 
           if (decode.id !== info._id)
             return res.status(401).json({error:'Unauthorized: id not equals'});

@@ -39,9 +39,9 @@ export default(User) => {
 
   User.post('save', function(err, doc, next) {
     if (err.name === 'MongoError' && err.code === 11000) {
-      next(`'username "${doc.username}" not available.'`);
+      return next(`'username "${doc.username}" not available.'`);
     } else {
-      next(err);
+      return next(err);
     }
   });
 

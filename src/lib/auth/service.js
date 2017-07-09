@@ -40,6 +40,8 @@ export function start(req, res, type) {
             res.cookie('token', JSON.stringify(token.value));
             res.redirect('/');
             break;
+          default:
+            res.json({error:'login error'});
         }
 
       }).catch(err => {
