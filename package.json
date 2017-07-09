@@ -12,9 +12,7 @@
     "build": "npm run lint && gulp build",
     "serve": "npm run build && node dist/server/app.js",
     "test": "mocha --compilers js:babel-register",
-    "lint": "eslint src --ext .js",
-    "snyk-protect": "snyk protect",
-    "prepare": "npm run snyk-protect"
+    "lint": "eslint src --ext .js"
   },
   "author": "Leonardo Rico Guevara (https://github.com/kevoj)",
   "license": "MIT",
