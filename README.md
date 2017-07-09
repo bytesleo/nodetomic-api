@@ -59,6 +59,10 @@ npm i
 
 You must be aware of running **npm start**
 
+## Eslint
+
+`npm lint`
+
 ## Start [Production]
 
 `npm run serve`
