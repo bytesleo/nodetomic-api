@@ -5,8 +5,31 @@
     "es6": true
   },
   "rules": {
-    "strict": 0,
+    # Erros
+    "valid-typeof": 2,
+    # Best Practices
+    "no-useless-escape": 1,
+    "eqeqeq": 1,
     "vars-on-top": 2,
-    "no-undef": 2
+    "default-case": 2,
+    # Variables
+    "init-declarations":1,
+    "no-delete-var": 1,
+    "no-label-var": 1,
+    "no-shadow-restricted-names": 1,
+    "no-undef": 2,
+    "no-undef-init": 2,
+    "no-unused-vars": 0,
+    # Node
+    "callback-return": 2,
+    "handle-callback-err": 0,
+    "no-mixed-requires" : 1,
+    "no-restricted-modules": 2,
+    # Stylistic Issues
+    # ECMAScript 6
+    "no-var": 1,
+    "constructor-super": 1,
+    "no-duplicate-imports": 1,
+    "no-const-assign": 1,
   }
 }
