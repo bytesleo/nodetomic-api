@@ -1,4 +1,4 @@
-# Nodetomic-api [![NPM version][npm-image]][npm-url] [![Build Status](https://travis-ci.org/kevoj/nodetomic-api.svg?branch=master)](https://travis-ci.org/kevoj/nodetomic-api) [![dependencies Status](https://david-dm.org/kevoj/nodetomic-api/status.svg)](https://david-dm.org/kevoj/nodetomic-api) [![devDependencies Status](https://david-dm.org/kevoj/nodetomic-api/dev-status.svg)](https://david-dm.org/kevoj/nodetomic-api?type=dev) [![Gitter chat](https://img.shields.io/gitter/room/kevoj/scaling-fullstack.svg)](https://gitter.im/scaling-fullstack/Lobby)
+# Nodetomic-api [![NPM version][npm-image]][npm-url] [![Build Status](https://travis-ci.org/kevoj/nodetomic-api.svg?branch=master)](https://travis-ci.org/kevoj/nodetomic-api) [![dependencies Status](https://david-dm.org/kevoj/nodetomic-api/status.svg)](https://david-dm.org/kevoj/nodetomic-api) [![devDependencies Status](https://david-dm.org/kevoj/nodetomic-api/dev-status.svg)](https://david-dm.org/kevoj/nodetomic-api?type=dev) [![Gitter chat](https://img.shields.io/gitter/room/kevoj/scaling-fullstack.svg)](https://gitter.im/scaling-fullstack/Lobby) [![GitHub license][license-image]][license-url] [![Downloads][npm-downloads-image]][npm-url]
 
 > Simple RESTful server designed for horizontal scalability, based on [MERN] MongoDb, Express, Redis, NodeJS.
 
@@ -25,6 +25,7 @@
 <a><img src="https://avatars3.githubusercontent.com/u/2824157?v=3&s=400" width="60"></a>
 <a><img src="https://i2.wp.com/community.nodemailer.com/wp-content/uploads/2015/10/n2-2.png?fit=422%2C360&ssl=1" width="60"></a>
 <a><img src="https://avatars2.githubusercontent.com/u/7658037?v=3&s=400" width="60"></a>
+<a><img src="https://cdn.travis-ci.org/images/logos/TravisCI-Mascot-1-20feeadb48fc2492ba741d89cb5a5c8a.png" width="60"></a>
 
 
 ## Requirements
