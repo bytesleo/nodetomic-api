@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="nodetomic-api">
+    <meta name="author" content="nodetomic-api">
+    <title>API - Development</title>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.7/slate/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="container" id="app">
+        <div class="row">
+
+            <div class="col-lg-12">
+
+                <div class="logo">
+                    <a href="/">
+                        <img src="logo.svg" id="logo" />
+                    </a>
+                </div>
+
+                <div class="section animated fadeInDown">
+                    Development
+                </div>
+                <textarea class="form-control tk" id="token"></textarea>
+
+                <div class="content animated fadeIn">
+                    <div class="title">
+                        <a href="/socket">Socket.io</a>
+                    </div>
+                </div>
+
+                <div class="footer animated fadeInUp">
+                    Github
+                    <a href="https://github.com/kevoj/nodetomic-api" target="_blank">@nodetomic-api</a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <script>
+        var url = new URL(location.href)
+        var t = url.searchParams.get("token")
+        var e = document.getElementById("token")
+        if (t) {
+            e.innerHTML = t
+            e.setAttribute("style", "display: inline !important;")
+        }
+    </script>
+</body>
+
+</html>

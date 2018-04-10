@@ -1,22 +1,36 @@
 import express from 'express';
-import http from 'http';
 import chalk from 'chalk';
 import config from './config';
 const app = express();
-// Core
-require('./core/engine').default(app);
-// Routers
-require('./core/router').default(app);
-// Swagger
-require('./core/swagger').default(app);
-// Paths
-require('./core/path').default(app);
-// MongoDB
-require('./core/mongoose');
-// Create HTTP server.
-const server = http.createServer(app);
-// Listen Server
-server.listen(config.server.port, config.server.ip, () => {
-  process.env.NODE_ENV = config.mode;
-  console.log(chalk.greenBright(`----------\nServer-> listening on http://${config.server.ip}:${config.server.port} in mode [${config.mode}]\n----------`));
-});
+
+(async function run() {
+
+  // Express
+  await require('./lib/express').index(app);
+
+  // Mongoose
+  await require('./lib/mongoose').connect();
+
+  // Redis-jwt
+  await require('./lib/redis-jwt').connect();
+
+  // Socket.io
+  await require('./lib/socket.io').connect();
+
+  // Passports
+  await require('./auth/services/router.service').default(app);
+
+  // Paths
+  await require('./lib/express/client').default(app);
+
+  // Server 
+  app.listen(config.server.port, config.server.ip, () => {
+    // Info
+    console.log(chalk.greenBright(`-------\nServer-> 
+          mode: [${chalk.magentaBright(`${config.mode}`)}]
+          url: ${chalk.blueBright(`http://${config.server.ip}:${config.server.port}`)}\n-------`));
+    // Ready!
+    console.log(chalk.black.bgGreenBright(`>>nodetomic-api ready!<<`));
+  });
+
+})();

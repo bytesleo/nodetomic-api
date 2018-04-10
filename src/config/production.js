@@ -1,90 +1,71 @@
-//-------------production-----------------
 import path from 'path';
-const mode = 'production'; // development or production
-const project = 'nodetomic-api'; //DB example name: nodetomic-api-development / swagger title: nodetomic-api / secret: s3kr3t_$k3y_&5ess10n?%-nodetomic-api-development
-const pathRoot = path.normalize(`${__dirname}/../..`);
-const pathBase = path.normalize(`${__dirname}/..`);
+
+const APP_NAME = `your-app-name`;
+const DB_NAME = `your-app-name`;
+const CLIENT = '/client';
 
 export default {
-  mode : mode, // Mode
-  root : pathRoot, // Path Root
-  base : pathBase, // Path Base
-  client : `${pathRoot}/client`, // Path Client
-  name: project,
-  server : { // Server listen
+  secret: `your_secret_key`, // Secret Key
+  server: { // Express
     ip: 'localhost',
-    port: 8000
+    port: 8000,
   },
-  secret : `s3kr3t_$k3y_&5ess10n?%-${project}-${mode}`, // Secret key
-  session : 'defaultStore', // defaultStore, mongoStore, redisStore / [Required for Twitter oAuth or sessions local (no redis)...]
-  // Roles
-  roles : [
+  log: false, // show logs
+  // Roles: if a user has multiple roles, will take the time of the greater role
+  roles: [
     {
-      rol: 'user',
-      time: 120 // 120 minutes
+      role: 'user',
+      ttl: '60 minutes',
     }, {
-      rol: 'admin',
-      time: 1440 // 24 hours
+      role: 'admin',
+      ttl: '5 days'
     }
   ],
-  router : {
-    ignore: ['example'] //Ignore Routers in /api/example
+  path: {
+    disabled: '/:url(api|assets|auth|config|lib|views)/*' // paths 404
   },
-  path : { // paths 404
-    disabled: '/:url(api|assets|lib|bower_components)/*'
-  },
-  database : { // DataBase
-    mongo: { // MongoDb
-      db: {
-        uri: `mongodb://localhost:27017/${project}-${mode}`, // [format-> mongodb://username:password@host:port/database?options]
-        options: {
-          useMongoClient: false
-        },
-        seeds: [
-          {
-            path: '/api/v1/user/user.seed',
-            plant: 'once' //once - alway - never
-          }, {
-            path: '/api/v1.x/hello/hello.seed',
-            plant: 'once' //once - alway - never
-          }
-        ]
-      }
-    }
-    // Other DataBase
-  },
-  email : { // Email Config
-    host: 'hostexample',
-    secure: true,
-    port: 465,
-    auth: {
-      user: 'example@gmail.com',
-      pass: 'examplePassword'
+  "socket.io": { // Socket.io
+    port: 8001, // public port listen, change also in views/default/demo.js
+    example: true, // router -> http://localhost:8000/socket 
+    redis: { // Redis config
+      host: '127.0.0.1',
+      port: 6379
     }
   },
-  swagger : { // Swagger Config
-    enabled: true,
-    title: `${project}`,
-    description: `RESTful API ${project}`,
-    "contact": {
-      "name": "Developer",
-      "url": "http://www.example.com",
-      "email": "example@example.com"
+  "redis-jwt": { // Sessions
+    //host: '/tmp/redis.sock', //unix domain
+    host: '127.0.0.1', //can be IP or hostname
+    port: 6379, // port
+    maxretries: 10, //reconnect retries, default 10
+    //auth: '123', //optional password, if needed
+    db: 0, //optional db selection
+    secret: 'secret_key', // secret key for Tokens!
+    multiple: true, // single or multiple sessions by user
+    kea: false // Enable notify-keyspace-events KEA
+  },
+  mongoose: { // MongoDB
+    // uri: mongodb://username:password@host:port/database?options
+    uri: `mongodb://localhost:27017/${DB_NAME}`,
+    options: {
     },
-    "license": {
-      "name": "MIT",
-      "url": "https://github.com/kevoj/nodetomic-api/blob/master/LICENSE"
-    }
+    seed: {
+      path: '/api/models/seeds/',
+      list: [
+        {
+          file: 'user.seed',
+          schema: 'User',
+          plant: 'once' //  once - always - never
+        },
+        {
+          file: 'example.seed',
+          schema: 'Example',
+          plant: 'once'
+        }
+      ]
+    },
   },
-  redis : { // Redis
-    token: {
-      uri: 'redis://127.0.0.1:6379/0', // [format-> redis://user:password@host:port/db-number?db=db-number&password=bar&option=value]
-      time: 1440, // by default 1440 minutes = 24 hours (Only if have property time in roles),
-      multiple: false // if you want multiples logins or only one device in same time
-    }
-  },
-  oAuth : { // oAuth
-    local:{
+  oAuth: { // oAuth
+    local: {
       enabled: true
     },
     facebook: {
@@ -106,9 +87,9 @@ export default {
       callbackURL: '/auth/google/callback'
     },
     github: {
-      enabled: false,
-      clientID: '',
-      clientSecret: '',
+      enabled: true,
+      clientID: '52be92c9a41f77a959eb',
+      clientSecret: '76c9bb03c689d098506822fa80dba372a1fe29c8',
       callbackURL: '/auth/github/callback'
     },
     bitbucket: {
@@ -118,11 +99,11 @@ export default {
       callbackURL: '/auth/bitbucket/callback'
     }
   },
-  // DEV
-  livereload : { // livereload
-    enabled: false,
-    ip: 'localhost',
-    port: 35729
-  },
-  log : false // Log request in console?
+  // globals
+  mode: process.env.NODE_ENV || 'production', // mode
+  name: APP_NAME, // name 
+  node: parseInt(process.env.NODE_APP_INSTANCE) || 0, // node instance
+  root: path.normalize(`${__dirname}/../..`), // root
+  base: path.normalize(`${__dirname}/..`), // base
+  client: `${path.normalize(`${__dirname}/../..`)}${CLIENT}`, // client
 };

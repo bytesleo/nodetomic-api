@@ -2,68 +2,94 @@
 <html lang="en">
 
 <head>
-  <meta charset="utf-8">
-  <title>404 Page Not Found :(</title>
-  <style>
-    body {
-      background: #19293a;
-      color: #d3d7de;
-      font-family: "Courier new";
-      font-size: 18px;
-      line-height: 1.5em;
-      cursor: default;
-    }
-
-    .code-area {
-      position: absolute;
-      width: 320px;
-      /*275*/
-      min-width: 320px;
-      top: 50%;
-      left: 50%;
-      -webkit-transform: translate(-50%, -50%);
-      transform: translate(-50%, -50%);
-    }
-
-    .code-area>span {
-      display: block;
-    }
-
-    @media screen and (max-width: 320px) {
-      .code-area {
-        font-size: 5vw;
-        min-width: auto;
-        width: 95%;
-        margin: auto;
-        padding: 5px;
-        padding-left: 10px;
-        line-height: 6.5vw;
-      }
-    }
-  </style>
+    <meta charset="utf-8">
+    <title>404 Page Not Found</title>
+    <link href="https://fonts.googleapis.com/css?family=Gruppo" rel="stylesheet">
+    <style>
+        body {
+            background-color: #272b30;
+            color: #fff;
+        }
+        
+        .glitch {
+            font-size: 13vh;
+            line-height: 1;
+            font-family: 'Gruppo', cursive;
+            font-weight: 400;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            margin: 0;
+            text-decoration: none;
+            color: #FBB071;
+            text-shadow: 0px 1px 25px rgb(29, 29, 29);
+        }
+        
+        .glitch:before,
+        .glitch:after {
+            display: block;
+            content: '404';
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 100%;
+            opacity: .8;
+            mix-blend-mode: multiply;
+        }
+        
+        .glitch:after {
+            color: #FF835D;
+            z-index: -2;
+        }
+        
+        .glitch:before {
+            color: #FBB071;
+            z-index: -1;
+        }
+        
+        .glitch:hover:before {
+            animation: glitch 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) both infinite;
+            mix-blend-mode: overlay;
+        }
+        
+        .glitch:hover:after {
+            animation: glitch 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) reverse both infinite;
+            mix-blend-mode: multiply;
+        }
+        
+        @keyframes glitch {
+            0% {
+                -webkit-transform: translate(0);
+                transform: translate(0);
+            }
+            20% {
+                -webkit-transform: translate(-5px, 5px);
+                transform: translate(-5px, 5px);
+            }
+            40% {
+                -webkit-transform: translate(-5px, -5px);
+                transform: translate(-5px, -5px);
+            }
+            60% {
+                -webkit-transform: translate(5px, 5px);
+                transform: translate(5px, 5px);
+            }
+            80% {
+                -webkit-transform: translate(5px, -5px);
+                transform: translate(5px, -5px);
+            }
+            to {
+                -webkit-transform: translate(0);
+                transform: translate(0);
+            }
+        }
+    </style>
 </head>
 
 <body>
-  <div class="code-area">
-    <span style="color: #777;font-style:italic;">
-                // 404 page not found.
-            </span>
-    <span>
-                <span style="color:#d65562;">
-                    if
-                </span> (
-    <span style="color:#4ca8ef;">!</span><span style="font-style: italic;color:#bdbdbd;">found</span>) {
-    </span>
-    <span>
-                <span style="padding-left: 15px;color:#2796ec">
-                    <i style="width: 10px;display:inline-block"></i>throw
-                </span>
-    <span>
-                    (<span style="color: #a6a61f">"(╯°□°)╯︵ ┻━┻"</span>);
-    </span>
-    <span style="display:block">}</span>
-    </span>
-  </div>
+    <a href="#" class="glitch">404</a>
 </body>
 
 </html>
