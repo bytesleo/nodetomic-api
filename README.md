@@ -31,7 +31,7 @@
 
 ### Horizontal scalability
 
-View horizontal scaling representation image with nodetomic-api-swagger <a href="https://github.com/kevoj/nodetomic-api/wiki/1.-Horizontal-scalability">HERE!</a>
+View horizontal scaling representation image with nodetomic-api <a href="https://github.com/kevoj/nodetomic-api/wiki/1.-Horizontal-scalability">HERE!</a>
 
 
 ### Structure
