@@ -4,6 +4,8 @@
 
 > RESTful API Nodejs designed for horizontal scalability with support for cluster, based on Express, MongoDB, Redis, JWT, Socket.io, Passport.
 
+If you want, the **swagger** version is also available: <a href="https://github.com/kevoj/nodetomic-api-swagger" >nodetomic-api-swagger</a>
+
 <a href="https://www.codacy.com/app/kevoj/nodetomic-api?utm_source=github.com&utm_medium=referral&utm_content=kevoj/nodetomic-api&utm_campaign=Badge_Grade" ><img src="https://i.imgur.com/0ag9bJ6.png"></a>
 
 ### Technologies
