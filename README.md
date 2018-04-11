@@ -41,12 +41,14 @@ View horizontal scaling representation image with nodetomic-api <a href="https:/
 |-- api
 |   |-- controllers
 |   |-- models
-|   `-- sockets
+|   |-- sockets
+|   `-- routers
 |-- assets
 |-- auth
 |   |-- controllers
 |   |-- passports
-|   `-- services
+|   |-- services
+|   `-- routers
 |-- config
 |-- lib
 |   |-- express
@@ -95,7 +97,7 @@ yarn add nodetomic-api --ignore-engines
 
 **Description:** Start the project in development mode
 
-![Imgur](https://i.imgur.com/qY1mzDZ.png)
+![Imgur](https://i.imgur.com/dV6o7p9.png)
 
 **Note:** if you want work with **nodemon** execute the command `npm run modemon`
 
@@ -105,7 +107,7 @@ yarn add nodetomic-api --ignore-engines
 
 **Description:** Compile the project by outputting the dist folder
 
-![Imgur](http://i.imgur.com/yTI3otr.png)
+![Imgur](http://i.imgur.com/NoXdDO4.png)
 
 **Note:** Generate folder **`dist`**. So "dist/client" is optional. You can paste the compilation of a client here, for example of Vue, React, Angular...
 
