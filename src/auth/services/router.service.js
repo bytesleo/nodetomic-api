@@ -23,13 +23,11 @@ if ("bitbucket" in config.oAuth && config.oAuth.bitbucket.enabled)
 export default (app) => {
   // Controllers Api
   fs.readdirSync(`${config.base}/api/routers`).forEach(route => {
-    let name = route.split('.')[0];
-    app.use(`/api/${name}`, require(`${config.base}/api/routers/${route}`).default);
+    require(`${config.base}/api/routers/${route}`).default(app);
   });
   // Controllers Auth
   fs.readdirSync(`${config.base}/auth/routers`).forEach(route => {
-    let name = route.split('.')[0];
-    app.use(`/auth/${name}`, require(`${config.base}/auth/routers/${route}`).default);
+    require(`${config.base}/auth/routers/${route}`).default(app);
   });
 }
 

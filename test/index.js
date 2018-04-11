@@ -176,7 +176,7 @@ describe('/', () => {
 
     let options = {
       method: 'DELETE',
-      url: `${host}/auth/session/logout`,
+      url: `${host}/auth/logout`,
       headers: {
         'authorization': `${token}`
       }

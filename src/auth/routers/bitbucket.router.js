@@ -1,9 +1,6 @@
-import express from 'express';
 import * as controller from './../controllers/bitbucket.controller';
 
-const router = express.Router();
-
-router.get('/', controller.index);
-router.get('/callback', controller.callback);
-
-export default router;
+export default (app) => {
+    app.get('/auth/bitbucket', controller.index);
+    app.get('/auth/bitbucket/callback', controller.callback);
+}

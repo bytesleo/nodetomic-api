@@ -29,6 +29,11 @@
 <a><img src="https://i2.wp.com/community.nodemailer.com/wp-content/uploads/2015/10/n2-2.png?fit=422%2C360&ssl=1" width="50"></a>
 <a><img src="https://cdn.xebialabs.com/assets/files/plugins/travis-ci.jpg" width="50"></a>
 
+### Horizontal scalability
+
+View horizontal scaling representation image with nodetomic-api-swagger <a href="https://github.com/kevoj/nodetomic-api/wiki/1.-Horizontal-scalability">HERE!</a>
+
+
 ### Structure
 
 <pre> 
@@ -51,6 +56,14 @@
 |-- views
 `-- app.js
 </pre> 
+
+## Preview
+
+##### Development
+![Imgur](https://i.imgur.com/brGk8Qt.png)
+
+##### Production
+![Imgur](https://i.imgur.com/2KLfEUq.png)
 
 ## Requirements
 
@@ -166,7 +179,7 @@ yarn add nodetomic-api --ignore-engines
 
 ## API Docs
 
-Very soon...
+You can find the documentation <a href="https://github.com/kevoj/nodetomic-api/wiki" >HERE!</a>
 
 ## License
 

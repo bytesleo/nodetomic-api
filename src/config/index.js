@@ -15,7 +15,7 @@ export default {
   roles: [
     {
       role: 'user',
-      ttl: '60 minutes',
+      ttl: '7200 minutes',
     }, {
       role: 'admin',
       ttl: '5 days'

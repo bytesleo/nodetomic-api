@@ -1,9 +1,6 @@
-import express from 'express';
 import * as controller from './../controllers/twitter.controller';
 
-const router = express.Router();
-
-router.get('/', controller.index);
-router.get('/callback', controller.callback);
-
-export default router;
+export default (app) => {
+    app.get('/auth/twitter', controller.index);
+    app.get('/auth/twitter/callback', controller.callback);
+}

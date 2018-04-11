@@ -15,10 +15,10 @@ export default {
   roles: [
     {
       role: 'user',
-      ttl: '60 minutes',
+      ttl: '10080 minutes',
     }, {
       role: 'admin',
-      ttl: '5 days'
+      ttl: '7 days'
     }
   ],
   path: {

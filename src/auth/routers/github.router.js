@@ -1,9 +1,6 @@
-import express from 'express';
 import * as controller from './../controllers/github.controller';
 
-const router = express.Router();
-
-router.get('/', controller.index);
-router.get('/callback', controller.callback);
-
-export default router;
+export default (app) => {
+    app.get('/auth/github', controller.index);
+    app.get('/auth/github/callback', controller.callback);
+}
