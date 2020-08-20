@@ -53,7 +53,7 @@
         "scalability"
     ],
     "dependencies": {
-        "bcrypt": "^2.0.0",
+        "bcrypt": "^5.0.0",
         "body-parser": "^1.18.2",
         "chalk": "^2.3.2",
         "compression": "^1.7.2",
