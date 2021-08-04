@@ -1,4 +1,9 @@
-# <img src="http://i.imgur.com/usoSYjY.png" width="50" /> Nodetomic Api 
+
+# 🔥🔥 NEW FASTER AND MORE SCALABLE VERSION <a href="https://github.com/kevoj/nodetomic" >HERE!</a>
+<hr/>
+
+
+# <img src="http://i.imgur.com/usoSYjY.png" width="50" /> Nodetomic Api
 
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/f5084c4bad544b2586e3e973c8e3a336)](https://www.codacy.com/app/kevoj/nodetomic-api?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=kevoj/nodetomic-api&amp;utm_campaign=Badge_Grade) [![NPM version](https://badge.fury.io/js/nodetomic-api.svg)](https://npmjs.org/package/nodetomic-api) [![Build Status](https://travis-ci.org/kevoj/nodetomic-api.svg?branch=master)](https://travis-ci.org/kevoj/nodetomic-api) [![dependencies Status](https://david-dm.org/kevoj/nodetomic-api/status.svg)](https://david-dm.org/kevoj/nodetomic-api) [![devDependencies Status](https://david-dm.org/kevoj/nodetomic-api/dev-status.svg)](https://david-dm.org/kevoj/nodetomic-api?type=dev) [![Gitter chat](https://img.shields.io/gitter/room/kevoj/scaling-fullstack.svg)](https://gitter.im/scaling-fullstack/Lobby) [![GitHub license](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](https://raw.githubusercontent.com/kevoj/nodetomic-api/master/LICENSE) [![Downloads](https://img.shields.io/npm/dt/nodetomic-api.svg?style=flat-square)](https://npmjs.org/package/nodetomic-api)
 
