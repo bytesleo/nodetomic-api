@@ -1,5 +1,5 @@
 
-# ===> NEWS! 🔥🔥 NEW FASTER AND MORE SCALABLE VERSION <a href="https://github.com/kevoj/nodetomic" >HERE!</a>
+# ===> NEWS! 🔥🔥 NEW FASTER AND MORE SCALABLE VERSION <a href="https://github.com/kevoj/nodetomic" >NODETOMIC LIGHT!</a>
 <hr/>
 
 
